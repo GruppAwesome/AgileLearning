@@ -1,15 +1,21 @@
-body {
-    background-color: aliceblue;
-    background-image: url("http://placehold.it/900x800");
+
+
+.pane{
+   background: #3a7bd5 ; /* For browsers that do not support gradients */
+   background: -webkit-linear-gradient(#FF8008, #2F80ED); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(#FF8008, #3a7bd5); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(#FF8008, #3a7bd5); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(#FFC837, #FF8008); /* Standard syntax */
 }
 
 .background {
-    padding-top: 10px;
+    height: 100vh;
+    width: 100vw;
     text-align: center;
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .loginForm input {
@@ -17,14 +23,26 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
 }
 
-.loginButton {
-    height: 100%;
+.onTop{
+    padding: 10px;
+    font-size: 10px;
+    word-wrap: break-word;
+    position: static;
+    top: 0;
+    height: fit-content;
+    width: 100vw;
+    margin-bottom: 20px;
+}
+
+.blackWithWhite {
+    background-color: #444;
+    color: white;
 }
 
 .footer {
-    background-color: pink;
     padding: 10px;
     font-size: 10px;
     text-align: left;
@@ -37,4 +55,5 @@ h1 {
 
 .logotype{
     border: 1px solid black;
+    margin: 5px;
 }
