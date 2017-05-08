@@ -1,10 +1,14 @@
 
 using System.Collections.Generic;
 using Npgsql;
+using System.IO;
+using System;
+using Newtonsoft;
+using Newtonsoft.Json;
+using WebAPI.Models;
 
 namespace WebAPI.Repositories
 {
-
 
     public interface IDatabaseConnection
     {
@@ -12,9 +16,9 @@ namespace WebAPI.Repositories
     }
 
     public class DatabaseConnection : IDatabaseConnection
-    {
-        private static string connectionString = "Host=weboholics-debian.dyndns-ip.com;Username=grupp2;Password=xxx;Database=gruppawesome";
-
+    {        
+        private static string connectionString = JsonConvert.DeserializeObject<Secret>(File.ReadAllText("secrets.json")).DatabaseKey;
+        
 
         // The actual Pool
         private static IList<NpgsqlConnection> connectionPool = SetupPool();
@@ -35,9 +39,5 @@ namespace WebAPI.Repositories
                 return newConn;
             }
         }
-
-
-
-
     }
 }
