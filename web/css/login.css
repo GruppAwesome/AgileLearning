@@ -1,0 +1,40 @@
+body {
+    background-color: aliceblue;
+    background-image: url("http://placehold.it/900x800");
+}
+
+.background {
+    padding-top: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.loginForm input {
+    margin: 1px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loginButton {
+    height: 100%;
+}
+
+.footer {
+    background-color: pink;
+    padding: 10px;
+    font-size: 10px;
+    text-align: left;
+    word-wrap: break-word;
+    position: absolute;
+    bottom: 0;
+    height: 25vh;
+    width: 100vw;
+}
+
+.logotype{
+    border: 1px solid black;
+}

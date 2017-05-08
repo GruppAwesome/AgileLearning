@@ -1,0 +1,7 @@
+{
+    "school":{
+        "name":"Exempel YH",
+        "logotype": "path/to/file.png",
+        "info":"Ipsum lorem"
+    }
+}
