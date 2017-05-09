@@ -63,10 +63,6 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public User Login([FromBody] LoginArgs args)
         {
-
-            var hash = GetHashString("tomat");
-
-            Console.WriteLine(GetHashString("tomat"));
             var user = this.userRepo.LoginUser(args.Username, GetHashString(args.Password));
             return user;
         }
