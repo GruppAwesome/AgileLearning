@@ -2,27 +2,34 @@
 
 var app = angular.module('starter', ['ionic']);
 
-var user1 = 'Micke';
-
+var myinfo = "lol";
 
 //Creates the controller
-app.controller('myCtrl', function($scope, $http, $state){
+app.controller('myCtrl', function($scope, $http, $state, $rootScope){
 $http.get('schooldata/data.json').success(function(data){
   $scope.data = data;
 });
 $scope.myuser;
+$scope.info = myinfo;
+
 
  $scope.login = function() {
         
-        $scope.myuser = user1;
+      
         var username = document.getElementById("usernameInput").value;
         var password = document.getElementById("passwordInput").value;
 
         $http.post('http://localhost:5000/api/users/login', {Username: username,Password:password})
         .success(function (data) {
        
-         $scope.mydata = data;
+          if(data != null && data != ""){
+         $rootScope.rootData = data;
+         $state.go('list');
+
+         
+
         
+        }
     });
     };
 
