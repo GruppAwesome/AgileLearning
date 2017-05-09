@@ -5,19 +5,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
-
-namespace WebAPI.Controllers 
+namespace WebAPI.Controllers
 {
 
+
+
     [Route("api/[controller]")]
-    public class UsersController 
+    public class UsersController
     {
+        public static byte[] GetHash(string inputString)
+        {
+            HashAlgorithm algorithm = SHA1.Create();  //or use SHA1.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        public static string GetHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+
 
         private IUserRepository userRepo;
 
-        public UsersController(IUserRepository userRepo) 
-        {   
+        public UsersController(IUserRepository userRepo)
+        {
             this.userRepo = userRepo;
         }
 
@@ -36,7 +54,7 @@ namespace WebAPI.Controllers
         }
 
 
-        public struct LoginArgs 
+        public struct LoginArgs
         {
             public string Username;
             public string Password;
@@ -45,8 +63,7 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public User Login([FromBody] LoginArgs args)
         {
-            Console.WriteLine($"Got login request: Username: '{args.Username}' Password: '{args.Password}'");
-            var user = this.userRepo.LoginUser(args.Username, args.Password);
+            var user = this.userRepo.LoginUser(args.Username, GetHashString(args.Password));
             return user;
         }
 
