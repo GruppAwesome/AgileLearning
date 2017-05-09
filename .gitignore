@@ -41,3 +41,7 @@ captures/
 
 # DBS Connection Secret Key
 secret.json
+
+# node modules
+web/node_modules/*
+

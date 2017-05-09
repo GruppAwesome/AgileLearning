@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="AgileLearning">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -20,17 +20,19 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+        <script src="js/main.js"></script>
 </head>
 
-<body>
+<body data-ng-app="myApp">
 
-    <div class="pane">
+    <div class="pane" data-ng-controller="myCtrl">
         <div class="container-fluid background">
             <div class="row blackWithWhite onTop">
-                <h1>Welcome to Agile Learning Portal!</h1>
+                <h1>Välkommen till {{data.name}}s skolportal!</h1>
             </div>
             <div class="row">
-                <img class="logotype" src="http://placehold.it/150x70">
+                <img class="logotype" data-ng-src="../schooldata/{{data.logo}}">
+                <p>{{data.name}}</p>
             </div>
             <div class="row">
                 <div class="col-xs-1 col-md-4 col-lg-5"></div>
@@ -45,27 +47,17 @@
             </div>
             <div class="row blackWithWhite footer">
                 <div class="col-xs-4">
-                    <p>Telefon: 08-410 456 00</p>
-                    <p>E-post: utbildning@newton.se</p>
-                    <p>Om webbplatsen</p>
+                    <p>Telefon: {{data.telefon}}</p>
+                    <p>E-post: {{data.epost}}</p>
+                    <p>{{data.om}}</p>
                 </div>
                 <div class="col-xs-4">
-                    <p>Yrkeshögskoleutbildningar</p>
-                    <p>Applikationsutvecklare för mobila enheter</p>
-                    <p>Fastighetsförvaltare</p>
-                    <p>IT-säkerhetstekniker</p>
-                    <p>Kravanalytiker IT</p>
-                    <p>Systemutvecklare JAVA</p>
-                    <p>VVS-ingenjör</p>
+                    
+                    <p>{{data.lorem1}}</p>
                 </div>
                 <div class="col-xs-4">
-                    <p>Om Newton</p>
-                    <p>Alumni</p>
-                    <p>Aktuellt</p>
-                    <p>Sir Isaac Newton</p>
-                    <p>Lediga tjänster</p>
-                    <p>Kontakta Newton</p>
-                    <p>Affärsidé och Ledning</p>
+                    <p>{{data.lorem2}}</p>
+
                 </div>
             </div>
         </div>
