@@ -17,7 +17,7 @@ namespace WebAPI.Repositories
 
     public class DatabaseConnection : IDatabaseConnection
     {        
-        private static string connectionString = JsonConvert.DeserializeObject<Secret>(File.ReadAllText("secrets.json")).DatabaseKey;
+        private static string connectionString = JsonConvert.DeserializeObject<Secret>(File.ReadAllText("secret.json")).DatabaseKey;
         
 
 
