@@ -20,6 +20,7 @@ namespace WebAPI.Repositories
         private static string connectionString = JsonConvert.DeserializeObject<Secret>(File.ReadAllText("secrets.json")).DatabaseKey;
         
 
+
         // The actual Pool
         private static IList<NpgsqlConnection> connectionPool = SetupPool();
 
