@@ -20,47 +20,12 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-        <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </head>
 
 <body data-ng-app="myApp">
-
     <div class="pane" data-ng-controller="myCtrl">
-        <div class="container-fluid background">
-            <div class="row blackWithWhite onTop">
-                <h1>Välkommen till {{data.name}}s skolportal!</h1>
-            </div>
-            <div class="row">
-                <img class="logotype" data-ng-src="../schooldata/{{data.logo}}">
-                <p>{{data.name}}</p>
-            </div>
-            <div class="row">
-                <div class="col-xs-1 col-md-4 col-lg-5"></div>
-                <div class="col-xs-10 col-md-4 col-lg-2">
-                    <div class="loginForm">
-                        <input></input>
-                        <input type="password"></input>
-                        <input type="submit" value="Sign In" class="blackWithWhite"></input>
-                    </div>
-                </div>
-                <div class="col-xs-1 col-md-4 col-lg-5"></div>
-            </div>
-            <div class="row blackWithWhite footer">
-                <div class="col-xs-4">
-                    <p>Telefon: {{data.telefon}}</p>
-                    <p>E-post: {{data.epost}}</p>
-                    <p>{{data.om}}</p>
-                </div>
-                <div class="col-xs-4">
-                    
-                    <p>{{data.lorem1}}</p>
-                </div>
-                <div class="col-xs-4">
-                    <p>{{data.lorem2}}</p>
-
-                </div>
-            </div>
-        </div>
+        <div data-ng-include="'templates/login.html'"></div>
     </div>
 </body>
 
