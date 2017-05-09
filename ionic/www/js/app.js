@@ -7,7 +7,9 @@ var user1 = 'Micke';
 
 //Creates the controller
 app.controller('myCtrl', function($scope, $http, $state){
-
+$http.get('schooldata/data.json').success(function(data){
+  $scope.data = data;
+});
 $scope.myuser;
 
  $scope.login = function() {
