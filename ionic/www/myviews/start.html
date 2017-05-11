@@ -1,11 +1,10 @@
 <ion-view view-title="Välkommen till {{data.name}}s skolportal" class="view-title">
-<ion-content  has-subheader="false" scroll="false">
+<ion-content scroll="false">
 <br>
 <div id="startlogo">
   <img class="full-image" ng-src="schooldata/{{data.logo}}">
 </div>
 <div class="item-body">
-  <!-- Using formconnect to connect the button in the footerbar since I cant reach the content from the footerbar -->
   <form>
     <br>
     <label class="whiteback item item-input">
@@ -22,12 +21,6 @@
     Login
   </a>
   </button>
-</div>
-
-<div class="card">
-  <div id="textCenter" class="item item-text-wrap">
-    {{mydata}}
-  </div>
 </div>
 </ion-content>
 </ion-view>
