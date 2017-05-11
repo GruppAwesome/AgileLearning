@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
     {
         public static byte[] GetHash(string inputString)
         {
-            HashAlgorithm algorithm = SHA1.Create();  //or use SHA1.Create();
+            HashAlgorithm algorithm = SHA1.Create();
             return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
 

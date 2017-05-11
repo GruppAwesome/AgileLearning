@@ -4,15 +4,14 @@
     </div>
     <div class="row">
         <img class="logotype" data-ng-src="../schooldata/{{data.logo}}">
-        <p>{{data.name}}</p>
     </div>
     <div class="row">
         <div class="col-xs-1 col-md-4 col-lg-5"></div>
         <div class="col-xs-10 col-md-4 col-lg-2">
             <div class="loginForm">
-                <input></input>
-                <input type="password"></input>
-                <input type="submit" value="Sign In" class="blackWithWhite"></input>
+                <input id="usernameInput"></input>
+                <input type="password" id="passwordInput"></input>
+                <input type="submit" value="Sign In" class="blackWithWhite" data-ng-click="login()"></input>
             </div>
         </div>
         <div class="col-xs-1 col-md-4 col-lg-5"></div>

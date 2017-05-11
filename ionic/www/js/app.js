@@ -4,7 +4,8 @@
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $http, $state, $rootScope) {
-    $http.get('schooldata/data.json').success(function (data) {
+    $http.get('schooldata/data.json')
+    .success(function (data) {
       $scope.data = data;
     });
     $scope.login = function () {
