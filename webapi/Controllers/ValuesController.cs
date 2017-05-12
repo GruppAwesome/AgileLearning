@@ -10,16 +10,6 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-
-        private IUserRepository userRepo;
-
-        
-        public ValuesController(IUserRepository userRepo)
-        {
-            this.userRepo = userRepo;
-        }
-
-
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
