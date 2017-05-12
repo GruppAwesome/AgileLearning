@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
            public IEnumerable<User> Get()
         {
             return dbConn.Conn.Query<User>(
-                 "select * from courses");
+                 "select * from users");
         }
 
 
