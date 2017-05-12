@@ -32,8 +32,6 @@ namespace WebAPI
         {
 
             services.AddScoped<IDatabaseConnection, DatabaseConnection>();
-            services.AddScoped<IUserRepository, UserRepository>();
-
             // Add framework services.
             services.AddMvc();
 

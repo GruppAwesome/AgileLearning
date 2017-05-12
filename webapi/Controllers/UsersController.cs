@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
+using Dapper;
 
 namespace WebAPI.Controllers
 {
@@ -14,7 +15,7 @@ namespace WebAPI.Controllers
 
 
     [Route("api/[controller]")]
-    public class UsersController
+    public class UsersController : Controller
     {
         public static byte[] GetHash(string inputString)
         {
@@ -32,26 +33,22 @@ namespace WebAPI.Controllers
         }
 
 
-        private IUserRepository userRepo;
+        private IDatabaseConnection dbConn;
 
-        public UsersController(IUserRepository userRepo)
+        public UsersController(IDatabaseConnection conn)
         {
-            this.userRepo = userRepo;
+            this.dbConn = conn;
         }
 
         // GET api/values
         [HttpGet]
-        public IList<User> GetUsers()
+           public IEnumerable<User> Get()
         {
-            return this.userRepo.Users().ToList();
+            return dbConn.Conn.Query<User>(
+                 "select * from courses");
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public User Get(int id)
-        {
-            return this.userRepo.UserById(id);
-        }
+
 
 
         public struct LoginArgs
@@ -63,9 +60,17 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public User Login([FromBody] LoginArgs args)
         {
-            var user = this.userRepo.LoginUser(args.Username, GetHashString(args.Password));
+            var user = this.LoginUser(args.Username, GetHashString(args.Password));
             return user;
         }
+
+           public User LoginUser(string username, string password)
+        {
+            // Vulnerable to SQL Injection? Very possible
+            return dbConn.Conn.QuerySingleOrDefault<User>(
+                $"select * from users where \"Password\" is not null and \"Username\" = '{username}' and \"Password\" = '{password}'");
+        }
+        
 
     }
 }
