@@ -21,7 +21,18 @@
             $state.go('list');
           }
         });
+
+      $http.post('http://localhost:5000/api/courses/mycourses', {
+          course_status: "Active",
+
+        })
+        .success(function (data) {
+            $rootScope.rootCourses = data;
+
+        });
+
     };
+
   });
 
 
