@@ -10,9 +10,9 @@ namespace WebAPI.Controllers
     public class CoursesController : Controller
     {
 
-    private IDatabaseConnection dbConn;
+        private IDatabaseConnection dbConn;
 
-        public CoursesController(IDatabaseConnection conn) 
+        public CoursesController(IDatabaseConnection conn)
         {
             this.dbConn = conn;
         }
@@ -23,6 +23,19 @@ namespace WebAPI.Controllers
         {
             return dbConn.Conn.Query<Course>(
                  "select * from courses");
+        }
+
+        public struct MyCoursesArgs
+        {
+            public string course_status;
+        }
+
+        [HttpPost("mycourses")]
+        public IEnumerable<Course> mycourses([FromBody]MyCoursesArgs args)
+        {
+            var user = dbConn.Conn.Query<Course>(
+                $"select * from courses where \"course_status\" = '{args.course_status}'");
+            return user;
         }
     }
 }
