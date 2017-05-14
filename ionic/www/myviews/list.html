@@ -3,15 +3,10 @@
 <button class="button button-icon button-clear ion-navicon">
 </button>
 </ion-nav-buttons>
-
 <div class="bar bar-subheader">
-  <h2 class="title">Välkommen {{rootData.firstname}} {{rootData.lastname}}</h2>
+	<h2 class="title">Välkommen {{rootData.firstname}} {{rootData.lastname}}</h2>
 </div>
-
 <ion-content id="subheaderSpace">
-
-
-
 <div class="list card">
 	<div class="item item-divider text-center">
 		Omprov 13/7
@@ -30,6 +25,18 @@
 		<p>
 			Öppethus på testvägen 12
 		</p>
+	</div>
+</div>
+<div class="list card">
+	<div class="item item-divider text-center">
+		Aktiva Kurser för {{rootData.firstname}}
+	</div>
+	<div id="centerText" class="item item-body">
+		<ul>
+			<li ng-repeat="x in rootCourses">
+				{{ x.course_name }}
+			</li>
+		</ul>
 	</div>
 </div>
 </ion-content>
