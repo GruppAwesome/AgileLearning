@@ -1,0 +1,64 @@
+<ion-nav-view>
+<ion-side-menus>
+<ion-side-menu-content>
+  <ion-header-bar class="bar-dark" ng-cloak>  
+  <h1 class="title">{{data.name}}</h1>
+    <div class="buttons">
+      <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+    </div>
+  </ion-header-bar>
+    <div class="bar bar-subheader">
+  <h2 class="title">Välkommen {{rootData.firstname}} {{rootData.lastname}}</h2>
+</div>
+    <ion-content id="subheaderSpace" >
+  <div class="list card">
+    <div class="item item-divider text-center">
+      Omprov 13/7
+    </div>
+  <div class="item item-body">
+    <p>
+      Omprov i sal för ämnena test1 och test2
+    </p>
+  </div>
+</div>
+
+<div class="list card">
+  <div class="item item-divider text-center">
+    Öppethus 14/8
+  </div>
+  <div class="item item-body">
+    <p>
+      Öppethus på testvägen 12
+    </p>
+  </div>
+</div>
+
+<div class="list card">
+  <div class="item item-divider text-center">
+    Aktiva Kurser för {{rootData.firstname}}
+  </div>
+  <div id="centerText" class="item item-body">
+    <ul>
+      <li ng-repeat="x in rootCourses">
+        {{ x.course_name }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+</ion-content>
+  </ion-side-menu-content>
+
+    <ion-side-menu side="right">
+        <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item menu-close> <a ng-click="login2()">Kurser</a> </ion-item>
+        <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
+      </ion-list>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>
+</ion-nav-view>

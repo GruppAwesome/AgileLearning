@@ -1,0 +1,59 @@
+
+<ion-nav-view>
+<ion-header-bar class="bar-dark" ng-cloak>
+  <a href="#/list" class="button button-icon-ion-android-arrow-back">Back
+    </a>
+    <h1 class="title">{{data.name}}</h1>
+</ion-header-bar>
+    
+  <ion-content class="padding">
+
+  <div class="list card">
+  <div class="item item-divider text-center">
+    Aktiva Kurser för {{rootData.firstname}}
+  </div>
+  <div id="centerText" class="item item-body">
+    <ul>
+      <li ng-repeat="x in rootCourses">
+        {{ x.course_name }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+  </ion-content>
+
+</ion-nav-view>
+
+<!--<div class="list card">
+  <div class="item item-divider text-center">
+    Aktiva Kurser för {{rootData.firstname}}
+  </div>
+  <div id="centerText" class="item item-body">
+    <ul>
+      <li ng-repeat="x in rootCourses">
+        {{ x.course_name }}
+      </li>
+    </ul>
+  </div>
+</div>-->
+<!--
+<ion-side-menus>
+<ion-side-menu-content>
+  <ion-header-bar class="bar-dark" ng-cloak>
+    <div class="buttons">
+      <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
+    </div>
+    <h1 class="title"></h1>
+  </ion-header-bar>
+    <ion-content id="subheaderSpace" >
+
+</ion-content>
+  
+  </ion-side-menu-content>
+    <ion-side-menu side="left">
+      <ion-list>
+        <ion-item ui-sref="courses" ui-sref-active="active">Kurser</ion-item>
+      </ion-list>
+    </ion-side-menu>
+  </ion-side-menus>-->

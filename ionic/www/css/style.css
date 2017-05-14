@@ -1,4 +1,3 @@
-
 .pane{
    background: #3a7bd5 ; /* For browsers that do not support gradients */
    background: -webkit-linear-gradient(#FF8008, #2F80ED); /* For Safari 5.1 to 6.0 */
@@ -14,20 +13,7 @@
   margin-top:2%;
 }
 
-#textCenter{
-	text-align: center;
-}
-
-#buttonspacebottom {
-  padding-bottom: 0;
-}
-
 #subheaderSpace{
   margin-top: 20px;
   padding-top:20px;
 }
-
-#centerText{
-  text-align: center;
-}
-
