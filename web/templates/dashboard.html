@@ -1,8 +1,24 @@
 <div class="container-fluid background">
-    <div class="row blackWithWhite onTop">
-        <img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}"><h1>{{data.name}}</h1>
-    </div>
-    <div class="row">
-        Välkommen {{rootData.username}}!
-    </div>
+	<div class="row blackWithWhite onTop">
+		<img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}"><h1>{{data.name}}</h1>
+	</div>
+	<div class="subheader row">
+		Välkommen {{rootData.username}}!
+	</div>
+	<div class="card">
+		<h4>Omprov 13/7</h4>
+		<p>Omprov i sal för ämnena test1 och test2</p>
+	</div>
+	<div class="card">
+		<h4>Öppethus 14/8</h4>
+		<p>Öppethus på testvägen 12</p>
+	</div>
+	<div class="card">
+		Aktiva Kurser för {{rootData.firstname}}
+		<p ng-repeat="x in rootCourses">
+			
+			{{ x.course_name }}
+			
+		</p>
+	</div>
 </div>

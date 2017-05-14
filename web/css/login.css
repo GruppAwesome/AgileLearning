@@ -34,7 +34,7 @@ h1 {
     top: 0;
     height: fit-content;
     width: 100vw;
-    margin-bottom: 20px;
+
 }
 
 .blackWithWhite {
@@ -56,4 +56,19 @@ h1 {
 .logotype{
     border: 1px solid black;
     margin: 5px;
+}
+
+.subheader{
+    border-bottom: solid;
+    background-color: white;
+}
+
+.card{
+    border:solid;
+    background-color: white;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 40px;
+    height: 200px;
+    border-radius: 25px;
 }
