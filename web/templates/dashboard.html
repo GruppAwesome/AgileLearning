@@ -1,43 +1,35 @@
 <div class="container-fluid background">
 	<div class="row blackWithWhite onTop">
-		<img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}">
-		<h1>{{data.name}}</h1>
+		<div class="col-md-1">
+			<img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}">
+		</div>
+		<div class="col-md-10">
+			<h1>{{data.name}}</h1>
+		</div>
+		<div class="col-md-1">
+			<h1><i class="fa fa-bars" aria-hidden="true"></i></h1>
+		</div>
 	</div>
 	<div class="subheader row">
 		Välkommen {{rootData.username}}!
 	</div>
-	<div class="row">
-		<div class="col-md-6">
+	<div class="col-md-6">
+		<div class="card">
+			<h4>Omprov 13/7</h4>
+			<p>Omprov i sal för ämnena test1 och test2</p>
 		</div>
-		<div class="col-md-6">
-			<div class="card">
-				<h4>Omprov 13/7</h4>
-				<p>Omprov i sal för ämnena test1 och test2</p>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-6">
-			<div class="card">
-				<h4>Öppethus 14/8</h4>
-				<p>Öppethus på testvägen 12</p>
-			</div>
+		<div class="card">
+			<h4>Öppethus 14/8</h4>
+			<p>Öppethus på testvägen 12</p>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-6">
-			<div class="card">
-				Aktiva Kurser för {{rootData.firstname}}
-				<p ng-repeat="x in rootCourses">
 
-					{{ x.course_name }}
-
-				</p>
-			</div>
+	<div class="col-md-6">
+		<div class="card">
+			Aktiva Kurser för {{rootData.firstname}}
+			<p ng-repeat="x in rootCourses">
+				{{ x.course_name }}
+			</p>
 		</div>
 	</div>
 </div>
