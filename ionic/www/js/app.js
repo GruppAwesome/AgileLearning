@@ -37,6 +37,11 @@
     $ionicSideMenuDelegate.toggleRight()
   }
 
+  $scope.openState = function(theState) {
+    $state.go(theState);
+    alert(theState);
+  }
+
   });
 
 
@@ -50,6 +55,12 @@
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('courses', {
+      url: '/courses',
+      templateUrl: 'myviews/courses.html',
       controller: 'myCtrl'
     });
 
