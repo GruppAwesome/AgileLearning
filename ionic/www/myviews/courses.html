@@ -1,27 +1,63 @@
 
 <ion-nav-view>
+<ion-view>
+  <ion-side-menus>
+    <ion-side-menu-content>
 <ion-header-bar class="bar-dark" ng-cloak>
-  <a href="#/list" class="button button-icon-ion-android-arrow-back">Back
-    </a>
+  <a href="#/list" class="button button-icon-ion-android-arrow-back">Back</a>
     <h1 class="title">{{data.name}}</h1>
+     <div class="buttons">
+          <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+      </div>
 </ion-header-bar>
+     <div class="bar bar-subheader">
+        <h2 class="title">Mina kurser</h2>
+      </div>
     
-  <ion-content class="padding">
+  <ion-content class="padding subheaderSpace">
 
   <div class="list card">
-  <div class="item item-divider text-center">
-    Aktiva Kurser för {{rootData.firstname}}
-  </div>
-  <div id="centerText" class="item item-body">
-    <ul>
-      <li ng-repeat="x in rootCourses">
-        {{ x.course_name }}
-      </li>
-    </ul>
+
+  <div class="item item-body">
+    <strong>Pågående(2)</strong><br><br>
+    <strong>Kurs C</strong><br>
+    Inlämningsuppgift<br><br>
+    <strong>Kurs D</strong><br>
+    Projectuppgift<br>
+    Inlämningsuppgift<br><br>
+    <strong>Kommande(1)</strong><br><br>
+
+    <strong>Kurs E</strong><br><br>
+    <strong>Avslutade(2)</strong><br><br>
+    <strong>Kurs A:</strong> G<br>
+    <strong>Projektuppgift:</strong> VG<br>
+    <strong>Tenta:</strong>  G<br><br>
+    <strong>Kurs B:</strong>  VG<br>
+    <strong>Tenta:</strong> VG
+
   </div>
 </div>
 
   </ion-content>
+
+  </ion-side-menu-content>
+    <ion-side-menu side="right">
+      <header class="bar bar-header bar-stable">
+        <h1 class="title">Left</h1>
+      </header>
+      <ion-content class="has-header">
+        <ion-list>
+          <ion-item menu-close> 
+            <a href="#courses">
+            Kurser 
+            </a>
+          </ion-item>
+          <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>
+</ion-view>
 
 </ion-nav-view>
 
