@@ -37,11 +37,6 @@
     $ionicSideMenuDelegate.toggleRight()
   }
 
-  $scope.openState = function(theState) {
-    $state.go(theState);
-    alert(theState);
-  }
-
   });
 
 
