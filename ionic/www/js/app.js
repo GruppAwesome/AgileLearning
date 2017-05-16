@@ -3,7 +3,7 @@
   var app = angular.module('starter', ['ionic']);
 
   //Creates the controller
-  app.controller('myCtrl', function ($scope, $http, $state, $rootScope) {
+  app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
     $http.get('schooldata/data.json')
     .success(function (data) {
       $scope.data = data;
@@ -32,6 +32,10 @@
         });
 
     };
+
+    $scope.toggleRight = function() {
+    $ionicSideMenuDelegate.toggleRight()
+  }
 
   });
 

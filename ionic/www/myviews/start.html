@@ -1,26 +1,26 @@
-<ion-view view-title="Välkommen till {{data.name}}s skolportal" class="view-title">
-<ion-content scroll="false">
-<br>
-<div id="startlogo">
-  <img class="full-image" ng-src="schooldata/{{data.logo}}">
-</div>
-<div class="item-body">
-  <form>
-    <br>
-    <label class="whiteback item item-input">
-      <span  class="input-label">Username</span>
+<ion-view>
+  <ion-header-bar class="bar-dark" ng-cloak>
+    <h1 class="title">Välkommen till {{data.name}}s skolportal</h1>
+  </ion-header-bar>
+  <ion-content scroll="false" class="space">
+    <div id="startlogo">
+      <img class="full-image" ng-src="schooldata/{{data.logo}}">
+    </div>
+    <div class="item-body">
+      <form>
+        <label class="whiteback item item-input">
+      <span class="input-label">Username</span>
       <input id="usernameInput" name="adults" type="text" required>
     </label>
-    <br>
-    <label class="item item-input">
+        <label class="item item-input">
       <span class="input-label">Password</span>
       <input id="passwordInput" name="children" type="password" required>
     </label>
-  </form>
-  <a ng-click="login()" class="button button-block button-dark">
+      </form>
+      <a ng-click="login()" class="button button-block button-dark">
     Login
   </a>
-  </button>
-</div>
-</ion-content>
+      </button>
+    </div>
+  </ion-content>
 </ion-view>
