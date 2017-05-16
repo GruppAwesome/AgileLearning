@@ -53,14 +53,14 @@ namespace WebAPI.Controllers
 
         public struct LoginArgs
         {
-            public string Username;
-            public string Password;
+            public string username;
+            public string password;
         }
 
         [HttpPost("login")]
         public User Login([FromBody] LoginArgs args)
         {
-            var user = this.LoginUser(args.Username, GetHashString(args.Password));
+            var user = this.LoginUser(args.username, GetHashString(args.password));
             return user;
         }
 
@@ -68,7 +68,7 @@ namespace WebAPI.Controllers
         {
             // Vulnerable to SQL Injection? Very possible
             return dbConn.Conn.QuerySingleOrDefault<User>(
-                $"select * from users where \"Password\" is not null and \"Username\" = '{username}' and \"Password\" = '{password}'");
+                $"select * from users where \"password\" is not null and \"user_name\" = '{username}' and \"password\" = '{password}'");
         }
         
 
