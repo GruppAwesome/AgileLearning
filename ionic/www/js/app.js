@@ -53,6 +53,12 @@
       controller: 'myCtrl'
     });
 
+    $stateProvider.state('courses', {
+      url: '/courses',
+      templateUrl: 'myviews/courses.html',
+      controller: 'myCtrl'
+    });
+
     //Standard redirection
     $urlRouterProvider.otherwise('/start');
 
