@@ -6,16 +6,16 @@ namespace WebAPI.Models {
 
     public class User 
     {
-        public int id { get; set; }
-        public string Username { get; set; }
+        public int user_id { get; set; }
+        public string user_name { get; set; }
 
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Email { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string email { get; set; }
 
-        public Nullable<int> Age { get; set; }
+        public Nullable<int> age { get; set; }
 
         [JsonIgnore]
-        public string Password { get; set; }
+        public string password { get; set; }
     }
 }
