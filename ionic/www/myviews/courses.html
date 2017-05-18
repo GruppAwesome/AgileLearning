@@ -1,7 +1,9 @@
 <ion-nav-view>
   <ion-view>
     <ion-side-menus>
+
       <ion-side-menu-content>
+
         <ion-header-bar class="bar-dark" ng-cloak>
           <a href="#/list" class="button button-icon-ion-android-arrow-back">Back</a>
           <h1 class="title">{{data.name}}</h1>
@@ -9,27 +11,50 @@
             <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
           </div>
         </ion-header-bar>
+
         <div class="bar bar-subheader">
           <h2 class="title">Mina kurser</h2>
         </div>
 
         <ion-content class="padding subheaderSpace">
-
           <div class="list card">
-
             <div class="item item-body">
-              <ul>
+              
+                <strong>Pågående</strong>
+                <ul>
                 <li ng-repeat="x in rootCourses">
-                  {{ x.course_status }} <br> {{ x.course_name }}
+                  <span ng-if="x.course_status == 'Aktiv'">
+                    <br> {{x.course_name}} <br>
+                  </span>
+                </li>
+                </ul>
+
+                <br>
+                <strong>Kommande</strong>
+                <ul>
+                <li ng-repeat="x in rootCourses">
+                  <span ng-if="x.course_status == 'Kommande'">
+                    <br> {{x.course_name}} <br>
+                  </span>
+                </li>
+                </ul>
+
+                <br>
+                <strong>Avslutad</strong>
+                <ul>
+                <li ng-repeat="x in rootCourses">
+                  <span ng-if="x.course_status == 'Avslutad'">
+                    <br> {{x.course_name}} <br>
+                    {{x.course_task}}
+                  </span>
                 </li>
               </ul>
 
             </div>
           </div>
-
         </ion-content>
-
       </ion-side-menu-content>
+
       <ion-side-menu side="right">
         <header class="bar bar-header bar-stable">
           <h1 class="title">Left</h1>
@@ -37,48 +62,15 @@
         <ion-content class="has-header">
           <ion-list>
             <ion-item menu-close>
-              <a href="#courses">
-            Kurser 
-            </a>
+              <a href="#courses">Kurser</a>
             </ion-item>
-            <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
+            <ion-item menu-close> 
+              <a href="#/start">Log out</a>
+            </ion-item>
           </ion-list>
         </ion-content>
       </ion-side-menu>
+
     </ion-side-menus>
   </ion-view>
-
 </ion-nav-view>
-
-<!--<div class="list card">
-  <div class="item item-divider text-center">
-    Aktiva Kurser för {{rootData.firstname}}
-  </div>
-  <div id="centerText" class="item item-body">
-    <ul>
-      <li ng-repeat="x in rootCourses">
-        {{ x.course_name }}
-      </li>
-    </ul>
-  </div>
-</div>-->
-<!--
-<ion-side-menus>
-<ion-side-menu-content>
-  <ion-header-bar class="bar-dark" ng-cloak>
-    <div class="buttons">
-      <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
-    </div>
-    <h1 class="title"></h1>
-  </ion-header-bar>
-    <ion-content id="subheaderSpace" >
-
-</ion-content>
-  
-  </ion-side-menu-content>
-    <ion-side-menu side="left">
-      <ion-list>
-        <ion-item ui-sref="courses" ui-sref-active="active">Kurser</ion-item>
-      </ion-list>
-    </ion-side-menu>
-  </ion-side-menus>-->
