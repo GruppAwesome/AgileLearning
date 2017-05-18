@@ -39,3 +39,11 @@
 .space {
   margin-top: 20%;
 }
+
+a {
+  text-decoration: none
+}
+
+a:visited {
+    color: black;
+}
