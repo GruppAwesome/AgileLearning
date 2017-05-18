@@ -13,37 +13,45 @@
             <h1>{{data.name}}</h1>
         </div>
         <div class="col-xs-2">
-
             <img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
         </div>
     </div>
     <div class="subheader row">
-        <h6>Välkommen1 {{rootData.username}}!</h6>
+        <h6>Mina Kurser</h6>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <h4>Påbörjade kurser</h4>
+            <strong>Pågående</strong>
             <ul>
-                <li><a href="#!/selectedcourse">Ostkunskap</a></li>
-                <li>Dans</li>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Aktiv'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
             </ul>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <h4>Avslutade Kurser</h4>
+            <strong>Kommande</strong>
             <ul>
-                <li>Ostkunskap</li>
-                <li>Dans</li>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Kommande'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
             </ul>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <h4>Kommande Kurser</h4>
+            <strong>Kommande Kurser</strong>
             <ul>
-                <li>Ostkunskap</li>
-                <li>Dans</li>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Avslutad'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
             </ul>
         </div>
     </div>
