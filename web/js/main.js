@@ -22,43 +22,52 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         }
       });
 
-        $http.post('http://localhost:5000/api/courses/mycourses', {
-          course_status: "Active",
+    $http.post('http://localhost:5000/api/courses/mycourses', {
+        course_status: "Active",
 
-        })
-        .then(function (data) {
-            $rootScope.rootCourses = data.data;
+      })
+      .then(function (data) {
+        $rootScope.rootCourses = data.data;
 
-        });
+      });
   };
 
   $scope.sidebarMenu = function () {
-       $('#sidebar').animate({width:$( document ).width()*0.2},0);
-       $('#sidebar').animate({width:'toggle'},350);
-     
-        if(sidebarClosed){
-       $('#sidebar-btn').animate({right:$( document ).width()*0.2},0);
-       sidebarClosed = !sidebarClosed;
-      }
-      else{
-        $('#sidebar-btn').animate({right:0},10);
-        sidebarClosed = true;
-      }
-             
-    };
+    var documentWidth = $(document).width();
+    if (documentWidth > 500) {
+      documentWidth *= 0.2;
+    }
+    $('#sidebar').animate({
+      width: documentWidth
+    }, 0);
+    $('#sidebar').animate({
+      width: 'toggle'
+    }, 350);
+
+    if (sidebarClosed) {
+      $('#sidebar-btn').animate({
+        right: documentWidth
+      }, 0);
+    } else {
+      $('#sidebar-btn').animate({
+        right: 0
+      }, 10);
+    }
+    sidebarClosed = !sidebarClosed;
+  };
 });
 
 app.config(function ($routeProvider) {
   $routeProvider
-  .when("/", {
-    templateUrl: "templates/login.html"
-  })
-  .when("/dashboard", {
-    templateUrl: "templates/dashboard.html"
+    .when("/", {
+      templateUrl: "templates/login.html"
+    })
+    .when("/dashboard", {
+      templateUrl: "templates/dashboard.html"
 
-      })
-  .when("/selectedcourse", {
-    templateUrl: "templates/selectedcourse.html"
-  });
+    })
+    .when("/selectedcourse", {
+      templateUrl: "templates/selectedcourse.html"
+    });
 
 });
