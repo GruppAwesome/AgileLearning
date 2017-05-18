@@ -1,0 +1,53 @@
+#sidebar{
+
+  background: white;
+  height: 100%;
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  border: solid 1px;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+ul li a{
+  background: white;
+  text-decoration: none;
+
+}
+
+#sidebar-btn{
+  width: 40px;
+  display: inline-block;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  transition: right 0.3s linear;
+
+}
+
+#sidebar-btn span{
+  color: white;
+  height: 4px;
+  background: white;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.someSpace{
+  margin-bottom:10px;
+}
