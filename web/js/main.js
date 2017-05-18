@@ -33,11 +33,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   };
 
   $scope.sidebarMenu = function () {
-       $('#sidebar').animate({width:$( document ).width()*0.3},0);
+       $('#sidebar').animate({width:$( document ).width()*0.2},0);
        $('#sidebar').animate({width:'toggle'},350);
      
         if(sidebarClosed){
-       $('#sidebar-btn').animate({right:$( document ).width()*0.3},0);
+       $('#sidebar-btn').animate({right:$( document ).width()*0.2},0);
        sidebarClosed = !sidebarClosed;
       }
       else{

@@ -10,6 +10,7 @@
   border: solid 1px;
   font-size: 20px;
   text-align: center;
+  padding-top: 20px;
 }
 
 
@@ -32,18 +33,11 @@ ul li a{
   width: 40px;
   display: inline-block;
   color: white;
-  position: relative;
+  position: absolute;
   top: 0;
   right: 0px;
   transition: right 0.3s linear;
 
-}
-
-
-
-.active{
-  top: 500px;
-  height: 200px;
 }
 
 #sidebar-btn span{
@@ -52,4 +46,8 @@ ul li a{
   background: white;
   margin-bottom: 5px;
   display: block;
+}
+
+.someSpace{
+  margin-bottom:10px;
 }
