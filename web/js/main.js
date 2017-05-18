@@ -21,15 +21,13 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   };
 
   $scope.showMyCourses = function () {
-    var username = document.getElementById("usernameInput").value;
 
-        $http.post('http://localhost:5000/api/courses/mycourses', {
-      Username: username
+    $http.post('http://localhost:5000/api/courses/mycourses', {
+      Username: $rootScope.rootData.user_name
     })
       .then(function (data) {
         if (data != null && data != "") {
           $rootScope.rootCourses = data.data;
-          //$location.url('/dashboard');
         }
       });
 

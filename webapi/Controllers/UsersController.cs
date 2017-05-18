@@ -11,9 +11,6 @@ using Dapper;
 
 namespace WebAPI.Controllers
 {
-
-
-
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
@@ -32,7 +29,6 @@ namespace WebAPI.Controllers
             return sb.ToString();
         }
 
-
         private IDatabaseConnection dbConn;
 
         public UsersController(IDatabaseConnection conn)
@@ -48,16 +44,12 @@ namespace WebAPI.Controllers
                  "select * from users");
         }
 
-
-
-
         public struct LoginArgs
         {
             public string username;
             public string password;
         }
 
-        //[HttpPost("login")]
         [Route("[action]")]
         public User Login([FromBody] LoginArgs args)
         {
@@ -71,7 +63,5 @@ namespace WebAPI.Controllers
             return dbConn.Conn.QuerySingleOrDefault<User>(
                 $"select * from users where \"password\" is not null and \"user_name\" = '{username}' and \"password\" = '{password}'");
         }
-        
-
     }
 }

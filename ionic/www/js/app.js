@@ -24,15 +24,13 @@
     };
 
     $scope.showMyCourses = function () {
-      var username = document.getElementById("usernameInput").value;
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-        Username: username
+        Username: $rootScope.rootData.user_name
       })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;
-            $state.go('courses');
           }
         });
     };

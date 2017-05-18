@@ -27,7 +27,6 @@ namespace WebAPI.Controllers
         public struct MyCoursesArgs
         {
             public string username;
-            public string password;
         }
 
         [Route("[action]")]
@@ -40,7 +39,7 @@ namespace WebAPI.Controllers
         public IEnumerable<Course> UserCourses(string username)
         {
             return dbConn.Conn.Query<Course>(
-                "select Course.* from users, courses, enrolled where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
+                $"select courses.* from users, courses, enrolled where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
         }
     }
 }
