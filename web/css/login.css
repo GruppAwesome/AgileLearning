@@ -35,7 +35,8 @@ h1 {
     word-wrap: break-word;
     position: static;
     top: 0;
-    height: fit-content;
+    min-height: fit-content;
+    height: 10%;
     width: 100vw;
 
 }
