@@ -12,24 +12,28 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post('http://localhost:5000/api/users/login', {
-        Username: username,
-        Password: password
-      })
+      Username: username,
+      Password: password
+    })
       .then(function (data) {
         if (data != null && data != "") {
           $rootScope.rootData = data.data;
           $location.url('/dashboard');
         }
       });
+  };
+
+  $scope.showMyCourses = function () {
 
     $http.post('http://localhost:5000/api/courses/mycourses', {
-        course_status: "Active",
-
-      })
+      Username: $rootScope.rootData.user_name
+    })
       .then(function (data) {
-        $rootScope.rootCourses = data.data;
-
+        if (data != null && data != "") {
+          $rootScope.rootCourses = data.data;
+        }
       });
+
   };
 
   $scope.sidebarMenu = function () {
@@ -55,6 +59,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
     sidebarClosed = !sidebarClosed;
   };
+
 });
 
 app.config(function ($routeProvider) {

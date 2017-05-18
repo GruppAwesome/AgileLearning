@@ -9,7 +9,6 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class CoursesController : Controller
     {
-
         private IDatabaseConnection dbConn;
 
         public CoursesController(IDatabaseConnection conn)
@@ -27,15 +26,20 @@ namespace WebAPI.Controllers
 
         public struct MyCoursesArgs
         {
-            public string course_status;
+            public string username;
         }
 
-        [HttpPost("mycourses")]
-        public IEnumerable<Course> mycourses([FromBody]MyCoursesArgs args)
+        [Route("[action]")]
+        public IEnumerable<Course> MyCourses([FromBody]MyCoursesArgs args)
         {
-            var user = dbConn.Conn.Query<Course>(
-                $"select * from courses where \"course_status\" = '{args.course_status}'");
-            return user;
+            var courses = this.UserCourses(args.username);
+            return courses;
+        }
+
+        public IEnumerable<Course> UserCourses(string username)
+        {
+            return dbConn.Conn.Query<Course>(
+                $"select courses.* from users, courses, enrolled where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
         }
     }
 }
