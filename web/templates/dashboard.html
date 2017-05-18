@@ -1,17 +1,20 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+	ost
+</md-sidenav>
 <div class="container-fluid background">
 	<div class="row blackWithWhite onTop">
-		<div class="col-md-1">
-			<img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}">
+		<div class="col-xs-2">
+			<img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
 		</div>
-		<div class="col-md-10">
+		<div class="col-xs-8">
 			<h1>{{data.name}}</h1>
 		</div>
-		<div class="col-md-1">
+		<div class="col-xs-1">
 			<h1><i class="fa fa-bars" aria-hidden="true"></i></h1>
 		</div>
 	</div>
 	<div class="subheader row">
-		Välkommen {{rootData.username}}!
+		<h6>Välkommen {{rootData.username}}!</h6>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
@@ -26,7 +29,7 @@
 
 	<div class="col-md-6">
 		<div class="card">
-			Aktiva Kurser för {{rootData.firstname}}
+			<h4> Kurser för {{rootData.firstname}}</h4>
 			<p ng-repeat="x in rootCourses">
 				{{ x.course_name }}
 			</p>

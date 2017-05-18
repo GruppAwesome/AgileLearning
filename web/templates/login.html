@@ -3,30 +3,30 @@
         <h1>Välkommen till {{data.name}}s skolportal!</h1>
     </div>
     <div class="row">
-        <img class="logotype" data-ng-src="../schooldata/{{data.logo}}">
-    </div>
-    <div class="row">
-        <div class="col-xs-1 col-md-4 col-lg-5"></div>
-        <div class="col-xs-10 col-md-4 col-lg-2">
-            <div class="loginForm">
-                <input id="usernameInput" placeholder="Username"></input>
-                <input type="password" placeholder="Password" id="passwordInput"></input>
-                <input type="submit" value="Sign In" class="blackWithWhite" data-ng-click="login()"></input>
+        <div class="col-xs-1 col-sm-4 col-md-4 col-lg-5"></div>
+        <div class="col-xs-10 col-sm-4 col-md-4 col-lg-2">
+            <div class="air">
+                <img id="logotype" data-ng-src="../schooldata/{{data.logo}}">
+                <div id="loginForm">
+                    <input id="usernameInput" placeholder="Username"></input>
+                    <input type="password" placeholder="Password" id="passwordInput"></input>
+                    <input type="submit" value="Sign In" class="blackWithWhite" data-ng-click="login()"></input>
+                </div>
             </div>
         </div>
-        <div class="col-xs-1 col-md-4 col-lg-5"></div>
+        <div class="col-xs-1 col-sm-4 col-md-4 col-lg-5"></div>
     </div>
     <div class="row blackWithWhite footer">
-        <div class="col-xs-4">
+        <div class="col-sm-4 col-xs-6">
             <p>Telefon: {{data.telefon}}</p>
             <p>E-post: {{data.epost}}</p>
             <p>{{data.om}}</p>
         </div>
-        <div class="col-xs-4">
-            <p>{{data.lorem1 | limitTo: 400}}</p>
+        <div class="col-sm-4 col-xs-6">
+            <p>{{data.lorem1 | limitTo: 100}}</p>
         </div>
-        <div class="col-xs-4">
-            <p>{{data.lorem2 | limitTo: 400}}</p>
+        <div class="col-sm-4 hidden-xs">
+            <p>{{data.lorem2 | limitTo: 100}}</p>
 
         </div>
     </div>
