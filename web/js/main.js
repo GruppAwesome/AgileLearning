@@ -1,3 +1,6 @@
+//Instance
+var sidebarClosed = true;
+
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $http.get("../schooldata/data.json")
@@ -28,6 +31,21 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
         });
   };
+
+  $scope.sidebarMenu = function () {
+       $('#sidebar').animate({width:$( document ).width()*0.2},0);
+       $('#sidebar').animate({width:'toggle'},350);
+     
+        if(sidebarClosed){
+       $('#sidebar-btn').animate({right:$( document ).width()*0.2},0);
+       sidebarClosed = !sidebarClosed;
+      }
+      else{
+        $('#sidebar-btn').animate({right:0},10);
+        sidebarClosed = true;
+      }
+             
+    };
 });
 
 app.config(function ($routeProvider) {

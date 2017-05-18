@@ -1,11 +1,14 @@
-
-
-.pane{
-   background: #3a7bd5 ; /* For browsers that do not support gradients */
-   background: -webkit-linear-gradient(#FF8008, #2F80ED); /* For Safari 5.1 to 6.0 */
-   background: -o-linear-gradient(#FF8008, #3a7bd5); /* For Opera 11.1 to 12.0 */
-   background: -moz-linear-gradient(#FF8008, #3a7bd5); /* For Firefox 3.6 to 15 */
-   background: linear-gradient(#FFC837, #FF8008); /* Standard syntax */
+.pane {
+    background: #3a7bd5;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#FF8008, #2F80ED);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FF8008, #3a7bd5);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FF8008, #3a7bd5);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFC837, #FF8008);
+    /* Standard syntax */
 }
 
 .background {
@@ -17,27 +20,41 @@
 
 h1 {
     margin-top: 0px;
-    font-size: 25px;
     display: inline-block;
+    font-size: 25px;
 }
 
-.loginForm input {
-    margin: 1px;
+h6 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 12px;
+    line-height: 96%;
+}
+
+.air {
+    margin-top: 15%;
+}
+
+#loginForm input {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
+    margin-top: 2px;
 }
 
-.onTop{
+
+
+.onTop {
     padding: 10px;
     font-size: 10px;
     word-wrap: break-word;
     position: static;
     top: 0;
-    height: fit-content;
+    min-height: fit-content;
+    height: 10%;
     width: 100vw;
-
+    text-align: center;
 }
 
 .blackWithWhite {
@@ -52,21 +69,28 @@ h1 {
     word-wrap: break-word;
     position: absolute;
     bottom: 0;
-    height: 25vh;
+    min-height: fit-content;
+    height: 20vh;
     width: 100vw;
 }
 
-.logotype{
+#logotype {
     border: 1px solid black;
-    margin: 5px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.subheader{
+.logotype-nav{
+    max-width: 100%;
+    width: 100px;
+}
+
+.subheader {
     border-bottom: solid;
     background-color: white;
 }
 
-.card{
+.card {
     border: 1px solid black;
     background-color: white;
     width: 90%;
