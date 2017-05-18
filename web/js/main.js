@@ -68,6 +68,9 @@ app.config(function ($routeProvider) {
     })
     .when("/selectedcourse", {
       templateUrl: "templates/selectedcourse.html"
+    })
+    .when("/courses", {
+      templateUrl: "templates/courses.html"
     });
 
 });

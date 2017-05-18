@@ -1,0 +1,50 @@
+<div id="sidebar" onclick="sidebarMenu()">
+    <ul>
+        <li class="someSpace">Kurser</li>
+        <li><a href="#!/">Signout</a></li>
+    </ul>
+</div>
+<div class="container-fluid background">
+    <div class="row blackWithWhite onTop">
+        <div class="col-xs-2">
+            <img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
+        </div>
+        <div class="col-xs-8">
+            <h1>{{data.name}}</h1>
+        </div>
+        <div class="col-xs-2">
+
+            <img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
+        </div>
+    </div>
+    <div class="subheader row">
+        <h6>Välkommen1 {{rootData.username}}!</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Påbörjade kurser</h4>
+            <ul>
+                <li><a href="#!/selectedcourse">Ostkunskap</a></li>
+                <li>Dans</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Avslutade Kurser</h4>
+            <ul>
+                <li>Ostkunskap</li>
+                <li>Dans</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Kommande Kurser</h4>
+            <ul>
+                <li>Ostkunskap</li>
+                <li>Dans</li>
+            </ul>
+        </div>
+    </div>
+</div>
