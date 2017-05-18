@@ -20,12 +20,13 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
 
         $http.post('http://localhost:5000/api/courses/mycourses', {
-          course_status: "Active",
-
+          Username: username
         })
         .then(function (data) {
+          if (data != null && data != "") {
             $rootScope.rootCourses = data.data;
-
+            //$location.url('/dashboard');
+          }
         });
   };
 });

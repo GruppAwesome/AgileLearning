@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             return user;
         }
 
-           public User LoginUser(string username, string password)
+        public User LoginUser(string username, string password)
         {
             // Vulnerable to SQL Injection? Very possible
             return dbConn.Conn.QuerySingleOrDefault<User>(

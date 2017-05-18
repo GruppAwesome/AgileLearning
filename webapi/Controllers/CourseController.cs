@@ -27,15 +27,22 @@ namespace WebAPI.Controllers
 
         public struct MyCoursesArgs
         {
-            public string course_status;
+            public string username;
         }
 
         [HttpPost("mycourses")]
         public IEnumerable<Course> mycourses([FromBody]MyCoursesArgs args)
         {
-            var user = dbConn.Conn.Query<Course>(
-                $"select * from courses where \"course_status\" = '{args.course_status}'");
-            return user;
+            var courses = this.MyCourses(args.username);
+            return courses;
+        }
+
+        public IEnumerable<Course> MyCourses(string username)
+        {
+            var firstname = dbConn.Conn.Query<Course>("select first_name from users where \"user_name\" = '{username}'");
+
+            return dbConn.Conn.Query<Course>(
+                "select * from users, courses, enrolled where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"first_name\" = '{firstname}'");
         }
     }
 }

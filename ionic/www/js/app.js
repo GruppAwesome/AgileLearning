@@ -23,12 +23,13 @@
         });
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-          course_status: "Active",
-
+          Username: username
         })
         .success(function (data) {
+          if (data != null && data != "") {
             $rootScope.rootCourses = data;
-
+            $state.go('courses');
+          }
         });
 
     };
