@@ -61,6 +61,12 @@
       controller: 'myCtrl'
     });
 
+    $stateProvider.state('selectedcourse', {
+      url: '/selectedcourse',
+      templateUrl: 'myviews/selectedcourse.html',
+      controller: 'myCtrl'
+    });
+
     //Standard redirection
     $urlRouterProvider.otherwise('/start');
 

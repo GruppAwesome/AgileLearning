@@ -1,17 +1,24 @@
+<div id="sidebar" ng-click="sidebarMenu()">
+	<ul>
+		<li class="someSpace"><a href="#!/courses">Kurser</a></li>
+		<li><a href="#!/">Signout</a></li>
+	</ul>
+</div>
 <div class="container-fluid background">
 	<div class="row blackWithWhite onTop">
-		<div class="col-md-1">
-			<img class="logotype" height="20px" data-ng-src="../schooldata/{{data.logo}}">
+		<div class="col-xs-2">
+			<img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
 		</div>
-		<div class="col-md-10">
+		<div class="col-xs-8">
 			<h1>{{data.name}}</h1>
 		</div>
-		<div class="col-md-1">
-			<h1><i class="fa fa-bars" aria-hidden="true"></i></h1>
+		<div class="col-xs-2" >
+			
+			<img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
 		</div>
 	</div>
 	<div class="subheader row">
-		Välkommen {{rootData.username}}!
+		<h6>Välkommen {{rootData.username}}!</h6>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
@@ -23,10 +30,9 @@
 			<p>Öppethus på testvägen 12</p>
 		</div>
 	</div>
-
 	<div class="col-md-6">
 		<div class="card">
-			Aktiva Kurser för {{rootData.firstname}}
+			<h4> Kurser för {{rootData.firstname}}</h4>
 			<p ng-repeat="x in rootCourses">
 				{{ x.course_name }}
 			</p>
