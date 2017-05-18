@@ -45,3 +45,6 @@ secret.json
 # node modules
 web/node_modules/*
 
+
+# Vscode 
+.vscode
