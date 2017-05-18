@@ -11,6 +11,36 @@
     /* Standard syntax */
 }
 
+
+/* unvisited link */
+
+a:link {
+    color: #FF8008;
+}
+
+
+/* visited link */
+
+a:visited {
+    color: #FF8008;
+}
+
+
+/* mouse over link */
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+
+/* selected link */
+
+a:active {
+    color: #000;
+    text-decoration: none;
+}
+
 .background {
     min-height: 100vh;
     height: 100%;
@@ -42,8 +72,6 @@ p {
     width: 100%;
     margin-top: 2px;
 }
-
-
 
 .onTop {
     padding: 10px;
@@ -80,7 +108,7 @@ p {
     margin-bottom: 20px;
 }
 
-.logotype-nav{
+.logotype-nav {
     max-width: 100%;
     width: 100px;
 }
@@ -97,7 +125,12 @@ p {
     margin: 0 auto;
     margin-top: 40px;
     padding: 5px;
-    min-height: 100px;
-    height: fit-content;
+    height: 150px;
+    min-height: fit-content;
     border-radius: 2px;
+    text-align: left;
+}
+
+.card>p {
+    line-height: 120%;
 }
