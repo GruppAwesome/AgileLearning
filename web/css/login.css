@@ -43,8 +43,6 @@ p {
     margin-top: 2px;
 }
 
-
-
 .onTop {
     padding: 10px;
     font-size: 10px;
@@ -80,7 +78,7 @@ p {
     margin-bottom: 20px;
 }
 
-.logotype-nav{
+.logotype-nav {
     max-width: 100%;
     width: 100px;
 }
@@ -97,7 +95,11 @@ p {
     margin: 0 auto;
     margin-top: 40px;
     padding: 5px;
-    min-height: 100px;
-    height: fit-content;
+    height: 150px;
+    min-height: fit-content;
     border-radius: 2px;
+}
+
+.card>p {
+    line-height: 120%;
 }
