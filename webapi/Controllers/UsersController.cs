@@ -57,7 +57,8 @@ namespace WebAPI.Controllers
             public string password;
         }
 
-        [HttpPost("login")]
+        //[HttpPost("login")]
+        [Route("[action]")]
         public User Login([FromBody] LoginArgs args)
         {
             var user = this.LoginUser(args.username, GetHashString(args.password));

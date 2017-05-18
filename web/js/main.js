@@ -9,34 +9,40 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post('http://localhost:5000/api/users/login', {
-        Username: username,
-        Password: password
-      })
+      Username: username,
+      Password: password
+    })
       .then(function (data) {
         if (data != null && data != "") {
           $rootScope.rootData = data.data;
           $location.url('/dashboard');
         }
       });
+  };
+
+  $scope.showMyCourses = function () {
+    var username = document.getElementById("usernameInput").value;
 
         $http.post('http://localhost:5000/api/courses/mycourses', {
-          Username: username
-        })
-        .then(function (data) {
-          if (data != null && data != "") {
-            $rootScope.rootCourses = data.data;
-            //$location.url('/dashboard');
-          }
-        });
+      Username: username
+    })
+      .then(function (data) {
+        if (data != null && data != "") {
+          $rootScope.rootCourses = data.data;
+          //$location.url('/dashboard');
+        }
+      });
+
   };
+
 });
 
 app.config(function ($routeProvider) {
   $routeProvider
-  .when("/", {
-    templateUrl: "templates/login.html"
-  })
-  .when("/dashboard", {
-    templateUrl: "templates/dashboard.html"
-  });
+    .when("/", {
+      templateUrl: "templates/login.html"
+    })
+    .when("/dashboard", {
+      templateUrl: "templates/dashboard.html"
+    });
 });
