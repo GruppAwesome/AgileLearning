@@ -59,12 +59,9 @@
       </header>
       <ion-content class="has-header">
         <ion-list>
-          <ion-item menu-close> 
-            <a href="#courses">
-            Kurser 
-            </a>
-          </ion-item>
-          <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
+          <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
+          <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
+          <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>
@@ -72,36 +69,3 @@
 </ion-view>
 
 </ion-nav-view>
-
-<!--<div class="list card">
-  <div class="item item-divider text-center">
-    Aktiva Kurser för {{rootData.firstname}}
-  </div>
-  <div id="centerText" class="item item-body">
-    <ul>
-      <li ng-repeat="x in rootCourses">
-        {{ x.course_name }}
-      </li>
-    </ul>
-  </div>
-</div>-->
-<!--
-<ion-side-menus>
-<ion-side-menu-content>
-  <ion-header-bar class="bar-dark" ng-cloak>
-    <div class="buttons">
-      <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
-    </div>
-    <h1 class="title"></h1>
-  </ion-header-bar>
-    <ion-content id="subheaderSpace" >
-
-</ion-content>
-  
-  </ion-side-menu-content>
-    <ion-side-menu side="left">
-      <ion-list>
-        <ion-item ui-sref="courses" ui-sref-active="active">Kurser</ion-item>
-      </ion-list>
-    </ion-side-menu>
-  </ion-side-menus>-->

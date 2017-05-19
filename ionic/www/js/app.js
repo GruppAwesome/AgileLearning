@@ -49,9 +49,16 @@
       templateUrl: 'myviews/start.html',
       controller: 'myCtrl'
     });
+    
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
+      controller: 'myCtrl'
+    });
+
+      $stateProvider.state('grades', {
+      url: '/grades',
+      templateUrl: 'myviews/grades.html',
       controller: 'myCtrl'
     });
 
