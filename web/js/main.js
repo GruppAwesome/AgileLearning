@@ -16,9 +16,12 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         Password: password
       })
       .then(function (data) {
-        if (data != null && data != "") {
+        if (data.data) {
           $rootScope.rootData = data.data;
           $location.url('/dashboard');
+        }
+        else{
+          alert("Something odd happened, did you really write the correct login info?");
         }
       });
   };
