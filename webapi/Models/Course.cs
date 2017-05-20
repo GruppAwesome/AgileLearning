@@ -20,5 +20,16 @@ namespace WebAPI.Models {
 
          public String course_task { get; set; }
 
+         public int exam_id { get; set; }
+
+         public String exam_info { get; set; }
+
+         public String exam_grade { get; set; }
+
+         public int task_id { get; set; }
+
+         public String task_info { get; set; }
+
+         public String task_grade { get; set; }
     }
 }
