@@ -1,0 +1,38 @@
+<div id="sidebar" ng-click="sidebarMenu()">
+	<ul>
+		<li class="someSpace"><a href="#!/courses">Kurser</a></li>
+		<li class="someSpace">Betyg</li>
+		<li><a href="#!/">Signout</a></li>
+	</ul>
+</div>
+<div class="container-fluid background">
+    <div class="row blackWithWhite onTop">
+        <div class="col-xs-2">
+            <img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
+        </div>
+        <div class="col-xs-8">
+            <h1>{{data.name}}</h1>
+        </div>
+        <div class="col-xs-2">
+            <img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
+        </div>
+    </div>
+    <div class="subheader row">
+        <h6>Mina Betyg</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="card" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
+            <h4><a href="#!/selectedcourse"> {{x.course_name}} </a> VG</h4>
+            <table>
+                <tr>
+                    <td>Inlämning</td>
+                    <td>G</td>
+                </tr>
+                <tr>
+                    <td>Tenta</td>
+                    <td>VG</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

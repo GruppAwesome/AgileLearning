@@ -12,9 +12,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post('http://localhost:5000/api/users/login', {
-      Username: username,
-      Password: password
-    })
+        Username: username,
+        Password: password
+      })
       .then(function (data) {
         if (data != null && data != "") {
           $rootScope.rootData = data.data;
@@ -26,8 +26,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.showMyCourses = function () {
 
     $http.post('http://localhost:5000/api/courses/mycourses', {
-      Username: $rootScope.rootData.user_name
-    })
+        Username: $rootScope.rootData.user_name
+      })
       .then(function (data) {
         if (data != null && data != "") {
           $rootScope.rootCourses = data.data;
@@ -76,6 +76,9 @@ app.config(function ($routeProvider) {
     })
     .when("/courses", {
       templateUrl: "templates/courses.html"
+    })
+    .when("/grades", {
+      templateUrl: "templates/grades.html"
     });
 
 });
