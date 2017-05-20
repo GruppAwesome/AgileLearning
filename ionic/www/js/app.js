@@ -1,17 +1,24 @@
 (function () {
 
+  var sCourse;
+  var assignment;
   var app = angular.module('starter', ['ionic']);
+
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
-    $scope.getobject = function(thisobject){
-    $rootScope.sCourse = thisobject;
-  }
+    $scope.sCourse = sCourse;
+    $scope.assignment;
+
+    $scope.getobject = function (thisobject) {
+      sCourse = thisobject;
+    }
 
     $http.get('schooldata/data.json').success(function (data) { $scope.data = data; });
 
     $scope.login = function () {
+
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
 
@@ -39,6 +46,28 @@
         });
     };
 
+    $scope.showMySchedule = function () {
+
+      $http.post('http://localhost:5000/api/courses/MySchedule', {
+        course_name: sCourse.course_name
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $rootScope.rootSchedule = data;
+            $http.post('http://localhost:5000/api/courses/CourseAssignment', {
+              course_name: sCourse.course_name
+            })
+              .success(function (data) {
+                if (data != null && data != "") {
+                  $scope.assignment = data;
+                }
+              });
+          }
+        });
+
+
+    };
+
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()
     }
@@ -53,14 +82,14 @@
       templateUrl: 'myviews/start.html',
       controller: 'myCtrl'
     });
-    
+
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
       controller: 'myCtrl'
     });
 
-      $stateProvider.state('grades', {
+    $stateProvider.state('grades', {
       url: '/grades',
       templateUrl: 'myviews/grades.html',
       controller: 'myCtrl'
