@@ -11,7 +11,7 @@
         <h2 class="title">Välkommen {{rootData.first_name}} {{rootData.last_name}}</h2>
       </div>
 
-      <ion-content class="subheaderSpace">
+      <ion-content ng-init="showMyCourses()" class="subheaderSpace">
         <div class="list card">
           <div class="item item-divider text-center">
             Omprov 13/7
@@ -34,9 +34,9 @@
         </div>
         <div class="list card">
           <div class="item item-divider text-center">
-            Aktiva Kurser för {{rootData.firstname}}
+            Aktiva Kurser: {{rootData.firstname}}
           </div>
-          <div id="centerText" class="item item-body">
+          <div class="centerText item item-body">
             <ul>
               <li ng-repeat="x in rootCourses">
                 {{ x.course_name }}
@@ -52,12 +52,9 @@
       </header>
       <ion-content class="has-header">
         <ion-list>
-          <ion-item menu-close> 
-            <a href="#courses">
-            Kurser 
-            </a>
-          </ion-item>
-          <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
+          <ion-item menu-close> <a href="#courses"> Kurser </a></ion-item>
+          <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
+          <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>
