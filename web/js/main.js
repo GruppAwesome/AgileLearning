@@ -16,7 +16,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         Password: password
       })
       .then(function (response) {
-        if (respone.data) {
+        if (response.data) {
           $rootScope.rootData = response.data;
           $location.url('/dashboard');
         }
