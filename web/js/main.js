@@ -83,6 +83,9 @@ app.config(function ($routeProvider) {
     })
     .when("/grades", {
       templateUrl: "templates/grades.html"
+    })
+    .when("/assignments", {
+      templateUrl: "templates/assignments.html"
     });
 
 });
