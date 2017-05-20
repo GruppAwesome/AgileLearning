@@ -9,7 +9,7 @@
             <h4>Pågående</h4>
             <table>
                 <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
-                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                    <td ><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                 </tr>
             </table>
         </div>
@@ -19,7 +19,7 @@
             <h4>Kommande</h4>
             <table>
                 <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Kommande'">
-                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                    <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                 </tr>
             </table>
         </div>
@@ -29,7 +29,7 @@
             <h4>Avslutade</h4>
             <table>
                 <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
-                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                    <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                     <td>G</td>
                 </tr>
             </table>
