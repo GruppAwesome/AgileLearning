@@ -21,38 +21,33 @@
     </div>
     <div class="col-md-6">
         <div class="card">
-            <strong>Pågående</strong>
-            <ul>
-                <li ng-repeat="x in rootCourses">
-                    <span ng-if="x.course_status == 'Aktiv'">
-                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
-                  </span>
-                </li>
-            </ul>
+            <h4>Pågående</h4>
+            <table>
+                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <strong>Kommande</strong>
-            <ul>
-                <li ng-repeat="x in rootCourses">
-                    <span ng-if="x.course_status == 'Kommande'">
-                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
-                  </span>
-                </li>
-            </ul>
+            <h4>Kommande</h4>
+            <table>
+                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Kommande'">
+                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <strong>Avslutade</strong>
-            <ul>
-                <li ng-repeat="x in rootCourses">
-                    <span ng-if="x.course_status == 'Avslutad'">
-                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
-                  </span>
-                </li>
-            </ul>
+            <h4>Avslutade</h4>
+            <table>
+                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
+                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                    <td>G</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
