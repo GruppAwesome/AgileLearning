@@ -18,14 +18,12 @@
 	<div class="col-md-6">
 
 		<div class="card">
-			  <strong>Pågående</strong>
-                <ul>
-                <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Aktiv'">
-                    <br> {{x.course_name}} <br>
-                  </span>
-                </li>
-                </ul>
+			  <h4>Pågående</h4>
+            <table>
+                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+                    <td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                </tr>
+            </table>
 		</div>
 
 		<div class="card">
@@ -35,10 +33,8 @@
 	</div>
 	<div class="col-md-6">
 		<div class="card">
-			<h4> Aktiva kurser: {{rootData.firstname}}</h4>
-			<p ng-repeat="x in rootCourses">
-				{{ x.course_name }}
-			</p>
+			<h4> Detta är ett till kort, {{rootData.firstname}}</h4>
+			<p> Här kan man skriva en massa trevlig info!</p>
 		</div>
 	</div>
 </div>
