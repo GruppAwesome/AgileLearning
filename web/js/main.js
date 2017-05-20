@@ -15,9 +15,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         Username: username,
         Password: password
       })
-      .then(function (data) {
-        if (data.data) {
-          $rootScope.rootData = data.data;
+      .then(function (response) {
+        if (respone.data) {
+          $rootScope.rootData = response.data;
           $location.url('/dashboard');
         }
         else{
@@ -31,9 +31,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     $http.post('http://localhost:5000/api/courses/mycourses', {
         Username: $rootScope.rootData.user_name
       })
-      .then(function (data) {
-        if (data != null && data != "") {
-          $rootScope.rootCourses = data.data;
+      .then(function (response) {
+        if (response.data) {
+          $rootScope.rootCourses = response.data;
         }
       });
 
