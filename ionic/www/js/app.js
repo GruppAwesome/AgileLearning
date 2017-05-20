@@ -5,6 +5,10 @@
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
+    $scope.getobject = function(thisobject){
+    $rootScope.sCourse = thisobject;
+  }
+
     $http.get('schooldata/data.json').success(function (data) { $scope.data = data; });
 
     $scope.login = function () {
