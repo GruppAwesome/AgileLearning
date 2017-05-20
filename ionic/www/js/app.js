@@ -5,20 +5,22 @@
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
-    $scope.getobject = function(thisobject){
-    $rootScope.sCourse = thisobject;
-  }
+    $scope.getobject = function (thisobject) {
+      $scope.sCourse = thisobject;
+    }
 
-    $http.get('schooldata/data.json').success(function (data) { $scope.data = data; });
+    $http.get('schooldata/data.json').success(function (data) {
+      $scope.data = data;
+    });
 
     $scope.login = function () {
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
 
       $http.post('http://localhost:5000/api/users/login', {
-        Username: username,
-        Password: password
-      })
+          Username: username,
+          Password: password
+        })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
@@ -30,8 +32,8 @@
     $scope.showMyCourses = function () {
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-        Username: $rootScope.rootData.user_name
-      })
+          Username: $rootScope.rootData.user_name
+        })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;
@@ -53,14 +55,14 @@
       templateUrl: 'myviews/start.html',
       controller: 'myCtrl'
     });
-    
+
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
       controller: 'myCtrl'
     });
 
-      $stateProvider.state('grades', {
+    $stateProvider.state('grades', {
       url: '/grades',
       templateUrl: 'myviews/grades.html',
       controller: 'myCtrl'
