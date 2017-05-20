@@ -3,7 +3,7 @@
     <ion-side-menus>
 
       <ion-side-menu-content>
-        
+
         <ion-header-bar class="bar-dark" ng-cloak>
           <a href="#/list" class="button button-icon-ion-android-arrow-back">Back</a>
           <h1 class="title">{{data.name}}</h1>
@@ -19,32 +19,33 @@
         <ion-content class="padding subheaderSpace">
           <div class="list card">
             <div class="item item-body">
-              
-                <strong>Pågående</strong>
-                <ul>
+
+              <strong>Pågående</strong>
+              <ul>
                 <li ng-repeat="x in rootCourses">
                   <span ng-if="x.course_status == 'Aktiv'">
-                    <a href="#selectedcourse"><br> {{x.course_name}} <br></a>
+                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>
-                </ul>
+              </ul>
 
-                <br>
-                <strong>Kommande</strong>
-                <ul>
+              <br>
+              <strong>Kommande</strong>
+              <ul>
                 <li ng-repeat="x in rootCourses">
                   <span ng-if="x.course_status == 'Kommande'">
-                    <a href="#selectedcourse"><br> {{x.course_name}} <br></a>
+                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>
-                </ul>
+              </ul>
 
                 <br>
                 <strong>Avslutade</strong>
                 <ul>
+
                 <li ng-repeat="x in rootCourses">
                   <span ng-if="x.course_status == 'Avslutad'">
-                    <a href="#selectedcourse"><br> {{x.course_name}} <br></a>
+                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>
               </ul>
@@ -56,11 +57,11 @@
 
       <ion-side-menu side="right">
         <header class="bar bar-header bar-stable">
-          <h1 class="title">Left</h1>
         </header>
         <ion-content class="has-header">
           <ion-list>
-            <ion-item menu-close> <a href="#courses"> Kurser </a></ion-item>
+            <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
+            <ion-item menu-close> <a href="#/assignments"> Inlämningsuppgifter </a></ion-item>
             <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
             <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
           </ion-list>

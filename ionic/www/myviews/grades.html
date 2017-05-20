@@ -3,7 +3,7 @@
     <ion-side-menus>
 
       <ion-side-menu-content>
-        
+
         <ion-header-bar class="bar-dark" ng-cloak>
           <a href="#/list" class="button button-icon-ion-android-arrow-back">Back</a>
           <h1 class="title">{{data.name}}</h1>
@@ -17,44 +17,38 @@
         </div>
 
         <ion-content class="padding subheaderSpace">
-          
+
           <div class="list card">
             <div class="item item-body">
               <strong>Engelska: VG</strong>
-              <br>
-              Prov: VG<br>
-              Inlämningsuppgift: G
+              <br> Prov: VG<br> Inlämningsuppgift: G
             </div>
           </div>
 
           <div class="list card">
             <div class="item item-body">
               <strong>Svenska: VG</strong>
-              <br>
-              Prov: G<br>
-              Inlämningsuppgift: VG
+              <br> Prov: G<br> Inlämningsuppgift: VG
             </div>
           </div>
 
-           <div class="list card">
+          <div class="list card">
             <div class="item item-body">
               <strong>Tyska: G</strong>
-              <br>
-              Prov: G<br>
-              Inlämningsuppgift: G
+              <br> Prov: G<br> Inlämningsuppgift: G
             </div>
           </div>
-        
+
         </ion-content>
       </ion-side-menu-content>
 
       <ion-side-menu side="right">
         <header class="bar bar-header bar-stable">
-          <h1 class="title">Left</h1>
         </header>
         <ion-content class="has-header">
           <ion-list>
-            <ion-item menu-close> <a href="#courses"> Kurser </a></ion-item>
+            <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
+            <ion-item menu-close> <a href="#/assignments"> Inlämningsuppgifter </a></ion-item>
             <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
             <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
           </ion-list>
