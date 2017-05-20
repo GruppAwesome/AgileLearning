@@ -66,6 +66,12 @@
       controller: 'myCtrl'
     });
 
+    $stateProvider.state('assignments', {
+      url: '/assignments',
+      templateUrl: 'myviews/assignments.html',
+      controller: 'myCtrl'
+    });
+
     $stateProvider.state('courses', {
       url: '/courses',
       templateUrl: 'myviews/courses.html',

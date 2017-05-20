@@ -1,47 +1,45 @@
 <ion-nav-view>
   <ion-view>
     <ion-side-menus>
-
       <ion-side-menu-content>
-
         <ion-header-bar class="bar-dark" ng-cloak>
-          <a href="#/list" class="button button-icon-ion-android-arrow-back">Back</a>
+          <a href="#/courses" class="button button-icon-ion-android-arrow-back">Back</a>
           <h1 class="title">{{data.name}}</h1>
           <div class="buttons">
             <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
           </div>
         </ion-header-bar>
-
         <div class="bar bar-subheader">
-          <h2 class="title">Mina Betyg</h2>
+          <h2 class="title">{{Inlämningsuppgifter}}</h2>
         </div>
 
         <ion-content class="padding subheaderSpace">
 
           <div class="list card">
             <div class="item item-body">
-              <strong>Engelska: VG</strong>
-              <br> Prov: VG<br> Inlämningsuppgift: G
+              <strong>Kursinfo</strong>
+
+              <strong>
+                Prov:</strong><br> Biologi
+              <br>
+              <strong>
+                Tid:</strong><br> 1/7
+
             </div>
           </div>
 
-          <div class="list card">
-            <div class="item item-body">
-              <strong>Svenska: VG</strong>
-              <br> Prov: G<br> Inlämningsuppgift: VG
-            </div>
-          </div>
+          <div class="item item-body">
+            <strong>
+              Inlämningsuppgift
+              </strong> Tid:
+            </strong><br> 1/8
 
-          <div class="list card">
-            <div class="item item-body">
-              <strong>Tyska: G</strong>
-              <br> Prov: G<br> Inlämningsuppgift: G
-            </div>
+          </div>
           </div>
 
         </ion-content>
-      </ion-side-menu-content>
 
+      </ion-side-menu-content>
       <ion-side-menu side="right">
         <header class="bar bar-header bar-stable">
         </header>
@@ -54,7 +52,7 @@
           </ion-list>
         </ion-content>
       </ion-side-menu>
-
     </ion-side-menus>
   </ion-view>
+
 </ion-nav-view>
