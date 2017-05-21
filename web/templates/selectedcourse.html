@@ -17,7 +17,7 @@
 		<div class="card">
 			<h4>Schema</h4>
 
-			<table id="schedule">
+			<table id="schedule" ng-if="rootSchedule">
 				<tr>
 					<th>Datum</th>
 					<th>Tid</th>
@@ -41,9 +41,7 @@
 		<div class="card">
 			<h4>Examentionmoment</h4>
 			<div ng-repeat="x in homework">
-
 				{{ x.final_info }}<br> {{ x.exam_info }}<br> {{ x.task_info }}<br>
-
 			</div>
 
 		</div>
