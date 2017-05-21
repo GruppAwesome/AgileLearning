@@ -47,3 +47,11 @@ a {
 a:visited {
     color: black;
 }
+
+table,tr,th,td{
+  border: solid 1px;
+}
+
+th, td {
+    padding: 15px;
+}
