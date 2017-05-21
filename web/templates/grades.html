@@ -5,18 +5,40 @@
         <h6>Mina Betyg</h6>
     </div>
     <div class="col-md-6">
-        <div class="card" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
-            <h4><a href="#!/selectedcourse"> {{x.course_name}} </a> VG</h4>
-            <table>
-                <tr>
-                    <td>Inlämning</td>
-                    <td>G</td>
-                </tr>
-                <tr>
-                    <td>Tenta</td>
-                    <td>VG</td>
-                </tr>
-            </table>
+        <div class="card">
+            <h4>Avslutade</h4>
+            <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
+                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> VG</h6>
+                <table>
+                    <tr>
+                        <td>Inlämning</td>
+                        <td>G</td>
+                    </tr>
+                    <tr>
+                        <td>Tenta</td>
+                        <td>VG</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Ej Avslutade</h4>
+            <!--Add boolean so Active but without any results does not appear-->
+            <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> - </h6>
+                <table>
+                    <tr>
+                        <td>Inlämning</td>
+                        <td>G</td>
+                    </tr>
+                    <tr>
+                        <td>Tenta</td>
+                        <td>VG</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

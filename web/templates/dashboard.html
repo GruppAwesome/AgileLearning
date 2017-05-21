@@ -2,7 +2,7 @@
 <div ng-init="showMyCourses()" class="container-fluid background">
 	<div data-ng-include="'templates/topnav.html'"></div>
 	<div class="subheader row">
-		<h6>Välkommen {{rootData.username}}!</h6>
+		<h6>Välkommen {{rootData.first_name}} {{rootData.last_name}}!</h6>
 	</div>
 	<div class="col-md-6">
 
@@ -10,7 +10,7 @@
 			<h4>Pågående</h4>
 			<table>
 				<tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
-					<td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+					<td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
 				</tr>
 			</table>
 		</div>
