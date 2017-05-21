@@ -1,12 +1,18 @@
 (function () {
 
+  var sCourse;
+  var assignment;
   var app = angular.module('starter', ['ionic']);
+
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
+    $scope.sCourse = sCourse;
+    $scope.assignment;
+
     $scope.getobject = function (thisobject) {
-      $scope.sCourse = thisobject;
+      sCourse = thisobject;
     }
 
     $http.get('schooldata/data.json').success(function (data) {
@@ -14,6 +20,7 @@
     });
 
     $scope.login = function () {
+
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
 
@@ -39,6 +46,28 @@
             $rootScope.rootCourses = data;
           }
         });
+    };
+
+    $scope.showMySchedule = function () {
+
+      $http.post('http://localhost:5000/api/courses/MySchedule', {
+        course_name: sCourse.course_name
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $rootScope.rootSchedule = data;
+            $http.post('http://localhost:5000/api/courses/CourseAssignment', {
+              course_name: sCourse.course_name
+            })
+              .success(function (data) {
+                if (data != null && data != "") {
+                  $scope.assignment = data;
+                }
+              });
+          }
+        });
+
+
     };
 
     $scope.toggleRight = function () {

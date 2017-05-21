@@ -39,7 +39,7 @@
           <div class="centerText item item-body">
             <ul>
               <li ng-repeat="x in rootCourses">
-                {{ x.course_name }}
+                <a ng-click="getobject(x)" href="#/selectedcourse">{{ x.course_name }}</a>
               </li>
             </ul>
           </div>
