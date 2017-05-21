@@ -3,6 +3,7 @@ var sidebarClosed = true;
 
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
+
   $http.get("../schooldata/data.json")
     .then(function (response) {
       $scope.data = response.data;
@@ -12,9 +13,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post('http://localhost:5000/api/users/login', {
-        Username: username,
-        Password: password
-      })
+      Username: username,
+      Password: password
+    })
       .then(function (response) {
         if (response.data) {
           $rootScope.rootData = response.data;
@@ -24,21 +25,42 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         }
       });
   };
+
   $scope.getobject = function (thisobject) {
     $scope.chosenObject = thisobject;
   }
-  $scope.showMyCourses = function () {
 
+  $scope.showMyCourses = function () {
     $http.post('http://localhost:5000/api/courses/mycourses', {
-        Username: $rootScope.rootData.user_name
-      })
+      Username: $rootScope.rootData.user_name
+    })
       .then(function (response) {
         if (response.data) {
           $rootScope.rootCourses = response.data;
         }
       });
-
   };
+
+  $scope.showCourseInfo = function () {
+    $http.post('http://localhost:5000/api/courses/MySchedule', {
+      course_name: $scope.chosenObject.course_name
+    })
+      .then(function (response) {
+        if (response.data) {
+          $rootScope.rootSchedule = response.data;
+
+          $http.post('http://localhost:5000/api/courses/CourseAssignment', {
+            course_name: $scope.chosenObject.course_name
+          })
+            .then(function (response) {
+              if (response.data) {
+                $scope.homework = response.data;
+              }
+            });
+        }
+      });
+  };
+
 
   $scope.sidebarMenu = function () {
     var documentWidth = $(document).width();
