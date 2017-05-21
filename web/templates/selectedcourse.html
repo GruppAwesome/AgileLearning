@@ -1,5 +1,5 @@
 <div data-ng-include="'templates/sidenav.html'"></div>
-<div class="container-fluid background">
+<div ng-init="showCourseInfo()" class="container-fluid background">
 	<div data-ng-include="'templates/topnav.html'"></div>
 	<div class="subheader row">
 		<h6>Välkommen till kursen {{chosenObject.course_name}}!</h6>
@@ -10,37 +10,42 @@
 			<p>
 				{{chosenObject.course_describe}}
 			</p>
-			<strong>Teacher:</strong> {{chosenObject.course_teacher}}
+			<strong>Lärare:</strong> {{chosenObject.course_teacher}}
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
 			<h4>Schema</h4>
-			<table>
+			<table id="schedule">
 				<tr>
-					<td>Fredag</td>
-					<td>Förläsning</td>
+					<th>Datum</th>
+					<th>Tid</th>
+					<th>Moment</th>
 				</tr>
-				<tr>
-					<td>Måndag</td>
-					<td>Studiedag</td>
-				</tr>
-				<tr>
-					<td>Tisdag</td>
-					<td>Tenta</td>
-				</tr>
+				<tr ng-repeat="x in rootSchedule">
+					<td>
+						{{x.schedule_date}}
+					</td>
+					<td>
+						{{x.schedule_time}}
+					</td>
+					<td>
+						{{x.schedule_moment}}
+					</td>
 			</table>
+
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
-			<h4>Dina resultat</h4>
-			<table>
-				<tr>
-					<td>Tenta 1</td>
-					<td>G</td>
-				</tr>
-			</table>
+			<h4>Examentionmoment</h4>
+			<div ng-repeat="x in homework">
+
+				{{ x.final_info }}<br> {{ x.exam_info }}<br> {{ x.task_info }}<br>
+
+			</div>
+
 		</div>
 	</div>
+</div>
 </div>
