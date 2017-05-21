@@ -1,11 +1,8 @@
 //Instance
 var sidebarClosed = true;
-var sCourse;
 
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
-
-  $scope.sCourse = sCourse;
 
   $http.get("../schooldata/data.json")
     .then(function (response) {
@@ -29,13 +26,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
   };
 
-
-
   $scope.getobject = function (thisobject) {
     $scope.chosenObject = thisobject;
   }
-  $scope.showMyCourses = function () {
 
+  $scope.showMyCourses = function () {
     $http.post('http://localhost:5000/api/courses/mycourses', {
       Username: $rootScope.rootData.user_name
     })
