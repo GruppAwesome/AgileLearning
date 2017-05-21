@@ -1,0 +1,7 @@
+#schedule tr, #schedule th, #schedule td{
+  border: solid 1px;
+}
+
+#schedule th, #schedule td {
+    padding: 15px;
+}
