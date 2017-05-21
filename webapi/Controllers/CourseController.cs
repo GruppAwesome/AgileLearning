@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         public IEnumerable<Course> UserCourses(string username)
         {
             return dbConn.Conn.Query<Course>(
-                $"select courses.* from users, courses, enrolled where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
+                $"select courses.*, exams.*, tasks.* from users, courses, enrolled left outer join exams on enrolled.eid = exams.\"exam_id\" left outer join tasks on enrolled.tid = tasks.\"task_id\" where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
         }
         public struct MyScheduleArgs
         {

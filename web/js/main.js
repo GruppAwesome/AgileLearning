@@ -12,13 +12,16 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post('http://localhost:5000/api/users/login', {
-      Username: username,
-      Password: password
-    })
-      .then(function (data) {
-        if (data != null && data != "") {
-          $rootScope.rootData = data.data;
+        Username: username,
+        Password: password
+      })
+      .then(function (response) {
+        if (response.data) {
+          $rootScope.rootData = response.data;
           $location.url('/dashboard');
+        }
+        else{
+          alert("Something odd happened, did you really write the correct login info?");
         }
       });
   };
@@ -26,11 +29,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.showMyCourses = function () {
 
     $http.post('http://localhost:5000/api/courses/mycourses', {
-      Username: $rootScope.rootData.user_name
-    })
-      .then(function (data) {
-        if (data != null && data != "") {
-          $rootScope.rootCourses = data.data;
+        Username: $rootScope.rootData.user_name
+      })
+      .then(function (response) {
+        if (response.data) {
+          $rootScope.rootCourses = response.data;
         }
       });
 
@@ -76,6 +79,9 @@ app.config(function ($routeProvider) {
     })
     .when("/courses", {
       templateUrl: "templates/courses.html"
+    })
+    .when("/grades", {
+      templateUrl: "templates/grades.html"
     });
 
 });

@@ -1,36 +1,18 @@
-<div id="sidebar" ng-click="sidebarMenu()">
-	<ul>
-		<li class="someSpace"><a href="#!/courses">Kurser</a></li>
-		<li><a href="#!/">Signout</a></li>
-	</ul>
-</div>
+<div data-ng-include="'templates/sidenav.html'"></div>
 <div ng-init="showMyCourses()" class="container-fluid background">
-	<div class="row blackWithWhite onTop">
-		<div class="col-xs-2">
-			<img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
-		</div>
-		<div class="col-xs-8">
-			<h1>{{data.name}}</h1>
-		</div>
-		<div class="col-xs-2" >
-			
-			<img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
-		</div>
-	</div>
+	<div data-ng-include="'templates/topnav.html'"></div>
 	<div class="subheader row">
 		<h6>Välkommen {{rootData.username}}!</h6>
 	</div>
 	<div class="col-md-6">
 
 		<div class="card">
-			  <strong>Pågående</strong>
-                <ul>
-                <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Aktiv'">
-                    <br> {{x.course_name}} <br>
-                  </span>
-                </li>
-                </ul>
+			<h4>Pågående</h4>
+			<table>
+				<tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+					<td><a href="#!/selectedcourse"> {{x.course_name}} </a></td>
+				</tr>
+			</table>
 		</div>
 
 		<div class="card">
@@ -40,10 +22,8 @@
 	</div>
 	<div class="col-md-6">
 		<div class="card">
-			<h4> Aktiva kurser: {{rootData.firstname}}</h4>
-			<p ng-repeat="x in rootCourses">
-				{{ x.course_name }}
-			</p>
+			<h4> Detta är ett till kort, {{rootData.firstname}}</h4>
+			<p> Här kan man skriva en massa trevlig info!</p>
 		</div>
 	</div>
 </div>

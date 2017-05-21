@@ -1,28 +1,12 @@
-<div id="sidebar" ng-click="sidebarMenu()">
-	<ul>
-		<li class="someSpace"><a href="#!/courses">Kurser</a></li>
-		<li><a href="#/">Signout</a></li>
-	</ul>
-</div>
+<div data-ng-include="'templates/sidenav.html'"></div>
 <div class="container-fluid background">
-	<div class="row blackWithWhite onTop">
-		<div class="col-xs-2">
-			<img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
-		</div>
-		<div class="col-xs-8">
-			<h1>{{data.name}}</h1>
-		</div>
-		<div class="col-xs-2">
-
-			<img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
-		</div>
-	</div>
+	<div data-ng-include="'templates/topnav.html'"></div>
 	<div class="subheader row">
-		<h6>Välkommen1 {{rootData.username}}!</h6>
+		<h6>Välkommen {{rootData.username}}!</h6>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
-			<h4>Kursinfo:</h4>
+			<h4>Kursinfo</h4>
 			<p>
 				I denna kurs får studenten lära sig arbeta med agila metoder i utvecklingsprojekt. Kursen har ett fokus på agil applikationsutveckling
 				men kursen tar även upp andra metoder för applikationsutveckling.
@@ -32,25 +16,31 @@
 	<div class="col-md-6">
 		<div class="card">
 			<h4>Schema</h4>
-			<p>
-				Dag1: Förläsning<br> Dag2: Ledig<br> Dag3: Prov
-			</p>
+			<table>
+				<tr>
+					<td>Fredag</td>
+					<td>Förläsning</td>
+				</tr>
+				<tr>
+					<td>Måndag</td>
+					<td>Studiedag</td>
+				</tr>
+				<tr>
+					<td>Tisdag</td>
+					<td>Tenta</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
-			<h4>Dina betyg</h4>
-			<p>
-				Inlämning 1: IG <br> Prov 1: MVG
-			</p>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="card">
-			<h4>Dina betyg</h4>
-			<p>
-				Inlämning 1: IG <br> Prov 1: MVG
-			</p>
+			<h4>Dina resultat</h4>
+			<table>
+				<tr>
+					<td>Tenta 1</td>
+					<td>G</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

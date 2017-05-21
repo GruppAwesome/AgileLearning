@@ -134,3 +134,7 @@ p {
 .card>p {
     line-height: 120%;
 }
+
+table * td {
+    padding-left: 10px;
+}

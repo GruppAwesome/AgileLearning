@@ -1,0 +1,22 @@
+<div data-ng-include="'templates/sidenav.html'"></div>
+<div class="container-fluid background">
+    <div data-ng-include="'templates/topnav.html'"></div>
+    <div class="subheader row">
+        <h6>Mina Betyg</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="card" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
+            <h4><a href="#!/selectedcourse"> {{x.course_name}} </a> VG</h4>
+            <table>
+                <tr>
+                    <td>Inlämning</td>
+                    <td>G</td>
+                </tr>
+                <tr>
+                    <td>Tenta</td>
+                    <td>VG</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
