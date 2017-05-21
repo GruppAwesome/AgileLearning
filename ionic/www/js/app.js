@@ -15,7 +15,9 @@
       sCourse = thisobject;
     }
 
-    $http.get('schooldata/data.json').success(function (data) { $scope.data = data; });
+    $http.get('schooldata/data.json').success(function (data) {
+      $scope.data = data;
+    });
 
     $scope.login = function () {
 
@@ -23,9 +25,9 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post('http://localhost:5000/api/users/login', {
-        Username: username,
-        Password: password
-      })
+          Username: username,
+          Password: password
+        })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
@@ -37,8 +39,8 @@
     $scope.showMyCourses = function () {
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-        Username: $rootScope.rootData.user_name
-      })
+          Username: $rootScope.rootData.user_name
+        })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;

@@ -2,15 +2,15 @@
 <div class="container-fluid background">
 	<div data-ng-include="'templates/topnav.html'"></div>
 	<div class="subheader row">
-		<h6>Välkommen {{rootData.username}}!</h6>
+		<h6>Välkommen till kursen {{chosenObject.course_name}}!</h6>
 	</div>
 	<div class="col-md-6">
 		<div class="card">
 			<h4>Kursinfo</h4>
 			<p>
-				I denna kurs får studenten lära sig arbeta med agila metoder i utvecklingsprojekt. Kursen har ett fokus på agil applikationsutveckling
-				men kursen tar även upp andra metoder för applikationsutveckling.
+				{{chosenObject.course_describe}}
 			</p>
+			<strong>Teacher:</strong> {{chosenObject.course_teacher}}
 		</div>
 	</div>
 	<div class="col-md-6">

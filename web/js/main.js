@@ -19,13 +19,14 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
         if (response.data) {
           $rootScope.rootData = response.data;
           $location.url('/dashboard');
-        }
-        else{
+        } else {
           alert("Something odd happened, did you really write the correct login info?");
         }
       });
   };
-
+  $scope.getobject = function (thisobject) {
+    $scope.chosenObject = thisobject;
+  }
   $scope.showMyCourses = function () {
 
     $http.post('http://localhost:5000/api/courses/mycourses', {
@@ -82,6 +83,9 @@ app.config(function ($routeProvider) {
     })
     .when("/grades", {
       templateUrl: "templates/grades.html"
+    })
+    .when("/assignments", {
+      templateUrl: "templates/assignments.html"
     });
 
 });
