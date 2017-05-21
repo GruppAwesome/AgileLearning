@@ -1,107 +1,87 @@
-
 <ion-nav-view>
-<ion-view>
-  <ion-side-menus>
-    <ion-side-menu-content>
-<ion-header-bar class="bar-dark" ng-cloak>
-  <a href="#/courses" class="button button-icon-ion-android-arrow-back">Back</a>
-    <h1 class="title">{{data.name}}</h1>
-     <div class="buttons">
-          <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
-      </div>
-</ion-header-bar>
-     <div class="bar bar-subheader">
-        <h2 class="title">Vald kurs</h2>
-      </div>
-    
-  <ion-content class="padding subheaderSpace">
+  <ion-view>
+    <ion-side-menus>
+      <ion-side-menu-content>
+        <ion-header-bar class="bar-dark" ng-cloak>
+          <a href="#/courses" class="button button-icon-ion-android-arrow-back">Back</a>
+          <h1 class="title">{{data.name}}</h1>
+          <div class="buttons">
+            <button class="button icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+          </div>
+        </ion-header-bar>
+        <div class="bar bar-subheader">
+          <h2 class="title">{{sCourse.course_name}}</h2>
+        </div>
 
-<div class="list card">
-  <div class="item item-body">
-    <strong>Kursinfo</strong>
+        <ion-content ng-init="showMySchedule()" class="padding subheaderSpace">
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="list card">
+            <div class="item item-body">
+              <strong>Kursinfo</strong>
 
-    <strong>Lärare: </strong>John <br>
-    
-    <p>
-    <strong>Examinerade</strong><br>
-    <strong>Prov </strong><br>
-    <strong>Inlämningsuppgift</strong>
-    </p>
+              <p>{{sCourse.course_describe}}</p>
 
-  </div>
-</div>
+              <strong> Lärare: </strong><br> {{sCourse.course_teacher}}
+              <br><br>
 
-<div class="item item-body">
-    <strong>Kursinfo</strong>
+              <strong> Examination moment: </strong><br>
+              <div ng-repeat="x in assignment">
 
-    <p>
-      <strong>Dag1: </strong>Föreläsning <br>
-      <strong>Dag2: </strong>Ledig <br>
-      <strong>Dag3: </strong>Prov <br>
-    </p>
+                <span ng-if="x.final_info.length > 0"> 
+                {{ x.final_info }}<br>
+                </span>
+                <span ng-if="x.exam_info.length > 0"> 
+                {{ x.exam_info }}<br> 
+                 </span>
+                <span ng-if="x.exam_info.length > 0">  
+                {{ x.task_info }}
+                 </span>
 
-  </div>
-</div>
+              </div>
 
-  </ion-content>
+            </div>
+          </div>
 
-  </ion-side-menu-content>
-    <ion-side-menu side="right">
-      <header class="bar bar-header bar-stable">
-        <h1 class="title">Left</h1>
-      </header>
-      <ion-content class="has-header">
-        <ion-list>
-          <ion-item menu-close> 
-            <a href="#courses">
-            Kurser 
-            </a>
-          </ion-item>
-          <ion-item menu-close> <a href="#/start">Log out</a> </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-side-menu>
-  </ion-side-menus>
-</ion-view>
+          <div class="item item-body">
+            <strong>Schema</strong>
+
+            <table>
+              <tr>
+                <th>Datum</th>
+                <th>Tid</th>
+                <th>Moment</th>
+              </tr>
+              <tr ng-repeat="x in rootSchedule">
+                <td>
+                  {{x.schedule_date}}
+                </td>
+                <td>
+                  {{x.schedule_time}}
+                </td>
+                <td>
+                  {{x.schedule_moment}}
+                </td>
+            </table>
+
+          </div>
+          </div>
+
+        </ion-content>
+
+      </ion-side-menu-content>
+      <ion-side-menu side="right">
+        <header class="bar bar-header bar-stable">
+        </header>
+        <ion-content class="has-header">
+          <ion-list>
+            <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
+            <ion-item menu-close> <a href="#/assignments"> Inlämningsuppgifter </a></ion-item>
+            <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
+            <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-side-menu>
+    </ion-side-menus>
+  </ion-view>
 
 </ion-nav-view>
-
-<!--<div class="list card">
-  <div class="item item-divider text-center">
-    Aktiva Kurser för {{rootData.firstname}}
-  </div>
-  <div id="centerText" class="item item-body">
-    <ul>
-      <li ng-repeat="x in rootCourses">
-        {{ x.course_name }}
-      </li>
-    </ul>
-  </div>
-</div>-->
-<!--
-<ion-side-menus>
-<ion-side-menu-content>
-  <ion-header-bar class="bar-dark" ng-cloak>
-    <div class="buttons">
-      <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
-    </div>
-    <h1 class="title"></h1>
-  </ion-header-bar>
-    <ion-content id="subheaderSpace" >
-
-</ion-content>
-  
-  </ion-side-menu-content>
-    <ion-side-menu side="left">
-      <ion-list>
-        <ion-item ui-sref="courses" ui-sref-active="active">Kurser</ion-item>
-      </ion-list>
-    </ion-side-menu>
-  </ion-side-menus>-->

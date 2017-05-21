@@ -1,0 +1,58 @@
+<div id="sidebar" ng-click="sidebarMenu()">
+    <ul>
+        <li class="someSpace">Kurser</li>
+        <li><a href="#!/">Signout</a></li>
+    </ul>
+</div>
+<div class="container-fluid background">
+    <div class="row blackWithWhite onTop">
+        <div class="col-xs-2">
+            <img class="logotype-nav" data-ng-src="../schooldata/{{data.logo}}">
+        </div>
+        <div class="col-xs-8">
+            <h1>{{data.name}}</h1>
+        </div>
+        <div class="col-xs-2">
+            <img ng-click="sidebarMenu()" id="sidebar-btn" src="schooldata/hamburger.png"></img>
+        </div>
+    </div>
+    <div class="subheader row">
+        <h6>Mina Kurser</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <strong>Pågående</strong>
+            <ul>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Aktiv'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <strong>Kommande</strong>
+            <ul>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Kommande'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <strong>Avslutade</strong>
+            <ul>
+                <li ng-repeat="x in rootCourses">
+                    <span ng-if="x.course_status == 'Avslutad'">
+                    <br><a href="#!/selectedcourse"> {{x.course_name}} </a><br>
+                  </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,41 +1,76 @@
 (function () {
 
+  var sCourse;
+  var assignment;
   var app = angular.module('starter', ['ionic']);
+
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
-    $http.get('schooldata/data.json')
-    .success(function (data) {
-      $scope.data = data;
-    });
+
+    $scope.sCourse = sCourse;
+    $scope.assignment;
+
+    $scope.getobject = function (thisobject) {
+      sCourse = thisobject;
+    }
+
+    $http.get('schooldata/data.json').success(function (data) { $scope.data = data; });
+
     $scope.login = function () {
+
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
+
       $http.post('http://localhost:5000/api/users/login', {
-          Username: username,
-          Password: password
-        })
+        Username: username,
+        Password: password
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
             $state.go('list');
           }
         });
+    };
+
+    $scope.showMyCourses = function () {
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-          course_status: "Active",
-
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
+          if (data != null && data != "") {
             $rootScope.rootCourses = data;
-
+          }
         });
+    };
+
+    $scope.showMySchedule = function () {
+
+      $http.post('http://localhost:5000/api/courses/MySchedule', {
+        course_name: sCourse.course_name
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $rootScope.rootSchedule = data;
+            $http.post('http://localhost:5000/api/courses/CourseAssignment', {
+              course_name: sCourse.course_name
+            })
+              .success(function (data) {
+                if (data != null && data != "") {
+                  $scope.assignment = data;
+                }
+              });
+          }
+        });
+
 
     };
 
-    $scope.toggleRight = function() {
-    $ionicSideMenuDelegate.toggleRight()
-  }
+    $scope.toggleRight = function () {
+      $ionicSideMenuDelegate.toggleRight()
+    }
 
   });
 
@@ -47,9 +82,22 @@
       templateUrl: 'myviews/start.html',
       controller: 'myCtrl'
     });
+
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('grades', {
+      url: '/grades',
+      templateUrl: 'myviews/grades.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('assignments', {
+      url: '/assignments',
+      templateUrl: 'myviews/assignments.html',
       controller: 'myCtrl'
     });
 

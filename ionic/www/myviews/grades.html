@@ -13,45 +13,32 @@
         </ion-header-bar>
 
         <div class="bar bar-subheader">
-          <h2 class="title">Mina kurser</h2>
+          <h2 class="title">Mina Betyg</h2>
         </div>
 
         <ion-content class="padding subheaderSpace">
+
           <div class="list card">
             <div class="item item-body">
-
-              <strong>Pågående</strong>
-              <ul>
-                <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Aktiv'">
-                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
-                  </span>
-                </li>
-              </ul>
-
-              <br>
-              <strong>Kommande</strong>
-              <ul>
-                <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Kommande'">
-                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
-                  </span>
-                </li>
-              </ul>
-
-                <br>
-                <strong>Avslutade</strong>
-                <ul>
-
-                <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Avslutad'">
-                    <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
-                  </span>
-                </li>
-              </ul>
-
+              <strong>Engelska: VG</strong>
+              <br> Prov: VG<br> Inlämningsuppgift: G
             </div>
           </div>
+
+          <div class="list card">
+            <div class="item item-body">
+              <strong>Svenska: VG</strong>
+              <br> Prov: G<br> Inlämningsuppgift: VG
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-body">
+              <strong>Tyska: G</strong>
+              <br> Prov: G<br> Inlämningsuppgift: G
+            </div>
+          </div>
+
         </ion-content>
       </ion-side-menu-content>
 
