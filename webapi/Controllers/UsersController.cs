@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
 
         // GET api/values
         [HttpGet]
-           public IEnumerable<User> Get()
+        public IEnumerable<User> Get()
         {
             return dbConn.Conn.Query<User>(
                  "select * from users");
@@ -63,5 +63,25 @@ namespace WebAPI.Controllers
             return dbConn.Conn.QuerySingleOrDefault<User>(
                 $"select * from users where \"password\" is not null and \"user_name\" = '{username}' and \"password\" = '{password}'");
         }
+
+        public struct GradeArgs
+        {
+            public string username;
+        }
+
+        [Route("[action]")]
+        public IEnumerable<Grade> Grade([FromBody]GradeArgs args)
+        {
+            return this.GetGrades(args.username);
+        }
+
+        public IEnumerable<Grade> GetGrades(string username)
+        {
+            return dbConn.Conn.Query<Grade>(
+                $"select distinct user_name, course_name, task_info, result_task, exam_info, result_exam, final_info, result_final, result_coursegrade, result_coursestatus from courses, results, tasks, exams, finals, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid and exams.exam_id = results.result_examid and users.user_name = '{username}'");
+        }
+
+
+
     }
 }

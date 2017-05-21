@@ -1,15 +1,12 @@
 (function () {
 
   var sCourse;
-  var assignment;
   var app = angular.module('starter', ['ionic']);
-
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
     $scope.sCourse = sCourse;
-    $scope.assignment;
 
     $scope.getobject = function (thisobject) {
       sCourse = thisobject;
@@ -25,9 +22,9 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post('http://localhost:5000/api/users/login', {
-          Username: username,
-          Password: password
-        })
+        Username: username,
+        Password: password
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
@@ -39,11 +36,23 @@
     $scope.showMyCourses = function () {
 
       $http.post('http://localhost:5000/api/courses/mycourses', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;
+          }
+        });
+    };
+
+    $scope.showMyGrades = function () {
+
+      $http.post('http://localhost:5000/api/users/grade', {
+        Username: $rootScope.rootData.user_name
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $scope.grades = data;
           }
         });
     };
@@ -55,7 +64,8 @@
       })
         .success(function (data) {
           if (data != null && data != "") {
-            $rootScope.rootSchedule = data;
+            $scope.schedule = data;
+
             $http.post('http://localhost:5000/api/courses/CourseAssignment', {
               course_name: sCourse.course_name
             })

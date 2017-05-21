@@ -47,7 +47,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     })
       .then(function (response) {
         if (response.data) {
-          $rootScope.rootSchedule = response.data;
+          $scope.schedule = response.data;
 
           $http.post('http://localhost:5000/api/courses/CourseAssignment', {
             course_name: $scope.chosenObject.course_name
@@ -57,6 +57,18 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
                 $scope.homework = response.data;
               }
             });
+        }
+      });
+  };
+
+  $scope.showMyGrades = function () {
+
+    $http.post('http://localhost:5000/api/users/grade', {
+      Username: $rootScope.rootData.user_name
+    })
+      .then(function (response) {
+        if (response.data) {
+          $scope.grades = response.data;
         }
       });
   };

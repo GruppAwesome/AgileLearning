@@ -16,26 +16,28 @@
           <h2 class="title">Mina Betyg</h2>
         </div>
 
-        <ion-content class="padding subheaderSpace">
+        <ion-content ng-init="showMyGrades()" class="padding subheaderSpace">
 
-          <div class="list card">
+          <div ng-repeat="x in grades" class="list card">
             <div class="item item-body">
-              <strong>Engelska: VG</strong>
-              <br> Prov: VG<br> Inlämningsuppgift: G
-            </div>
-          </div>
 
-          <div class="list card">
-            <div class="item item-body">
-              <strong>Svenska: VG</strong>
-              <br> Prov: G<br> Inlämningsuppgift: VG
-            </div>
-          </div>
+              <strong>{{x.course_name}}:</strong>
+              <span ng-if="x.result_coursestatus == 'Avslutade'">
+                    {{x.result_coursegrade}}
+              </span><br><br>
 
-          <div class="list card">
-            <div class="item item-body">
-              <strong>Tyska: G</strong>
-              <br> Prov: G<br> Inlämningsuppgift: G
+              <span ng-if="x.final_info.length > 0"> 
+                {{x.final_info}}: {{x.result_final}}
+                </span><br>
+
+              <span ng-if="x.exam_info.length > 0"> 
+                {{x.exam_info}}: {{x.result_exam}}
+                </span><br>
+
+              <span ng-if="x.exam_info.length > 0"> 
+                {{x.task_info}}: {{x.result_task}}
+                </span><br>
+
             </div>
           </div>
 
