@@ -12,7 +12,7 @@
         <div class="bar bar-subheader">
           <h2 class="title">{{sCourse.course_name}}</h2>
         </div>
-
+        
         <ion-content ng-init="showMySchedule()" class="padding subheaderSpace">
 
           <div class="list card">
@@ -51,7 +51,7 @@
                 <th>Tid</th>
                 <th>Moment</th>
               </tr>
-              <tr ng-repeat="x in rootSchedule">
+              <tr ng-repeat="x in schedule">
                 <td>
                   {{x.schedule_date}}
                 </td>
