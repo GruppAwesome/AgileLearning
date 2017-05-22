@@ -1,52 +1,31 @@
 <div data-ng-include="'templates/sidenav.html'"></div>
-<div class="container-fluid background">
+<div ng-init="showMyGrades()" class="container-fluid background">
     <div data-ng-include="'templates/topnav.html'"></div>
     <div class="subheader row">
         <h6>Mina Betyg</h6>
     </div>
     <div class="col-md-6">
-        <div class="card">
-            <h4>Avslutade</h4>
-            <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
-                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a>{{x.exam_grade}}</h6>
-                <table ng-repeat="x in homework">
-                    <tr>
-                        <td>{{ x.final_info }}</td>
-                        <td>{{ x.final_grade }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ x.exam_info }}</td>
-                        <td>{{ x.exam_grade }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ x.task_info }}</td>
-                        <td>{{ x.task_grade}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <h4>Ej Avslutade</h4>
-            <!--Add boolean so Active but without any results does not appear-->
-            <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
-                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> {{x.exam_grade}} </h6>
-                <table ng-repeat="x in homework">
-                    <tr>
-                        <td>{{ x.final_info }}</td>
-                        <td>{{ x.final_grade }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ x.exam_info }}</td>
-                        <td>{{ x.exam_grade }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ x.task_info }}</td>
-                        <td>{{ x.task_grade}}</td>
-                    </tr>
-                </table>
-            </div>
+        <div class="card" ng-repeat="x in grades">
+
+            <h4>{{x.course_name}}</h4>
+
+            <span ng-if="x.result_coursestatus == 'Avslutade'">
+                    {{x.result_coursegrade}}
+              </span><br><br>
+            <table>
+                <tr ng-if="x.final_info.length > 0">
+                    <td>{{x.final_info}}: </td>
+                    <td>{{x.result_final}}</td>
+                </tr>
+                <tr ng-if="x.exam_info.length > 0">
+                    <td>{{x.exam_info}}: </td>
+                    <td>{{x.result_exam}}</td>
+                </tr>
+                <tr ng-if="x.task_info.length > 0">
+                    <td>{{x.task_info}}: </td>
+                    <td>{{x.result_task}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
