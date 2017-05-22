@@ -6,11 +6,11 @@
     </div>
     <!--Repeat per thingy-->
     <div class="col-md-6" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad' && x.task_info">
-        <div class="card">
+        <div class="card" ng-if="x.task_info">
             <div>
-                <h4>{{x.course_name}}: [Uppgiftstyp]</h4>
+                <h4>{{x.course_name}}: {{x.task_info}}</h4>
                 <p>{{x.task_info}}</p>
-                <h6>Tid: [Datum]</h6>
+                <h6>Tid: {{x.task_date}}</h6>
             </div>
         </div>
     </div>

@@ -8,15 +8,19 @@
         <div class="card">
             <h4>Avslutade</h4>
             <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
-                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> VG</h6>
-                <table>
+                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a>{{x.exam_grade}}</h6>
+                <table ng-repeat="x in homework">
                     <tr>
-                        <td>Inlämning</td>
-                        <td>G</td>
+                        <td>{{ x.final_info }}</td>
+                        <td>{{ x.final_grade }}</td>
                     </tr>
                     <tr>
-                        <td>Tenta</td>
-                        <td>VG</td>
+                        <td>{{ x.exam_info }}</td>
+                        <td>{{ x.exam_grade }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ x.task_info }}</td>
+                        <td>{{ x.task_grade}}</td>
                     </tr>
                 </table>
             </div>
@@ -27,15 +31,19 @@
             <h4>Ej Avslutade</h4>
             <!--Add boolean so Active but without any results does not appear-->
             <div ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
-                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> - </h6>
-                <table>
+                <h6><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a> {{x.exam_grade}} </h6>
+                <table ng-repeat="x in homework">
                     <tr>
-                        <td>Inlämning</td>
-                        <td>G</td>
+                        <td>{{ x.final_info }}</td>
+                        <td>{{ x.final_grade }}</td>
                     </tr>
                     <tr>
-                        <td>Tenta</td>
-                        <td>VG</td>
+                        <td>{{ x.exam_info }}</td>
+                        <td>{{ x.exam_grade }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ x.task_info }}</td>
+                        <td>{{ x.task_grade}}</td>
                     </tr>
                 </table>
             </div>

@@ -30,7 +30,7 @@
             <table>
                 <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
                     <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
-                    <td>G</td>
+                    <td>{{x.final_grade}}</td>
                 </tr>
             </table>
         </div>

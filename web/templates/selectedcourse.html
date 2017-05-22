@@ -41,7 +41,9 @@
 		<div class="card">
 			<h4>Examinationmoment</h4>
 			<div ng-repeat="x in homework">
-				{{ x.final_info }}<br> {{ x.exam_info }}<br> {{ x.task_info }}<br>
+				<p ng-if="x.final_info">{{ x.final_info }}<br></p>
+				<p ng-if="x.exam_info">{{ x.exam_info }}<br></p>
+				<p ng-if="x.task_info">{{ x.task_info }}<br></p>
 			</div>
 		</div>
 	</div>
