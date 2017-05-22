@@ -6,24 +6,26 @@
     </div>
     <div class="col-md-6">
         <div class="card" ng-repeat="x in grades">
-            
-            {{x.course_name}}
-            
+
+            <h4>{{x.course_name}}</h4>
+
             <span ng-if="x.result_coursestatus == 'Avslutade'">
                     {{x.result_coursegrade}}
               </span><br><br>
-
-            <span ng-if="x.final_info.length > 0"> 
-                {{x.final_info}}: {{x.result_final}}
-                </span><br>
-
-            <span ng-if="x.exam_info.length > 0"> 
-                {{x.exam_info}}: {{x.result_exam}}
-                </span><br>
-
-            <span ng-if="x.exam_info.length > 0"> 
-                {{x.task_info}}: {{x.result_task}}
-                </span><br>
+            <table>
+                <tr ng-if="x.final_info.length > 0">
+                    <td>{{x.final_info}}: </td>
+                    <td>{{x.result_final}}</td>
+                </tr>
+                <tr ng-if="x.exam_info.length > 0">
+                    <td>{{x.exam_info}}: </td>
+                    <td>{{x.result_exam}}</td>
+                </tr>
+                <tr ng-if="x.task_info.length > 0">
+                    <td>{{x.task_info}}: </td>
+                    <td>{{x.result_task}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

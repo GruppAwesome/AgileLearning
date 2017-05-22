@@ -5,13 +5,12 @@
         <h6>Mina Uppgifter</h6>
     </div>
     <!--Repeat per thingy-->
-    <div class="col-md-6"> 
-        <div class="card">
-            <h4>[Uppgiftstyp]: [Kurs]</h4>
-            <h6>Datum: [Datum]</h6>
+    <div class="col-md-6" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad' && x.task_info">
+        <div class="card" ng-if="x.task_info">
             <div>
-                <h6>Information</h6>
-                <p>Massor med information</p>
+                <h4>{{x.course_name}}: {{x.task_info}}</h4>
+                <p>{{x.task_info}}</p>
+                <h6>Tid: {{x.task_date}}</h6>
             </div>
         </div>
     </div>
