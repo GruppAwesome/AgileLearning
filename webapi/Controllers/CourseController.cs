@@ -9,6 +9,14 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class CoursesController : Controller
     {
+        //Structor
+        public struct MyStruct
+        {
+            public string username;
+            public string course_name;
+        }
+
+        //DatabaseConnection
         private IDatabaseConnection dbConn;
 
         public CoursesController(IDatabaseConnection conn)
@@ -16,7 +24,7 @@ namespace WebAPI.Controllers
             this.dbConn = conn;
         }
 
-        // GET: api/values
+        // GET & POST Functions
         [HttpGet]
         public IEnumerable<Course> Get()
         {
@@ -24,16 +32,10 @@ namespace WebAPI.Controllers
                  "select * from courses");
         }
 
-        public struct MyCoursesArgs
-        {
-            public string username;
-        }
-
         [Route("[action]")]
-        public IEnumerable<Course> MyCourses([FromBody]MyCoursesArgs args)
+        public IEnumerable<Course> MyCourses([FromBody]MyStruct args)
         {
-            var courses = this.UserCourses(args.username);
-            return courses;
+            return this.UserCourses(args.username);
         }
 
         public IEnumerable<Course> UserCourses(string username)
@@ -41,16 +43,11 @@ namespace WebAPI.Controllers
             return dbConn.Conn.Query<Course>(
                 $"select courses.*, exams.*, tasks.* from users, courses, enrolled left outer join exams on enrolled.eid = exams.\"exam_id\" left outer join tasks on enrolled.tid = tasks.\"task_id\" where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
         }
-        public struct MyScheduleArgs
-        {
-            public string course_name;
-        }
 
         [Route("[action]")]
-        public IEnumerable<Schedule> MySchedule([FromBody]MyScheduleArgs args)
+        public IEnumerable<Schedule> MySchedule([FromBody]MyStruct args)
         {
-            var courses = this.Schedule(args.course_name);
-            return courses;
+            return this.Schedule(args.course_name);
         }
 
         public IEnumerable<Schedule> Schedule(string course_name)
@@ -59,16 +56,10 @@ namespace WebAPI.Controllers
                 $"select distinct schedules.* from schedules, courses, enrolled where enrolled.cid = courses.\"course_id\" and enrolled.cid = schedules.\"schedule_id\" and courses.\"course_name\" = '{course_name}'");
         }
 
-        public struct AssignmentArgs
-        {
-            public string course_name;
-        }
-
         [Route("[action]")]
-        public IEnumerable<Assignment> CourseAssignment([FromBody]AssignmentArgs args)
+        public IEnumerable<Assignment> CourseAssignment([FromBody]MyStruct args)
         {
-            var courses = this.Assignment(args.course_name);
-            return courses;
+            return this.Assignment(args.course_name);
         }
 
         public IEnumerable<Assignment> Assignment(string course_name)
