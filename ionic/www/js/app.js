@@ -57,6 +57,20 @@
         });
     };
 
+    $scope.showMyTodo = function () {
+      alert("Its working")
+
+      $http.post('http://localhost:5000/api/courses/Todo', {
+        Username: "Micke"
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            alert(data)
+            $scope.rootScope.todo = data;
+          }
+        });
+    };
+
     $scope.showMySchedule = function () {
 
       $http.post('http://localhost:5000/api/courses/MySchedule', {

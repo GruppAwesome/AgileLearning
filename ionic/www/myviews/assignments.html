@@ -13,13 +13,13 @@
           <h2 class="title">Inlämningsuppgifter</h2>
         </div>
 
-        <ion-content class="padding subheaderSpace">
+        <ion-content ng-init="showMyTodo()" class="padding subheaderSpace">
 
           <div class="list card">
             <div class="item item-body">
-
               <strong>
                 Prov:</strong><br> Biologi
+                {{todo}}
               <br><br>
               <strong>
                 Info:</strong><br> Instuderingsfrågor och gamla prov som berör grundläggande cellbiologi i
