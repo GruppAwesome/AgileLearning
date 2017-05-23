@@ -14,6 +14,23 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
+
+        //Structor
+        public struct MyStruct
+        {
+            public string username;
+            public string password;
+        }
+
+        //DatabaseConnection
+        private IDatabaseConnection dbConn;
+
+        public UsersController(IDatabaseConnection conn)
+        {
+            this.dbConn = conn;
+        }
+
+        //SHA1HASHING
         public static byte[] GetHash(string inputString)
         {
             HashAlgorithm algorithm = SHA1.Create();
@@ -29,14 +46,8 @@ namespace WebAPI.Controllers
             return sb.ToString();
         }
 
-        private IDatabaseConnection dbConn;
 
-        public UsersController(IDatabaseConnection conn)
-        {
-            this.dbConn = conn;
-        }
-
-        // GET api/values
+        // GET & POST Functions
         [HttpGet]
         public IEnumerable<User> Get()
         {
@@ -44,33 +55,20 @@ namespace WebAPI.Controllers
                  "select * from users");
         }
 
-        public struct LoginArgs
-        {
-            public string username;
-            public string password;
-        }
-
         [Route("[action]")]
-        public User Login([FromBody] LoginArgs args)
+        public User Login([FromBody]MyStruct args)
         {
-            var user = this.LoginUser(args.username, GetHashString(args.password));
-            return user;
+            return this.LoginUser(args.username, GetHashString(args.password));
         }
 
         public User LoginUser(string username, string password)
         {
-            // Vulnerable to SQL Injection? Very possible
             return dbConn.Conn.QuerySingleOrDefault<User>(
                 $"select * from users where \"password\" is not null and \"user_name\" = '{username}' and \"password\" = '{password}'");
         }
 
-        public struct GradeArgs
-        {
-            public string username;
-        }
-
         [Route("[action]")]
-        public IEnumerable<Grade> Grade([FromBody]GradeArgs args)
+        public IEnumerable<Grade> Grade([FromBody]MyStruct args)
         {
             return this.GetGrades(args.username);
         }
