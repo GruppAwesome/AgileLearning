@@ -15,38 +15,26 @@
 
         <ion-content ng-init="showMyTodo()" class="padding subheaderSpace">
 
-          <div class="list card">
+          <div class="list card" ng-repeat="task in todo">
             <div class="item item-body">
               <strong>
-                Prov:</strong><br> Biologi
-                {{todo}}
+              {{task.course_name}}</strong><br> 
               <br><br>
               <strong>
-                Info:</strong><br> Instuderingsfrågor och gamla prov som berör grundläggande cellbiologi i
-              Biologi 1 (och Biologi A). För gamla prov som handlar om cellens genetik och molekylärbiologi (replikation,
-              transkription, translation o.dyl.)
+              {{task.task_info}} {{task.task_time}}:
+              </strong><br> 
+              {{task.task_describe}}
               <br><br>
+              
               <strong>
-                Tid:</strong><br> 1/7
+              {{task.final_info}} {{task.final_time}}:
+              </strong><br> 
+              {{task.final_describe}}
+              <br><br>
 
             </div>
           </div>
 
-          <div class="item item-body">
-
-            <strong>
-                Inlämningsuppgift:</strong><br> Fysik
-            <br><br>
-            <strong>
-                Info:</strong><br> Provet består av en matematikdel (3 timmar) och en fysikdel (2 timmar). Resultaten
-            från de båda delarna sammanräknas för samtliga sökande till utbildningarna vid Chalmers och KTH. För sökande
-            till utbildningarna vid Stockholms universitet räknas endast resultatet från matematikdelen.
-            <br><br>
-            <strong>
-                Tid:</strong><br> 1/7
-
-          </div>
-          </div>
 
         </ion-content>
 
