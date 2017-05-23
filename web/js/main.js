@@ -4,6 +4,9 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
+var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+//var myURL = "http://localhost:5000"; //local dev
+
   $http.get("../schooldata/data.json")
     .then(function (response) {
       $scope.data = response.data;
@@ -12,7 +15,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.login = function () {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
-    $http.post('http://localhost:5000/api/users/login', {
+    $http.post(myURL+'/api/users/login', {
       Username: username,
       Password: password
     })
@@ -31,7 +34,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   }
 
   $scope.showMyCourses = function () {
-    $http.post('http://localhost:5000/api/courses/mycourses', {
+    $http.post(myURL+'/api/courses/mycourses', {
       Username: $rootScope.rootData.user_name
     })
       .then(function (response) {
@@ -42,14 +45,14 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   };
 
   $scope.showCourseInfo = function () {
-    $http.post('http://localhost:5000/api/courses/MySchedule', {
+    $http.post(myURL+ '/api/courses/MySchedule', {
       course_name: $scope.chosenObject.course_name
     })
       .then(function (response) {
         if (response.data) {
           $scope.schedule = response.data;
 
-          $http.post('http://localhost:5000/api/courses/CourseAssignment', {
+          $http.post(myURL+'/api/courses/CourseAssignment', {
             course_name: $scope.chosenObject.course_name
           })
             .then(function (response) {
@@ -63,7 +66,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   $scope.showMyGrades = function () {
 
-    $http.post('http://localhost:5000/api/users/grade', {
+    $http.post(myURL+'/api/users/grade', {
       Username: $rootScope.rootData.user_name
     })
       .then(function (response) {
