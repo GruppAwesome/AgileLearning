@@ -2,8 +2,9 @@
 
   var sCourse;
   var app = angular.module('starter', ['ionic']);
-  var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
-  // var myURL = "http://localhost:5000"; //local dev
+
+  //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  var myURL = "http://localhost:5000"; //local dev
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
@@ -24,9 +25,9 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post(myURL + '/api/users/login', {
-          Username: username,
-          Password: password
-        })
+        Username: username,
+        Password: password
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
@@ -38,8 +39,8 @@
     $scope.showMyCourses = function () {
 
       $http.post(myURL + '/api/courses/mycourses', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;
@@ -50,8 +51,8 @@
     $scope.showMyGrades = function () {
 
       $http.post(myURL + '/api/users/grade', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.grades = data;
@@ -59,18 +60,30 @@
         });
     };
 
+    $scope.showMyTodo = function () {
+
+            $http.post(myURL + '/api/users/todo', {
+              Username: "Ralle"
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $scope.todo = data;
+          }
+        });
+    };
+
     $scope.showMySchedule = function () {
 
       $http.post(myURL + '/api/courses/MySchedule', {
-          course_name: sCourse.course_name
-        })
+        course_name: sCourse.course_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.schedule = data;
 
             $http.post(myURL + '/api/courses/CourseAssignment', {
-                course_name: sCourse.course_name
-              })
+              course_name: sCourse.course_name
+            })
               .success(function (data) {
                 if (data != null && data != "") {
                   $scope.assignment = data;

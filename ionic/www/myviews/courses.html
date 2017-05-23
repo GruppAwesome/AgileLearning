@@ -23,7 +23,7 @@
               <strong>Pågående</strong>
               <ul>
                 <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Aktiv'">
+                  <span ng-if="x.task_status == 'Aktiv'">
                     <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>

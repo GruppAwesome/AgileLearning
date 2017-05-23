@@ -4,8 +4,8 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
-var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
-//var myURL = "http://localhost:5000"; //local dev
+  //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  var myURL = "http://localhost:5000"; //local dev
 
   $http.get("../schooldata/data.json")
     .then(function (response) {
@@ -15,7 +15,7 @@ var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   $scope.login = function () {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
-    $http.post(myURL+'/api/users/login', {
+    $http.post(myURL + '/api/users/login', {
       Username: username,
       Password: password
     })
@@ -34,7 +34,7 @@ var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   }
 
   $scope.showMyCourses = function () {
-    $http.post(myURL+'/api/courses/mycourses', {
+    $http.post(myURL + '/api/courses/mycourses', {
       Username: $rootScope.rootData.user_name
     })
       .then(function (response) {
@@ -44,15 +44,27 @@ var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
       });
   };
 
+  $scope.showMyTodo = function () {
+
+    $http.post(myURL + '/api/users/todo', {
+      Username: $rootScope.rootData.user_name
+    })
+      .then(function (response) {
+        if (response.data) {
+          $scope.todo = response.data;
+        }
+      });
+  };
+
   $scope.showCourseInfo = function () {
-    $http.post(myURL+ '/api/courses/MySchedule', {
+    $http.post(myURL + '/api/courses/MySchedule', {
       course_name: $scope.chosenObject.course_name
     })
       .then(function (response) {
         if (response.data) {
           $scope.schedule = response.data;
 
-          $http.post(myURL+'/api/courses/CourseAssignment', {
+          $http.post(myURL + '/api/courses/CourseAssignment', {
             course_name: $scope.chosenObject.course_name
           })
             .then(function (response) {
@@ -66,7 +78,7 @@ var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
 
   $scope.showMyGrades = function () {
 
-    $http.post(myURL+'/api/users/grade', {
+    $http.post(myURL + '/api/users/grade', {
       Username: $rootScope.rootData.user_name
     })
       .then(function (response) {
