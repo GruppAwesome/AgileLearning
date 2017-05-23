@@ -75,21 +75,25 @@ namespace WebAPI.Controllers
 
         public IEnumerable<Grade> GetGrades(string username)
         {
+
             return dbConn.Conn.Query<Grade>(
                 $"select distinct user_name, course_name, task_info, result_task, exam_info, result_exam, final_info, result_final, result_coursegrade, result_coursestatus from courses, results, tasks, exams, finals, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid and exams.exam_id = results.result_examid and users.user_name = '{username}'");
         }
 
-        [Route("[action]")]
-        public IEnumerable<Todo> Todo([FromBody]MyStruct args) // IEnumerable är som en räknare. Är addressen för metoden
+            [HttpPost("Todo")]
+       public IEnumerable<Todo> Todo([FromBody]MyStruct args)
         {
             return this.GetTodo(args.username);
         }
 
-        public IEnumerable<Todo> GetTodo(string username)
-        {
+                public IEnumerable<Todo> GetTodo(string username)
+        {      String sqlTemplate = "Kommande";
+
             return dbConn.Conn.Query<Todo>(
-                "select * from users");
+                $"select distinct user_name, course_name, task_info, task_describe, task_time, final_info, final_describe, final_time, result_coursestatus from courses, results, tasks, exams, finals, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid and exams.exam_id = results.result_examid and users.user_name = @username and (results.result_coursestatus = 'Kommande' or results.result_coursestatus = 'Aktiv')", new { username = username});
         }
+
+
 
 
     }

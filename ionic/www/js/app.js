@@ -60,13 +60,13 @@
     $scope.showMyTodo = function () {
       alert("Its working")
 
-      $http.post('http://localhost:5000/api/courses/Todo', {
-        Username: "Micke"
+            $http.post('http://localhost:5000/api/users/todo', {
+              Username: $rootScope.rootData.user_name
       })
         .success(function (data) {
           if (data != null && data != "") {
             alert(data)
-            $scope.rootScope.todo = data;
+            $scope.todo = data;
           }
         });
     };
