@@ -15,17 +15,27 @@
 
         <ion-content ng-init="showMyTodo()" class="padding subheaderSpace">
 
-          <div class="list card" ng-repeat="x in todo">
-            <div class="item item-body">
-              <strong>{{x.course_name}}</strong><br><br>
 
-              <strong>{{x.task_info}}</strong>:<br> {{x.task_describe}}<br> Datum:{{x.task_time}}
-              <br>
-              <br>
-              <strong>{{x.final_info}}</strong>:<br> {{x.final_describe}}<br><br>
+          <div class="list card" ng-repeat="task in todo">
+            <div class="item item-body">
+              <strong>
+              {{task.course_name}}</strong><br> 
+              <br><br>
+              <strong>
+              {{task.task_info}} {{task.task_time}}:
+              </strong><br> 
+              {{task.task_describe}}
+              <br><br>
+              
+              <strong>
+              {{task.final_info}} {{task.final_time}}:
+              </strong><br> 
+              {{task.final_describe}}
+              <br><br>
 
             </div>
           </div>
+
 
         </ion-content>
 

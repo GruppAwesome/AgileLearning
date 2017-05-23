@@ -3,6 +3,9 @@
   var sCourse;
   var app = angular.module('starter', ['ionic']);
 
+  //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  var myURL = "http://localhost:5000"; //local dev
+
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
 
@@ -60,7 +63,7 @@
     $scope.showMyTodo = function () {
 
             $http.post('http://localhost:5000/api/users/todo', {
-              Username: $rootScope.rootData.user_name
+              Username: "Ralle"
       })
         .success(function (data) {
           if (data != null && data != "") {
