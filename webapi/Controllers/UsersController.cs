@@ -93,7 +93,36 @@ namespace WebAPI.Controllers
                 $"select distinct user_name, course_name, task_info, task_describe, task_time, final_info, final_describe, final_time, result_coursestatus from courses, results, tasks, exams, finals, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid and exams.exam_id = results.result_examid and users.user_name = @username and (results.result_coursestatus = 'Kommande' or results.result_coursestatus = 'Aktiv')", new { username = username });
         }
 
+        [HttpPost("Feedback")]
+        public IEnumerable<Feedback> Feedback([FromBody]MyStruct args)
+        {
+            var test123 = GetFeedback();
+            
+            if (test123 != null) {
 
+
+                Console.Write(GetFeedback());
+                return test123;
+
+              }
+            else{
+                
+                Console.Write("inne");
+                dbConn.Conn.Query<Feedback> ($"INSERT into feedbacks (\"feedback_date\")VALUES ('0/3/3')");
+                return test123;
+            }
+
+
+         /* Vi ska göra en fungerande query.
+            Kolla om date är null.
+            Om den är null insert (en till query)
+            Annars ska den return feedback_vote från DB*/   
+        }
+
+        public IEnumerable<Feedback> GetFeedback()
+        {
+            return dbConn.Conn.Query<Feedback>($"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id AND users.user_name = 'Micke' and feedbacks.feedback_date = '5/3/2012'");
+        }
 
 
     }
