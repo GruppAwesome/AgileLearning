@@ -23,7 +23,7 @@
               <strong>Pågående</strong>
               <ul>
                 <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.task_status == 'Aktiv'">
+                  <span ng-if="x.result_coursestatus == 'Aktiv'">
                     <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>
@@ -33,7 +33,7 @@
               <strong>Kommande</strong>
               <ul>
                 <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Kommande'">
+                  <span ng-if="x.result_coursestatus == 'Kommande'">
                     <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>
@@ -44,7 +44,7 @@
               <ul>
 
                 <li ng-repeat="x in rootCourses">
-                  <span ng-if="x.course_status == 'Avslutad'">
+                  <span ng-if="x.result_coursestatus == 'Avslutade'">
                     <a ng-click="getobject(x)" href="#selectedcourse"><br> {{x.course_name}} <br></a>
                   </span>
                 </li>

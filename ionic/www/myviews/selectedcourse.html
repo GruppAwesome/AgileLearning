@@ -13,13 +13,17 @@
           <h2 class="title">{{sCourse.course_name}}</h2>
         </div>
 
-        <ion-content ng-init="showMySchedule()" class="padding subheaderSpace">
+        <ion-content ng-init="MyFeedback()" class="padding subheaderSpace">
 
-          <div class="list card">
+          <div class="list card" ng-init="showMySchedule()">
             <div class="item item-body">
               <strong>Kursinfo</strong>
 
               <p>{{sCourse.course_describe}}</p>
+
+              <strong>Kursmål</strong>
+
+              <p>{{sCourse.course_goal}}</p>
 
               <strong> Lärare: </strong><br> {{sCourse.course_teacher}}
               <br><br>

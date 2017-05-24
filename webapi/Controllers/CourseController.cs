@@ -35,13 +35,13 @@ namespace WebAPI.Controllers
         [Route("[action]")]
         public IEnumerable<Course> MyCourses([FromBody]MyStruct args)
         {
-            return this.UserCourses(args.username);
+            return this.GetMyCourses(args.username);
         }
 
-        public IEnumerable<Course> UserCourses(string username)
+        public IEnumerable<Course> GetMyCourses(string username)
         {
             return dbConn.Conn.Query<Course>(
-                $"select courses.*, exams.*, tasks.* from users, courses, enrolled left outer join exams on enrolled.eid = exams.\"exam_id\" left outer join tasks on enrolled.tid = tasks.\"task_id\" where enrolled.uid = users.\"user_id\" and enrolled.cid = courses.\"course_id\" and users.\"user_name\" = '{username}'");
+                $"select distinct user_name, course_name, course_teacher, course_describe, task_describe, course_goal, result_coursestatus from courses, results, tasks, exams, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and exams.exam_id = results.result_examid and users.user_name = @username", new {username = username});
         }
 
         [Route("[action]")]

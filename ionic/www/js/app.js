@@ -95,6 +95,18 @@
 
     };
 
+      $scope.MyFeedback = function () {
+
+            $http.post(myURL + '/api/users/feedback', {
+              Username: "Micke"
+      })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $scope.todo = data;
+          }
+        });
+    };
+
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()
     }
