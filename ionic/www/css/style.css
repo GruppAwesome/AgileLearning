@@ -12,6 +12,12 @@
 
 }
 
+
+
+#smileyDiv img {
+  width: 30%;
+}
+
 #startlogo {
   width: 50%;
   text-align: center;

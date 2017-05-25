@@ -98,14 +98,31 @@
       $scope.MyFeedback = function () {
 
             $http.post(myURL + '/api/users/feedback', {
-              Username: "Micke"
+              user_id: 2
       })
         .success(function (data) {
           if (data != null && data != "") {
-            $scope.todo = data;
+            $scope.hasVotedToday = data;
+  
+          }
+          else{
+            $scope.hasVotedToday = "no";
+
           }
         });
     };
+
+          $scope.SendFeedback = function (theVote) {
+            $http.post(myURL + '/api/users/SendFeedback', {
+              feedback_vote: theVote
+      })
+        .success(function (data) {
+          $scope.hasVotedToday = data;
+ 
+        });
+    };
+
+
 
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()

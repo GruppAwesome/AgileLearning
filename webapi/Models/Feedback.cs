@@ -6,6 +6,7 @@ namespace WebAPI.Models {
 
     public class Feedback
     {
+        public string user_id { get; set; }
         public string feedback_id { get; set; }
 
         public String feedback_date { get; set; }
