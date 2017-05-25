@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
         {
             public string username;
             public string course_name;
+
         }
 
         //DatabaseConnection
@@ -41,7 +42,7 @@ namespace WebAPI.Controllers
         public IEnumerable<Course> GetMyCourses(string username)
         {
             return dbConn.Conn.Query<Course>(
-                $"select distinct user_name, course_name, course_teacher, course_describe, task_describe, course_goal, result_coursestatus from courses, results, tasks, exams, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and exams.exam_id = results.result_examid and users.user_name = @username", new {username = username});
+                $"select distinct user_name, course_name, course_teacher, course_describe, task_describe, course_goal, result_coursestatus from courses, results, tasks, exams, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and exams.exam_id = results.result_examid and users.user_name = @username", new { username = username });
         }
 
         [Route("[action]")]

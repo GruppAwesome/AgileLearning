@@ -15,9 +15,19 @@
       sCourse = thisobject;
     }
 
+    //Tempfunction that reset the feedbackValues in the database
+    $scope.resetTheFeedback = function (thisobject) {
+      
+      $http.get(myURL + '/api/users/ResetFeedback', {
+
+      })
+
+    }
+
     $http.get('schooldata/data.json').success(function (data) {
       $scope.data = data;
     });
+
 
     $scope.login = function () {
 
@@ -62,8 +72,8 @@
 
     $scope.showMyTodo = function () {
 
-            $http.post(myURL + '/api/users/todo', {
-              Username: "Ralle"
+      $http.post(myURL + '/api/users/todo', {
+        Username: $rootScope.rootData.user_name
       })
         .success(function (data) {
           if (data != null && data != "") {
@@ -95,41 +105,44 @@
 
     };
 
-      $scope.MyFeedback = function () {
-
-            $http.post(myURL + '/api/users/feedback', {
-              user_id: 2
+    //Checks if the user has voted
+    $scope.HasVoted = function () {
+      $http.post(myURL + '/api/users/HasVoted', {
+        user_id: $rootScope.rootData.user_id
       })
         .success(function (data) {
           if (data != null && data != "") {
+
+            //If the user has voted
             $scope.hasVotedToday = data;
-  
+
           }
-          else{
+          else {
+
+            //If the user hasn't voted
             $scope.hasVotedToday = "no";
 
           }
         });
     };
 
-          $scope.SendFeedback = function (theVote) {
-            $http.post(myURL + '/api/users/SendFeedback', {
-              feedback_vote: theVote
+    //The daily feedback
+    $scope.SendFeedback = function (theVote) {
+      $http.post(myURL + '/api/users/SendFeedback', {
+        feedback_vote: theVote,
+        user_id: $rootScope.rootData.user_id
       })
         .success(function (data) {
           $scope.hasVotedToday = data;
- 
+
         });
     };
-
-
 
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()
     }
 
   });
-
 
   //My lovely router that redirection myviews
   app.config(function ($stateProvider, $urlRouterProvider) {
