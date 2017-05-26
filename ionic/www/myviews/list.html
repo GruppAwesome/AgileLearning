@@ -8,10 +8,76 @@
         </div>
       </ion-header-bar>
       <div class="bar bar-subheader">
-        <h2 class="title">Välkommen {{rootData.first_name}}!</h2>
+        <h2 ng-init="showMyCourses()" class="title">Välkommen {{rootData.first_name}}!</h2>
       </div>
 
-      <ion-content ng-init="showMyCourses()" class="subheaderSpace">
+      <ion-content ng-init="HasVoted()" class="subheaderSpace">
+
+        <div ng-if="hasVotedToday == 'no'" id="smileyDiv">
+          <div class="list card">
+
+            <a ng-click="SendFeedback(-1)">
+          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
+          </a>
+
+            <a ng-click="SendFeedback(0)">
+          <img  class="full-image" ng-src="schooldata/neutral.png">
+           </a>
+
+            <a ng-click="SendFeedback(1)">
+          <img class="full-image" ng-src="schooldata/happy.png">
+            </a>
+
+            <div class="item item-body">
+              <p>
+                Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <div ng-if="hasVotedToday != 'no'" id="smileyDiv">
+          <div class="list card">
+
+            <span ng-if="hasVotedToday.feedback_vote == '-1'">           
+          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
+          </span>
+
+            <span ng-if="hasVotedToday.feedback_vote == '0'">  
+          <img class="full-image" ng-src="schooldata/neutral.png">
+           </span>
+
+            <span ng-if="hasVotedToday.feedback_vote == '1'">  
+          <img class="full-image" ng-src="schooldata/happy.png">
+           </span>
+
+            <div class="item item-body">
+              <p>
+                Idag röstade du att dagen hade varit
+
+                <span ng-if="hasVotedToday.feedback_vote == '-1'">
+                Dålig
+              </span>
+
+                <span ng-if="hasVotedToday.feedback_vote == '0'">
+                Mellan
+              </span>
+
+                <span ng-if="hasVotedToday.feedback_vote == '1'">
+                Bra
+              </span>
+
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tempbutton / Reset the database -->
+        <button ng-click="resetTheFeedback()" class="button button-full button-assertive">
+          Reset the feedbacks
+        </button>
+
         <div class="list card">
           <div class="item item-divider text-center">
             Omprov 13/7
@@ -22,6 +88,7 @@
             </p>
           </div>
         </div>
+
         <div class="list card">
           <div class="item item-divider text-center">
             Öppethus 14/8
@@ -38,7 +105,7 @@
           </div>
           <div class="centerText item item-body">
             <ul>
-              <li ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+              <li ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Aktiv'">
                 <a ng-click="getobject(x)" href="#/selectedcourse">{{ x.course_name }}</a>
               </li>
             </ul>

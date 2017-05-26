@@ -8,7 +8,7 @@
         <div class="card">
             <h4>Pågående</h4>
             <table>
-                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
+                <tr ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Aktiv'">
                     <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                 </tr>
             </table>
@@ -18,7 +18,7 @@
         <div class="card">
             <h4>Kommande</h4>
             <table>
-                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Kommande'">
+                <tr ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Kommande'">
                     <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                 </tr>
             </table>
@@ -28,7 +28,7 @@
         <div class="card">
             <h4>Avslutade</h4>
             <table>
-                <tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad'">
+                <tr ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Avslutade'">
                     <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
                     <td>{{x.final_grade}}</td>
                 </tr>

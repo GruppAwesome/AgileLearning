@@ -14,12 +14,13 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-
         //Structor
         public struct MyStruct
         {
             public string username;
             public string password;
+            public int feedback_vote;
+            public int user_id;
         }
 
         //DatabaseConnection
@@ -46,6 +47,11 @@ namespace WebAPI.Controllers
             return sb.ToString();
         }
 
+        private String GetCurrentDate()
+        {
+
+            return DateTime.Now.ToString("yyyy-MM-dd");
+        }
 
         // GET & POST Functions
         [HttpGet]
@@ -92,6 +98,32 @@ namespace WebAPI.Controllers
             return dbConn.Conn.Query<Todo>(
                 $"select distinct user_name, course_name, task_info, task_describe, task_time, final_info, final_describe, final_time, result_coursestatus from courses, results, tasks, exams, finals, users where users.user_id = results.result_userid and courses.course_id = results.result_courseid and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid and exams.exam_id = results.result_examid and users.user_name = @username and (results.result_coursestatus = 'Kommande' or results.result_coursestatus = 'Aktiv')", new { username = username });
         }
+
+        [HttpPost("HasVoted")]
+        public Feedback HasVoted([FromBody]MyStruct args)
+        {
+
+            var result = dbConn.Conn.Query<Feedback>($"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id AND users.user_id = @userid and feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
+
+            return result;
+        }
+
+        [HttpPost("SendFeedback")]
+        public Feedback SendFeedback([FromBody]MyStruct args)
+        {
+
+            dbConn.Conn.Query<Feedback>($"INSERT INTO feedbacks(feedback_uid, feedback_vote, feedback_date)SELECT @userid , '{args.feedback_vote}' , '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT feedback_uid FROM feedbacks WHERE feedback_uid = @userid AND feedback_date = '{GetCurrentDate()}')", new { userid = args.user_id });
+
+            return dbConn.Conn.Query<Feedback>($"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id AND users.user_id = @userid and feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
+
+        }
+
+          [HttpGet("ResetFeedback")]
+                public void ResetFeedback()
+        {
+            dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
+        }
+
 
 
 
