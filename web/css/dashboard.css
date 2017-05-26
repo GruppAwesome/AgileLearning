@@ -1,5 +1,9 @@
 #smileyDiv img {
-  width: 30%;
+  width: 20%;
+}
+
+#smileyDiv{
+    margin: 0 auto;
 }
 
 #sidebar{
