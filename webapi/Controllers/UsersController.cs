@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         {
             public string username;
             public string password;
-            public string feedback_vote;
+            public int feedback_vote;
             public int user_id;
         }
 
@@ -118,8 +118,8 @@ namespace WebAPI.Controllers
 
         }
 
-          [HttpGet("ResetFeedback")]
-                public void ResetFeedback()
+        [HttpGet("ResetFeedback")]
+        public void ResetFeedback()
         {
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
