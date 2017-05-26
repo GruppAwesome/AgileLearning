@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         {
             public string username;
             public string password;
-            public int feedback_vote;
+            public string feedback_vote;
             public int user_id;
         }
 
