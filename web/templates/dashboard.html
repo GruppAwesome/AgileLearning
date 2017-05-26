@@ -4,26 +4,84 @@
 	<div class="subheader row">
 		<h6>Välkommen {{rootData.user_name}}!</h6>
 	</div>
-	<div class="col-md-6">
+	<div ng-init="HasVoted()" class="col-md-6">
 
-		<div class="card">
-			<h4>Pågående</h4>
-			<table>
-				<tr ng-repeat="x in rootCourses" ng-if="x.course_status == 'Aktiv'">
-					<td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
-				</tr>
-			</table>
-		</div>
+        <div ng-if="hasVotedToday == 'no'" id="smileyDiv">
+          <div class="card">
+
+            <a ng-click="SendFeedback(0)">
+          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
+          </a>
+
+            <a ng-click="SendFeedback(1)">
+          <img  class="full-image" ng-src="schooldata/neutral.png">
+           </a>
+
+            <a ng-click="SendFeedback(2)">
+          <img class="full-image" ng-src="schooldata/happy.png">
+            </a>
+
+            <div class="item item-body">
+              <p>
+                Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div ng-if="hasVotedToday != 'no'" id="smileyDiv">
+          <div class="card">
+
+            <span ng-if="hasVotedToday.feedback_vote == '0'">           
+          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
+          </span>
+
+            <span ng-if="hasVotedToday.feedback_vote == '1'">  
+          <img class="full-image" ng-src="schooldata/neutral.png">
+           </span>
+
+            <span ng-if="hasVotedToday.feedback_vote == '2'">  
+          <img class="full-image" ng-src="schooldata/happy.png">
+           </span>
+
+            <div class="item item-body">
+              <p>
+                Idag röstade du att dagen hade varit
+
+                <span ng-if="hasVotedToday.feedback_vote == '0'">
+                Dålig
+              </span>
+
+                <span ng-if="hasVotedToday.feedback_vote == '1'">
+                Mellan
+              </span>
+
+                <span ng-if="hasVotedToday.feedback_vote == '2'">
+                Bra
+              </span>
+
+              </p>
+            </div>
+          </div>
+        </div>
 
 		<div class="card">
 			<h4>Öppethus 14/8</h4>
 			<p>Öppethus på testvägen 12</p>
 		</div>
 	</div>
+
 	<div class="col-md-6">
 		<div class="card">
-			<h4> Detta är ett till kort, {{rootData.first_name}}!</h4>
-			<p> Här kan man skriva en massa trevlig info!</p>
+			<h4>Aktiva Kurser:</h4>
+			<table>
+				<tr ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Aktiv'">
+					<td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
+				</tr>
+			</table>
 		</div>
-	</div>
+		</div>
+
 </div>
