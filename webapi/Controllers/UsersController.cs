@@ -118,8 +118,8 @@ namespace WebAPI.Controllers
 
         }
 
-          [HttpGet("ResetFeedback")]
-                public void ResetFeedback()
+        [HttpGet("ResetFeedback")]
+        public void ResetFeedback()
         {
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
