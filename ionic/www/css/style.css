@@ -12,8 +12,10 @@
 
 }
 
-#smileyDiv img {
-  width: 30%;
+#dailyfeedback i {
+  padding-top: 10px;
+  padding-left: 40px;
+  color: black;
 }
 
 #startlogo {
