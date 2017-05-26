@@ -33,6 +33,13 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     $scope.chosenObject = thisobject;
   }
 
+   $scope.resetTheFeedback = function (thisobject) {
+      
+      $http.get(myURL + '/api/users/ResetFeedback', {
+
+      })
+    };
+
   $scope.showMyCourses = function () {
     $http.post(myURL + '/api/courses/mycourses', {
       Username: $rootScope.rootData.user_name
