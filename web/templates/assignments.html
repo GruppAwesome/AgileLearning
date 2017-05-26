@@ -1,17 +1,21 @@
 <div data-ng-include="'templates/sidenav.html'"></div>
-<div class="container-fluid background">
+<div ng-init="showMyTodo()" class="container-fluid background">
     <div data-ng-include="'templates/topnav.html'"></div>
     <div class="subheader row">
-        <h6>Mina Uppgifter</h6>
+        <h6>Inlämningsuppgifter</h6>
     </div>
     <!--Repeat per thingy-->
-    <div class="col-md-6" ng-repeat="x in rootCourses" ng-if="x.course_status == 'Avslutad' && x.task_info">
-        <div class="card" ng-if="x.task_info">
-            <div>
-                <h4>{{x.course_name}}: {{x.task_info}}</h4>
-                <p>{{x.task_info}}</p>
-                <h6>Tid: {{x.task_date}}</h6>
-            </div>
+    <div class="col-md-6" ng-repeat="task in todo">
+        <div class="card">
+            
+            <strong>{{task.course_name}}</strong><br><br>
+
+              <strong>{{task.task_info}}</strong>:<br> {{task.task_describe}}<br> Datum:{{task.task_time}}
+              <br>
+              <br>
+              <strong>{{task.final_info}}</strong>:<br> {{task.final_describe}}<br><br>
+
+
         </div>
     </div>
 </div>
