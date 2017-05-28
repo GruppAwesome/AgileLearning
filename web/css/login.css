@@ -11,30 +11,26 @@
     /* Standard syntax */
 }
 
+a {
+    font-size: 16px;
+}
 
-/* unvisited link */
+li>a {
+    font-size: 20px;
+}
 
 a:link {
     color: #FF8008;
 }
 
-
-/* visited link */
-
 a:visited {
     color: #FF8008;
 }
-
-
-/* mouse over link */
 
 a:hover {
     color: #000;
     text-decoration: none;
 }
-
-
-/* selected link */
 
 a:active {
     color: #000;
@@ -58,11 +54,6 @@ h6 {
     font-size: 16px;
 }
 
-p {
-    font-size: 12px;
-    line-height: 96%;
-}
-
 .air {
     margin-top: 15%;
 }
@@ -70,6 +61,7 @@ p {
 #loginForm input {
     display: block;
     width: 100%;
+    font-size: 19px;
     margin-top: 2px;
 }
 

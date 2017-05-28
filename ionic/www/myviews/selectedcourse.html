@@ -17,18 +17,18 @@
 
           <div class="list card">
             <div class="item item-body">
-              <strong>Kursinfo</strong>
+              <h2>Kursinfo</h2>
 
               <p>{{sCourse.course_describe}}</p>
 
-              <strong>Kursmål</strong>
+              <h2>Kursmål</h2>
 
               <p>{{sCourse.course_goal}}</p>
 
-              <strong> Lärare: </strong><br> {{sCourse.course_teacher}}
+              <h2> Lärare: </h2><br> {{sCourse.course_teacher}}
               <br><br>
 
-              <strong> Examination moment: </strong><br>
+              <h2> Examination moment: </h2><br>
               <div ng-repeat="x in assignment">
 
                 <span ng-if="x.final_info.length > 0"> 
@@ -47,7 +47,7 @@
           </div>
 
           <div class="item item-body">
-            <strong>Schema</strong>
+            <h2>Schema</h2>
 
             <table>
               <tr>

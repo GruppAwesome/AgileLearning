@@ -131,7 +131,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.sidebarMenu = function () {
     var documentWidth = $(document).width();
     if (documentWidth > 500) {
-      documentWidth *= 0.2;
+      documentWidth *= 0.3;
     }
     $('#sidebar').animate({
       width: documentWidth

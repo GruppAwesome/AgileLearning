@@ -74,3 +74,8 @@ table,tr,th,td{
 th, td {
     padding: 15px;
 }
+
+h2:not(.title){
+  font-weight: bold;
+}
+

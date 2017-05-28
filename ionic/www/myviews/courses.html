@@ -20,7 +20,7 @@
           <div class="list card">
             <div class="item item-body">
 
-              <strong>Pågående</strong>
+              <h2>Pågående</h2>
               <ul>
                 <li ng-repeat="x in rootCourses">
                   <span ng-if="x.result_coursestatus == 'Aktiv'">
@@ -30,7 +30,7 @@
               </ul>
 
               <br>
-              <strong>Kommande</strong>
+              <h2>Kommande</h2>
               <ul>
                 <li ng-repeat="x in rootCourses">
                   <span ng-if="x.result_coursestatus == 'Kommande'">
@@ -40,7 +40,7 @@
               </ul>
 
               <br>
-              <strong>Avslutade</strong>
+              <h2>Avslutade</h2>
               <ul>
 
                 <li ng-repeat="x in rootCourses">

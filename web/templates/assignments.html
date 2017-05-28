@@ -2,19 +2,15 @@
 <div ng-init="showMyTodo()" class="container-fluid background">
     <div data-ng-include="'templates/topnav.html'"></div>
     <div class="subheader row">
-        <h6>Inlämningsuppgifter</h6>
+        <h4>Inlämningsuppgifter</h4>
     </div>
     <!--Repeat per thingy-->
     <div class="col-md-6" ng-repeat="task in todo">
         <div class="card">
-            
-            <strong>{{task.course_name}}</strong><br><br>
 
-              <strong>{{task.task_info}}</strong>:<br> {{task.task_describe}}<br> Datum:{{task.task_time}}
-              <br>
-              <br>
-              <strong>{{task.final_info}}</strong>:<br> {{task.final_describe}}<br><br>
-
+            <h4>{{task.course_name}}</h4>
+            <h4>{{task.task_info}}</h4>: {{task.task_describe}}<br> Datum:{{task.task_time}}
+            <h4>{{task.final_info}}</h4>: {{task.final_describe}}
 
         </div>
     </div>
