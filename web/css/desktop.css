@@ -1,4 +1,9 @@
 @media (min-width: 768px){
+
+    .smileyDiv i{
+        padding-left: 30px;
+    }
+
     h1{
         font-size: 30px;
     }
@@ -16,4 +21,6 @@
     p {
         font-size: 15px;
     }
+    
+
 }

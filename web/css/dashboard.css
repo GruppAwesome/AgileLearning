@@ -1,5 +1,21 @@
-#sidebar{
 
+.smileyDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.smileyDiv i{
+  padding-left: 5px;
+}
+
+.dailyFeedbackText{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 40px;
+}
+
+#sidebar{
   background: white;
   height: 100%;
   display: none;
