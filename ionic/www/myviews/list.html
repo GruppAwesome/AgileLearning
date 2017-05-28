@@ -16,15 +16,15 @@
         <div ng-if="hasVotedToday == 'no'" id="smileyDiv">
           <div class="list card">
 
-            <a ng-click="SendFeedback(-1)">
+            <a ng-click="SendFeedback(0)">
           <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
           </a>
 
-            <a ng-click="SendFeedback(0)">
+            <a ng-click="SendFeedback(1)">
           <img  class="full-image" ng-src="schooldata/neutral.png">
            </a>
 
-            <a ng-click="SendFeedback(1)">
+            <a ng-click="SendFeedback(2)">
           <img class="full-image" ng-src="schooldata/happy.png">
             </a>
 
@@ -40,15 +40,15 @@
         <div ng-if="hasVotedToday != 'no'" id="smileyDiv">
           <div class="list card">
 
-            <span ng-if="hasVotedToday.feedback_vote == '-1'">           
+            <span ng-if="hasVotedToday.feedback_vote == '0'">           
           <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
           </span>
 
-            <span ng-if="hasVotedToday.feedback_vote == '0'">  
+            <span ng-if="hasVotedToday.feedback_vote == '1'">  
           <img class="full-image" ng-src="schooldata/neutral.png">
            </span>
 
-            <span ng-if="hasVotedToday.feedback_vote == '1'">  
+            <span ng-if="hasVotedToday.feedback_vote == '2'">  
           <img class="full-image" ng-src="schooldata/happy.png">
            </span>
 
@@ -56,15 +56,15 @@
               <p>
                 Idag röstade du att dagen hade varit
 
-                <span ng-if="hasVotedToday.feedback_vote == '-1'">
+                <span ng-if="hasVotedToday.feedback_vote == '0'">
                 Dålig
               </span>
 
-                <span ng-if="hasVotedToday.feedback_vote == '0'">
+                <span ng-if="hasVotedToday.feedback_vote == '1'">
                 Mellan
               </span>
 
-                <span ng-if="hasVotedToday.feedback_vote == '1'">
+                <span ng-if="hasVotedToday.feedback_vote == '2'">
                 Bra
               </span>
 
