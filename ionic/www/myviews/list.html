@@ -13,23 +13,27 @@
 
       <ion-content ng-init="HasVoted()" class="subheaderSpace">
 
-        <div ng-if="hasVotedToday == 'no'" id="smileyDiv">
+        <div ng-if="hasVotedToday == 'no'">
           <div class="list card">
 
-            <a ng-click="SendFeedback(0)">
-          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
-          </a>
+            <div class="dailyFeedback">
 
-            <a ng-click="SendFeedback(1)">
-          <img  class="full-image" ng-src="schooldata/neutral.png">
-           </a>
-
-            <a ng-click="SendFeedback(2)">
-          <img class="full-image" ng-src="schooldata/happy.png">
+              <a ng-click="SendFeedback(2)">
+              <i class="fa fa-smile-o fa-3x" aria-hidden="true"></i>
             </a>
 
+              <a ng-click="SendFeedback(1)">
+              <i class="fa fa-meh-o fa-3x" aria-hidden="true"></i>
+           </a>
+
+              <a ng-click="SendFeedback(0)">
+              <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+          </a>
+
+            </div>
+
             <div class="item item-body">
-              <p>
+              <p class="dailyFeedbackText">
                 Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
               </p>
             </div>
@@ -37,24 +41,28 @@
           </div>
         </div>
 
-        <div ng-if="hasVotedToday != 'no'" id="smileyDiv">
+        <div ng-if="hasVotedToday != 'no'">
           <div class="list card">
 
-            <span ng-if="hasVotedToday.feedback_vote == '0'">           
-          <img id="sadSmiley" class="full-image" ng-src="schooldata/sad.png">
+            <div class="dailyFeedback">
+
+              <span ng-if="hasVotedToday.feedback_vote == '0'">
+              <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
           </span>
 
-            <span ng-if="hasVotedToday.feedback_vote == '1'">  
-          <img class="full-image" ng-src="schooldata/neutral.png">
+              <span ng-if="hasVotedToday.feedback_vote == '1'">
+              <i class="fa fa-meh-o fa-3x" aria-hidden="true"></i>
            </span>
 
-            <span ng-if="hasVotedToday.feedback_vote == '2'">  
-          <img class="full-image" ng-src="schooldata/happy.png">
+              <span ng-if="hasVotedToday.feedback_vote == '2'">  
+              <i class="fa fa-smile-o fa-3x" aria-hidden="true"></i>
            </span>
+
+            </div>
 
             <div class="item item-body">
-              <p>
-                Idag röstade du att dagen hade varit
+              <p class="dailyFeedbackText">
+                Idag röstade du att dagen har varit:&nbsp
 
                 <span ng-if="hasVotedToday.feedback_vote == '0'">
                 Dålig
@@ -72,7 +80,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Tempbutton / Reset the database -->
         <button ng-click="resetTheFeedback()" class="button button-full button-assertive">
           Reset the feedbacks
