@@ -12,10 +12,22 @@
 
 }
 
-#dailyfeedback i {
-  padding-top: 10px;
-  padding-left: 40px;
+.dailyFeedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dailyFeedback i {
   color: black;
+  padding: 10px;
+  margin: auto;
+}
+
+.dailyFeedbackText {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 40px;
 }
 
 #startlogo {
