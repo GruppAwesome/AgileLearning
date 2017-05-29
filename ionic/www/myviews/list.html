@@ -62,20 +62,7 @@
 
             <div class="item item-body">
               <p class="dailyFeedbackText">
-                Idag röstade du att dagen har varit:&nbsp
-
-                <span ng-if="hasVotedToday.feedback_vote == '0'">
-                Dålig
-              </span>
-
-                <span ng-if="hasVotedToday.feedback_vote == '1'">
-                Mellan
-              </span>
-
-                <span ng-if="hasVotedToday.feedback_vote == '2'">
-                Bra
-              </span>
-
+                Idag röstade du att dagen har varit {{feedbackAlternatives[hasVotedToday.feedback_vote]}}.
               </p>
             </div>
           </div>
