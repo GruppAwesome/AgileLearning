@@ -8,19 +8,19 @@
     <div ng-if="hasVotedToday == 'no'">
       <div class="card">
 
-<div class="smileyDiv">
-        <a ng-click="SendFeedback(0)">
-          <i class="test123 fa fa-frown-o fa-5x" aria-hidden="true"></i>
+        <div class="smileyDiv">
+          <a ng-click="SendFeedback(0)">
+            <i class="test123 fa fa-frown-o fa-5x" aria-hidden="true"></i>
           </a>
 
-        <a ng-click="SendFeedback(1)">
-          <i class="test123 fa fa-meh-o fa-5x" aria-hidden="true"></i>
-           </a>
+          <a ng-click="SendFeedback(1)">
+            <i class="test123 fa fa-meh-o fa-5x" aria-hidden="true"></i>
+          </a>
 
-        <a ng-click="SendFeedback(2)">
-          <i class="test123 fa fa-smile-o fa-5x" aria-hidden="true"></i>
-            </a>
-</div>
+          <a ng-click="SendFeedback(2)">
+            <i class="test123 fa fa-smile-o fa-5x" aria-hidden="true"></i>
+          </a>
+        </div>
         <div class="item item-body">
           <p class="dailyFeedbackText">
             Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
@@ -32,19 +32,19 @@
 
     <div ng-if="hasVotedToday != 'no'">
       <div class="card">
-<div class="smileyDiv">
-        <span ng-if="hasVotedToday.feedback_vote == '0'">           
+        <div class="smileyDiv">
+          <span ng-if="hasVotedToday.feedback_vote == '0'">           
           <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
           </span>
 
-        <span ng-if="hasVotedToday.feedback_vote == '1'">  
+          <span ng-if="hasVotedToday.feedback_vote == '1'">  
           <i class="fa fa-meh-o fa-4x" aria-hidden="true"></i>
            </span>
 
-        <span ng-if="hasVotedToday.feedback_vote == '2'">  
+          <span ng-if="hasVotedToday.feedback_vote == '2'">  
           <i class="fa fa-smile-o fa-4x" aria-hidden="true"></i>
            </span>
-</div>
+        </div>
         <div class="item item-body">
           <p class="dailyFeedbackText">
             Idag röstade du att dagen hade varit&nbsp 
