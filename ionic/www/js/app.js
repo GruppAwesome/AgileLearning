@@ -11,6 +11,7 @@
 
     $scope.sCourse = sCourse;
     $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
+    $scope.loginError = false;
     $scope.getobject = function (thisobject) {
       sCourse = thisobject;
     }
@@ -42,6 +43,8 @@
           if (data != null && data != "") {
             $rootScope.rootData = data;
             $state.go('list');
+          } else {
+            $scope.loginError = true;
           }
         });
     };

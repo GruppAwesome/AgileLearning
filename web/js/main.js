@@ -26,7 +26,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           $location.url('/dashboard');
         } else {
           $scope.loginError = true;
-          $( "#loginError" ).fadeIn( "slow" );
+          $("#loginError").fadeIn("slow");
         }
       });
   };
