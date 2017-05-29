@@ -6,7 +6,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   var myURL = "http://localhost:5000"; //local dev
-
+  $scope.loginError = false;
   $http.get("../schooldata/data.json")
     .then(function (response) {
       $scope.data = response.data;
@@ -24,7 +24,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           $rootScope.rootData = response.data;
           $location.url('/dashboard');
         } else {
-          alert("Something odd happened, did you really write the correct login info?");
+          $scope.loginError = true;
+          $( "#loginError" ).fadeIn( "slow" );
         }
       });
   };

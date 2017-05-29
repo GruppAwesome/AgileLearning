@@ -63,6 +63,7 @@ h6 {
     width: 100%;
     font-size: 19px;
     margin-top: 2px;
+    border-radius: 3px;
 }
 
 .onTop {
@@ -119,14 +120,41 @@ h6 {
     padding: 5px;
     height: 150px;
     min-height: fit-content;
-    border-radius: 2px;
+    border-radius: 3px;
     text-align: left;
 }
 
-.card>p {
+
+/*.card>p {
     line-height: 120%;
-}
+}*/
 
 table * td {
     padding-left: 10px;
+}
+
+#loginError {
+    background-color: maroon;
+    color: white;
+    margin: 3px;
+    border-radius: 3px;
+}
+
+.animate-show,
+.animate-hide {
+    -webkit-transition: all linear 1s;
+    -moz-transition: all linear 1s;
+    -ms-transition: all linear 1s;
+    -o-transition: all linear 1s;
+    transition: all 1s linear 0s;
+}
+
+.animate-show.ng-hide-remove,
+.animate-hide.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+}
+
+.animate-hide.ng-hide-add,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
 }
