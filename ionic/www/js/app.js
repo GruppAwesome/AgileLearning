@@ -61,6 +61,18 @@
         });
     };
 
+       $scope.showAttendence = function () {
+
+      $http.post(myURL + '/api/attendence', {
+    
+        })
+        .success(function (data) {
+          if (data != null && data != "") {
+            
+          }
+        });
+    };
+
     $scope.showMyGrades = function () {
 
       $http.post(myURL + '/api/users/grade', {
