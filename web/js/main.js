@@ -17,9 +17,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post(myURL + '/api/users/login', {
-        Username: username,
-        Password: password
-      })
+      Username: username,
+      Password: password
+    })
       .then(function (response) {
         if (response.data) {
           $rootScope.rootData = response.data;
@@ -44,8 +44,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   $scope.showMyCourses = function () {
     $http.post(myURL + '/api/courses/mycourses', {
-        Username: $rootScope.rootData.user_name
-      })
+      Username: $rootScope.rootData.user_name
+    })
       .then(function (response) {
         if (response.data) {
           $rootScope.rootCourses = response.data;
@@ -56,8 +56,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.showMyTodo = function () {
 
     $http.post(myURL + '/api/users/todo', {
-        Username: $rootScope.rootData.user_name
-      })
+      Username: $rootScope.rootData.user_name
+    })
       .then(function (response) {
         if (response.data) {
           $scope.todo = response.data;
@@ -67,15 +67,15 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   $scope.showCourseInfo = function () {
     $http.post(myURL + '/api/courses/MySchedule', {
-        course_name: $scope.chosenObject.course_name
-      })
+      course_name: $scope.chosenObject.course_name
+    })
       .then(function (response) {
         if (response.data) {
           $scope.schedule = response.data;
 
           $http.post(myURL + '/api/courses/CourseAssignment', {
-              course_name: $scope.chosenObject.course_name
-            })
+            course_name: $scope.chosenObject.course_name
+          })
             .then(function (response) {
               if (response.data) {
                 $scope.homework = response.data;
@@ -88,8 +88,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $scope.showMyGrades = function () {
 
     $http.post(myURL + '/api/users/grade', {
-        Username: $rootScope.rootData.user_name
-      })
+      Username: $rootScope.rootData.user_name
+    })
       .then(function (response) {
         if (response.data) {
           $scope.grades = response.data;
@@ -100,8 +100,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   //Checks if the user has voted
   $scope.HasVoted = function () {
     $http.post(myURL + '/api/users/HasVoted', {
-        user_id: $rootScope.rootData.user_id
-      })
+      user_id: $rootScope.rootData.user_id
+    })
       .then(function (response) {
         if (response.data != null && response.data != "") {
 
@@ -120,14 +120,37 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   //The daily feedback
   $scope.SendFeedback = function (theVote) {
     $http.post(myURL + '/api/users/SendFeedback', {
-        feedback_vote: theVote,
-        user_id: $rootScope.rootData.user_id
-      })
+      feedback_vote: theVote,
+      user_id: $rootScope.rootData.user_id
+    })
       .then(function (response) {
         $scope.hasVotedToday = response.data;
 
       });
   };
+
+  // Leave attendance
+  $scope.leaveAttendance = function () {
+    var theCode = document.getElementById("codeInput").value;
+    var toast = document.getElementById("snackbar");
+
+    $http.post(myURL + '/api/users/SendAttendance', {
+      attendance_code: theCode
+    })
+      .then(function (response) {
+        if (response.data) {
+          $scope.courseName = response.data;
+          toast.className = "show success";
+          toast.innerHTML = "Din närvaro är nu registrerad för " + $scope.courseName;
+        }
+        else {
+          toast.className = "show failure";
+          toast.innerHTML = "Ingen närvaro för kod " + theCode;
+        }
+      });
+    setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
+  };
+
 
   $(window).resize(function () {
     if (!sidebarClosed) {
@@ -187,6 +210,9 @@ app.config(function ($routeProvider) {
     })
     .when("/assignments", {
       templateUrl: "templates/assignments.html"
+    })
+    .when("/attendance", {
+      templateUrl: "templates/attendance.html"
     });
 
 });
