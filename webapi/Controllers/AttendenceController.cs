@@ -37,12 +37,10 @@ namespace WebAPI.Controllers
 
             if (result.FirstOrDefault() != null)
             {
-
                 var coursecode_cid = result.ToList().First().coursecode_cid;
                 var user_id = result.ToList().First().user_id;
 
                 dbConn.Conn.Query<Presence>($"INSERT INTO attendence (attendence_cid, attendence_uid, attendence_date)SELECT @theCid , @theUid, '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT attendence_uid, attendence_cid, attendence_date FROM attendence WHERE attendence_cid = @theCid AND attendence_uid = @theUid AND attendence_date = '{GetCurrentDate()}')", new { theCid = coursecode_cid, theUid = user_id });
-
             }
 
             return result.ToList();
