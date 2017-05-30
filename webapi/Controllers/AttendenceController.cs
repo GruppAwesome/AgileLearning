@@ -35,51 +35,50 @@ namespace WebAPI.Controllers
             return DateTime.Now.ToString("yyyy-MM-dd");
         }
 
-
         [HttpPost("Presence")]
-        public Presence Presence([FromBody]MyStruct args)
+        public IEnumerable<Presence> Presence([FromBody]MyStruct args)
         {
-            String currentDate = GetCurrentDate();
-
-            IEnumerable<Presence> result = dbConn.Conn.Query<Presence>(
-
-                $"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'");
-
-                var result112 = dbConn.Conn.Query<Presence>( $"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'", new { userid = 5 }).SingleOrDefault();
-
-                if(result112 != null){
-                    
-                    IEnumerable<Presence> result1 = dbConn.Conn.Query<Presence>( $"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'", new { userid = 5 });
-
-                     var hej12 = result112.coursecode_cid;
-                     var apa = result1.ToList().First().coursecode_cid;
-                     var dance = result.First().course_name;
-
-                        Console.Write(dance);
-                    Console.Write("inte null");
-                    dbConn.Conn.Query<Presence>($"INSERT INTO attendence (attendence_cid, attendence_uid, attendence_date) SELECT @theCid , @theUid , '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT attendence_uid FROM attendence WHERE attendence_uid = @theUid AND attendence_date = '{GetCurrentDate()}' AND attendence_cid = 2)", new { theCid = 2, theUid = 2 });
-                    
-                }
 
 
-
-             Console.Write(result112);
-
-             
-
-           
-        
-
-               
+            IEnumerable<Presence> result = dbConn.Conn.Query<Presence>($"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'");
 
             
 
+            
+            if (result.FirstOrDefault() != null)
+            {
+
+                var coursecode_cid = result.ToList().First().coursecode_cid;
+                var user_id = result.ToList().First().user_id;
+
+
+                Console.Write("inte null");
+               dbConn.Conn.Query<Presence>($"INSERT INTO attendence (attendence_cid, attendence_uid, attendence_date)SELECT 2 , 2, '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT attendence_uid, attendence_cid, attendence_date FROM attendence WHERE attendence_cid = '2' AND attendence_uid = 2 AND attendence_date = '{GetCurrentDate()}')");
+
+            }
+            else{
+                 Console.Write("null som fan");
+            }
+
+
+
+           
 
 
 
 
 
-            return result112;
+
+
+
+
+
+
+
+
+
+
+            return result.ToList();
 
         }
 
