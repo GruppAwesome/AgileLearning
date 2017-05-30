@@ -64,7 +64,7 @@
        $scope.showAttendence = function () {
 
       $http.post(myURL + '/api/attendence/presence', {
-    
+        coursecode_code: 'xxx'
         })
         .success(function (data) {
           if (data != null && data != "") {
