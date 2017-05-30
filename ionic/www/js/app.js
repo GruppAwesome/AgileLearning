@@ -61,10 +61,10 @@
         });
     };
 
-       $scope.showAttendence = function () {
+       $scope.CheckAttendenceCode = function () {
 
       $http.post(myURL + '/api/attendence/presence', {
-        coursecode_code: 'xxx'
+        coursecode_code: 'xxxs'
         })
         .success(function (data) {
           if (data != null && data != "") {
