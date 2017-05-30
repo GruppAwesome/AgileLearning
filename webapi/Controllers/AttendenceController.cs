@@ -47,23 +47,33 @@ namespace WebAPI.Controllers
                 and courses.course_id = coursecodes.coursecode_cid
                 and user_name = 'Ralle'
                 AND coursecodes.coursecode_date = @theCurrentDate", new { theCurrentDate = "2016-06-06" });
-            
 
 
-            
+
+
 
             var course_cid = GetCoursecode_cid(result);
             var user_uid = GetCourse_uid(result);
 
-        
+            
+            Console.Write("HÄR ÄR RESULTATET" + result);
 
+            if (result != null)
+            {
 
-            dbConn.Conn.Query<Presence>(@"INSERT INTO attendence (attendence_cid, attendence_uid, 
+                dbConn.Conn.Query<Presence>(@"INSERT INTO attendence (attendence_cid, attendence_uid, 
         attendence_date) SELECT @theCid , @theUid , @theCurrentDate 
         WHERE NOT EXISTS (SELECT attendence_uid 
         FROM attendence WHERE attendence_uid = @theUid 
         AND attendence_date = @theCurrentDate 
         AND attendence_cid = 2)", new { theCid = course_cid, theUid = user_uid, theCurrentDate = "2001-01-01" });
+
+            }
+
+
+
+
+
 
             return result;
 
