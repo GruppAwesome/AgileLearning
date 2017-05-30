@@ -63,7 +63,7 @@
 
        $scope.showAttendence = function () {
 
-      $http.post(myURL + '/api/attendence', {
+      $http.post(myURL + '/api/attendence/presence', {
     
         })
         .success(function (data) {

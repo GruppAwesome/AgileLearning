@@ -41,12 +41,7 @@ namespace WebAPI.Controllers
 
             IEnumerable<Presence> result = dbConn.Conn.Query<Presence>(
 
-                @"select distinct user_id, coursecode_cid, course_name, coursecode_date
-                from courses, coursecodes , users
-                where coursecodes.coursecode_code = 'xxx'
-                and courses.course_id = coursecodes.coursecode_cid
-                and user_name = 'Ralle'
-                AND coursecodes.coursecode_date = @theCurrentDate", new { theCurrentDate = "2016-06-06" });
+                $"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = 'xxx' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'", new { theCurrentDate = "2016-06-06" });
 
 
 
@@ -60,13 +55,8 @@ namespace WebAPI.Controllers
 
             if (result != null)
             {
-
-                dbConn.Conn.Query<Presence>(@"INSERT INTO attendence (attendence_cid, attendence_uid, 
-        attendence_date) SELECT @theCid , @theUid , @theCurrentDate 
-        WHERE NOT EXISTS (SELECT attendence_uid 
-        FROM attendence WHERE attendence_uid = @theUid 
-        AND attendence_date = @theCurrentDate 
-        AND attendence_cid = 2)", new { theCid = course_cid, theUid = user_uid, theCurrentDate = "2001-01-01" });
+                Console.Write("inte null");
+                dbConn.Conn.Query<Presence>($"INSERT INTO attendence (attendence_cid, attendence_uid, attendence_date) SELECT @theCid , @theUid , '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT attendence_uid FROM attendence WHERE attendence_uid = @theUid AND attendence_date = '{GetCurrentDate()}' AND attendence_cid = 2)", new { theCid = course_cid, theUid = user_uid });
 
             }
 
