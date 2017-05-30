@@ -44,7 +44,7 @@
             $rootScope.rootData = data;
             $state.go('list');
           } else {
-            $scope.loginError = true;
+            showToast(false, "Inloggningen misslyckades.");
           }
         });
     };
@@ -144,6 +144,26 @@
       $ionicSideMenuDelegate.toggleRight()
     }
 
+    $scope.sendAttendance = function () {
+      showToast(true, "Du har nu lämnat in närvaro");
+    }
+
+    var showToast = function (successful, message) {
+      var toast = document.getElementsByClassName("snackbar");
+      var toastFlavour = "";
+      toast.innerHTML = message;
+      if (successful) {
+        toastFlavour = "success";
+      } else {
+        toastFlavour = "error";
+      }
+      toast.className = "show " + toastFlavour;
+      console.log(message);
+      setTimeout(function () {
+        toast.className = toast.className.replace("show", "");
+      }, 3000);
+    }
+
   });
 
   //My lovely router that redirection myviews
@@ -169,6 +189,12 @@
     $stateProvider.state('assignments', {
       url: '/assignments',
       templateUrl: 'myviews/assignments.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('attendance', {
+      url: '/attendance',
+      templateUrl: 'myviews/attendance.html',
       controller: 'myCtrl'
     });
 
