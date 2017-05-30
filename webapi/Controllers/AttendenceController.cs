@@ -47,9 +47,15 @@ namespace WebAPI.Controllers
                 and courses.course_id = coursecodes.coursecode_cid
                 and user_name = 'Ralle'
                 AND coursecodes.coursecode_date = @theCurrentDate", new { theCurrentDate = "2016-06-06" });
+            
+
+
+            
 
             var course_cid = GetCoursecode_cid(result);
             var user_uid = GetCourse_uid(result);
+
+        
 
 
             dbConn.Conn.Query<Presence>(@"INSERT INTO attendence (attendence_cid, attendence_uid, 
@@ -62,6 +68,8 @@ namespace WebAPI.Controllers
             return result;
 
         }
+
+
 
         private int GetCourse_uid(IEnumerable<Presence> result)
         {
