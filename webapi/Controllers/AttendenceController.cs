@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         public IEnumerable<Presence> Presence([FromBody]MyStruct args)
         {
 
-            IEnumerable<Presence> result = dbConn.Conn.Query<Presence>($"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = 'Ralle' AND coursecodes.coursecode_date = '{GetCurrentDate()}'");
+            IEnumerable<Presence> result = dbConn.Conn.Query<Presence>($"select distinct user_id, coursecode_cid, course_name, coursecode_date from courses, coursecodes , users where coursecodes.coursecode_code = '{args.coursecode_code}' and courses.course_id = coursecodes.coursecode_cid and user_name = @theName AND coursecodes.coursecode_date = '{GetCurrentDate()}'", new {theName = args.username});
 
             if (result.FirstOrDefault() != null)
             {
@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
                 var user_id = result.ToList().First().user_id;
 
                 dbConn.Conn.Query<Presence>($"INSERT INTO attendence (attendence_cid, attendence_uid, attendence_date)SELECT @theCid , @theUid, '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT attendence_uid, attendence_cid, attendence_date FROM attendence WHERE attendence_cid = @theCid AND attendence_uid = @theUid AND attendence_date = '{GetCurrentDate()}')", new { theCid = coursecode_cid, theUid = user_id });
+            //Dollabillia göra så att du kan skicka in den ifrån C sharp
             }
 
             return result.ToList();
@@ -48,7 +49,6 @@ namespace WebAPI.Controllers
 
         private String GetCurrentDate()
         {
-
             return DateTime.Now.ToString("yyyy-MM-dd");
         }
     }
