@@ -105,3 +105,6 @@ h2:not(.title){
     opacity: 1;
 }
 
+.halfCard{
+  width: 46%;
+}
