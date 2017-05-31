@@ -79,7 +79,7 @@
 
      $scope.HasVotedWeekly = function () {
       alert("KÖRS")
-      $http.post(myURL + '/api/Users/Weeklyfeedback', {
+      $http.post(myURL + '/api/Users/HasVotedWeekly', {
         coursecode_code: 'xxx',
         username:""
         })

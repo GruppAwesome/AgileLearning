@@ -100,6 +100,8 @@ namespace WebAPI.Controllers
          [HttpPost("HasVotedWeekly")]
         public IEnumerable <Weeklyfeedback> HasVotedWeekly([FromBody]MyStruct args)
         {
+            
+            DayOfWeek day = DateTime.Now.DayOfWeek;
 
             IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(@"select distinct weekly_q1, weekly_q2, weekly_q3, class_name
             from weeklyfeedbacks, classes, users
@@ -107,11 +109,16 @@ namespace WebAPI.Controllers
             and classes.class_uid = users.user_id
             and users.user_name = 'Micke'");
 
-            if ( result.FirstOrDefault() != null ) {
-                Console.Write("Finns");
+            if ( result.FirstOrDefault() != null && (day >= DayOfWeek.Monday) && (day <= DayOfWeek.Friday) ) {
+                Console.Write("Detta returnas om weeklyfeedbacks ska visas");
+                return result;
             }
-                Console.Write("Finns inte");
-            return result;    
+            else{
+                Console.Write("Detta returnas om weeklyfeedbacks inte ska visas");
+                 return null; 
+            }
+                
+           
         }
 
         //SHA1HASHING
