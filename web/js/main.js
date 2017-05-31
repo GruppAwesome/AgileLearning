@@ -25,9 +25,6 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           $rootScope.rootData = response.data;
           $location.url('/dashboard');
         } else {
-          //var toast = document.getElementById("snackbar");
-          //toast.className = "show failure";
-          //toast.innerHTML = "Something went wrong... Did you write the correct info?";
           $scope.loginError = true;
           $("#loginError").fadeIn("slow");
         }
