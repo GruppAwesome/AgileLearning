@@ -1,0 +1,26 @@
+<div data-ng-include="'templates/sidenav.html'"></div>
+<div class="container-fluid background">
+    <div data-ng-include="'templates/topnav.html'"></div>
+    <div class="subheader row">
+        <h6>Närvaro</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Idag har du lämnat närvaro för följande kurs(er)</h4>
+            <table>
+                <tr ng-repeat="x in rootCourses" ng-if="x.result_coursestatus == 'Aktiv'">
+                    <td><a ng-click="getobject(x)" href="#!/selectedcourse"> {{x.course_name}} </a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <h4>Lämna närvaro här</h4>
+            <div id="attendanceForm">
+                <input id="codeInput" placeholder="Code"></input>
+                <input type="submit" value="Skicka" class="blackWithWhite" data-ng-click="leaveAttendance()" required></input>
+            </div>
+        </div>
+    </div>
+</div>
