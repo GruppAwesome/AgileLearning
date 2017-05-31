@@ -97,6 +97,23 @@ namespace WebAPI.Controllers
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
 
+         [HttpPost("HasVotedWeekly")]
+        public IEnumerable <Weeklyfeedback> HasVotedWeekly([FromBody]MyStruct args)
+        {
+
+            IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(@"select distinct weekly_q1, weekly_q2, weekly_q3, class_name
+            from weeklyfeedbacks, classes, users
+            where weeklyfeedbacks.weekly_clid = classes.class_id
+            and classes.class_uid = users.user_id
+            and users.user_name = 'Micke'");
+
+            if ( result.FirstOrDefault() != null ) {
+                Console.Write("Finns");
+            }
+                Console.Write("Finns inte");
+            return result;    
+        }
+
         //SHA1HASHING
         public static byte[] GetHash(string inputString)
         {
