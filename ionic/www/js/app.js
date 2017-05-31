@@ -61,6 +61,22 @@
         });
     };
 
+       $scope.CheckAttendencyCode = function () {
+
+      $http.post(myURL + '/api/attendence/presence', {
+        coursecode_code: 'xxx',
+        username:$rootScope.rootData.user_name
+        })
+        .success(function (data) {
+          if (data != null && data != "") {
+            $scope.attendency = data;
+          }
+          else {
+            $scope.attendency = "Wrong Code";
+          }
+        });
+    };
+
     $scope.showMyGrades = function () {
 
       $http.post(myURL + '/api/users/grade', {
