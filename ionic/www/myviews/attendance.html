@@ -13,35 +13,42 @@
         </ion-header-bar>
 
         <div class="bar bar-subheader">
-          <h2 class="title">Mina Betyg</h2>
+          <h2 class="title">Lämna Närvaro</h2>
         </div>
 
-        <ion-content ng-init="showMyGrades()" class="padding subheaderSpace">
-
-          <div ng-repeat="x in grades" class="list card">
+        <ion-content class="padding subheaderSpace">
+          <div class="list card">
             <div class="item item-body">
 
-              <h2>{{x.course_name}}:</h2>
-              <span ng-if="x.result_coursestatus == 'Avslutade'">
-                    {{x.result_coursegrade}}
-              </span><br><br>
-
-              <span ng-if="x.final_info.length > 0"> 
-                {{x.final_info}}: {{x.result_final}}
-                </span><br>
-
-              <span ng-if="x.exam_info.length > 0"> 
-                {{x.exam_info}}: {{x.result_exam}}
-                </span><br>
-
-              <span ng-if="x.exam_info.length > 0"> 
-                {{x.task_info}}: {{x.result_task}}
-                </span><br>
-
+              <h2>Du har lämnat närvaro för följande kurs(er) idag ({{DATE}}): </h2>
+              <ul>
+                <li>
+                  Kurs 1
+                </li>
+                <li>
+                  Kurs 2
+                </li>
+              </ul>
             </div>
           </div>
 
+          <div class="list card">
+            <div class="item item-body">
+
+              <h2>Lämna närvaro här</h2>
+              <form>
+                <label class="whiteback item item-input">
+      <span class="input-label">Kod</span>
+      <input id="usernameInput" type="text" required></input>
+    </label>
+                <button ng-click="sendAttendance()" class="halfCard button button-dark item-right icon-left ion-paper-airplane">Skicka</button>
+                <button  class="halfCard button button-dark item-right icon-left ion-qr-scanner">Lämna med QR</button>
+              </form>
+            </div>
+          </div>
+          
         </ion-content>
+        
       </ion-side-menu-content>
 
       <ion-side-menu side="right">
