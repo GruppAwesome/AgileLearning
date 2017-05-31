@@ -22,8 +22,10 @@
 
 .success {
     background-color: #333; /* Black background color */
+    color: #fff;
 }
 
 .failure {
     background-color: #991212; /* Red background color */
+    color: #fff;
 }
