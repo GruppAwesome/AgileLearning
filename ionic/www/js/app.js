@@ -77,18 +77,19 @@
         });
     };
 
-     $scope.HasVotedWeekly = function () {
-      alert("KÖRS")
-      $http.post(myURL + '/api/Users/HasVotedWeekly', {
-        coursecode_code: 'xxx',
-        username:""
+     $scope.ShowWeekFeedback = function () {
+      $http.post(myURL + '/api/Users/ShowWeekFeedback', {
+        coursecode_code: 'xxx'
         })
         .success(function (data) {
           if (data != null && data != "") {
             alert("finns");
+            $scope.ShowWeeklyFeedback = data;
+          
           }
           else {
             alert("Finns inte");
+
           }
         });
     };

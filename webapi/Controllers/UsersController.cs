@@ -97,7 +97,7 @@ namespace WebAPI.Controllers
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
 
-         [HttpPost("HasVotedWeekly")]
+         [HttpPost("ShowWeekFeedback")]
         public IEnumerable <Weeklyfeedback> HasVotedWeekly([FromBody]MyStruct args)
         {
             
@@ -114,7 +114,7 @@ namespace WebAPI.Controllers
                 return result;
             }
             else{
-                Console.Write("Detta returnas om weeklyfeedbacks inte ska visas");
+                Console.Write("Detta returnas om weeklyfeedbacks ska visas");
                  return null; 
             }
                 
