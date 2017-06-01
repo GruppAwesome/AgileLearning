@@ -2,9 +2,9 @@
   <ion-header-bar class="bar-dark" ng-cloak>
     <h1 class="title">Välkommen till {{data.name}}s skolportal</h1>
   </ion-header-bar>
-  <ion-content ng-init="ShowWeekFeedback()" scroll="false" class="space">
+  <ion-content ng-init="Sendweeklyfeedback()" scroll="false" class="space">
 
-<div ng-if="ShowWeeklyFeedback !== null">
+<div ng-if="ShowWeeklyFeedback == null">
   Den här killen har inte röstat denna vecka och det är fredag-söndag
 </div>
 

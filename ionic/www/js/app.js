@@ -94,6 +94,18 @@
         });
     };
 
+       $scope.Sendweeklyfeedback = function () {
+      $http.post(myURL + '/api/users/Sendweeklyfeedback', {
+          weekly_uid: 2,
+          weekly_q1: 1         
+        })
+        .success(function (data) {
+          $scope.hasVotedToday = data;
+
+        });
+    };
+
+
 
     $scope.showMyGrades = function () {
 

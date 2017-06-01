@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
 using Dapper;
+using System.Globalization;
 
 namespace WebAPI.Controllers
 {
@@ -21,6 +22,19 @@ namespace WebAPI.Controllers
             public string password;
             public int feedback_vote;
             public int user_id;
+
+            public int weekly_q1;
+
+            public int weekly_q2;
+
+            public int weekly_q3;
+
+            public string weekly_free_text1;
+
+            public string weekly_free_text2;
+
+            public int weekly_uid;
+
         }
 
         //DatabaseConnection
@@ -102,23 +116,50 @@ namespace WebAPI.Controllers
         {
             
             DayOfWeek day = DateTime.Now.DayOfWeek;
+            DateTime week = DateTime.Now;
+
+            GetWeekNumber(week);
 
             IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(@"select distinct weekly_q1, weekly_q2, weekly_q3, class_name
             from weeklyfeedbacks, classes, users
             where weeklyfeedbacks.weekly_clid = classes.class_id
             and classes.class_uid = users.user_id
+            and weeklyfeedbacks.weekly_week = 22
             and users.user_name = 'Micke'");
 
-            if ( result.FirstOrDefault() != null && (day >= DayOfWeek.Monday) && (day <= DayOfWeek.Friday) ) {
-                Console.Write("Detta returnas om weeklyfeedbacks ska visas");
-                return result;
+            if ( result.FirstOrDefault() == null && (day >= DayOfWeek.Monday) && (day <= DayOfWeek.Friday) ) {
+                Console.Write("SHOW(Finns ej i databas)");
+                return null;
             }
             else{
-                Console.Write("Detta returnas om weeklyfeedbacks ska visas");
-                 return null; 
+                Console.Write("Ingen show (finns i databas)");
+                 return result; 
             }
                 
            
+        }
+
+           [HttpPost("Sendweeklyfeedback")]
+        public void Sendweeklyfeedback([FromBody]MyStruct args)
+        {
+
+            DateTime week = DateTime.Now;
+
+            var weekNr = GetWeekNumber(week);
+
+
+            dbConn.Conn.Query<Weeklyfeedback>(@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 , weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week )
+            SELECT @theQ1,@theQ2,@theQ3,@theFreeText1, @theFreeText2, @theUid, @theWeek 
+            WHERE NOT EXISTS (SELECT weekly_week FROM weeklyfeedbacks WHERE weekly_week = @theWeek AND weekly_uid != @theUid)", 
+            new {theQ1 = args.weekly_q1, theQ2 = args.weekly_q2, theQ3 = args.weekly_q3, theFreeText1 = args.weekly_free_text1, theFreeText2 = args.weekly_free_text2, theUid = args.user_id, theWeek = weekNr}
+            );
+}
+
+        public static int GetWeekNumber(DateTime dtPassed)
+        {
+        CultureInfo ciCurr = CultureInfo.CurrentCulture;
+        int weekNum = ciCurr.Calendar.GetWeekOfYear(dtPassed, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        return weekNum;
         }
 
         //SHA1HASHING
