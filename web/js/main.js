@@ -137,9 +137,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       username: $rootScope.rootData.user_name
     })
       .then(function (response) {
-        $scope.courseName = response.data;
+        $scope.courseName = response.data[0].course_name;
         if (response.data != null && response.data != "") {
-          var message = "Din närvaro är nu registrerad för " + $scope.courseName;
+          var message = "Din närvaro är nu registrerad för kursen " + $scope.courseName;
           showToast(true, message);
         }
         else {
