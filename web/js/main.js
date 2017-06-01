@@ -4,7 +4,9 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
-  var myURL = "http://localhost:5000"; //local dev
+  var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  //var myURL = "http://localhost:5000"; //local dev
+
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
   $http.get("../schooldata/data.json")
@@ -137,14 +139,12 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       username: $rootScope.rootData.user_name
     })
       .then(function (response) {
-        $scope.courseName = response.data;
         if (response.data != null && response.data != "") {
-          var message = "Din närvaro är nu registrerad för " + $scope.courseName;
+          var message = "Din närvaro är nu registrerad för " + response.data[0].course_name;
           showToast(true, message);
         }
         else {
-          //$scope.courseName = response.data;
-          var message = "Ingen närvaro för kod " + theCode;
+          var message = "Ingen närvaro att rapportera för kod " + theCode;
           showToast(false, message);
         }
       });
@@ -164,7 +164,6 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     toast.innerHTML = message;
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
   }
-
 
   $(window).resize(function () {
     if (!sidebarClosed) {
