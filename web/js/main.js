@@ -139,11 +139,10 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       .then(function (response) {
         $scope.courseName = response.data[0].course_name;
         if (response.data != null && response.data != "") {
-          var message = "Din närvaro är nu registrerad för kursen " + $scope.courseName;
+          var message = "Du är närvarande på kursen " + $scope.courseName;
           showToast(true, message);
         }
         else {
-          //$scope.courseName = response.data;
           var message = "Ingen närvaro för kod " + theCode;
           showToast(false, message);
         }

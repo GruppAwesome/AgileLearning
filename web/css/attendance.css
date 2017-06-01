@@ -5,6 +5,7 @@
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 250px; /* Set a default minimum width */
+    height: fit-content;
     margin-left: -125px; /* Divide value of min-width by 2 */
     color: #fff; /* White text color */
     text-align: center; /* Centered text */

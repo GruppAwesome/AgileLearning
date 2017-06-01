@@ -94,7 +94,7 @@ h2:not(.title){
     position: fixed; 
     z-index: 20000; 
     left: 50%; 
-    bottom: 30px; 
+    bottom: 30px;
 }
 
 #snackbar.error{

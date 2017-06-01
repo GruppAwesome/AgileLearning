@@ -61,18 +61,21 @@
         });
     };
 
-    $scope.CheckAttendencyCode = function () {
+    $scope.sendAttendance = function () {
       var theCode = document.getElementById("codeInput").value;
       $http.post(myURL + '/api/attendence/presence', {
         coursecode_code: theCode,
         username: $rootScope.rootData.user_name
       })
-        .success(function (data) {
-          if (data != null && data != "") {
-            $scope.attendency = data;
+        .then(function (response) {
+          if (response.data.length > 0) {
+            $scope.courseName = response.data[0].course_name;
+            var msg = "Du är närvarande på kursen " + $scope.courseName;
+            showToast(true, msg);
           }
           else {
-            $scope.attendency = "Wrong Code";
+            var msg = "Ingen närvaro för kod " + theCode;
+            showToast(false, msg);
           }
         });
     };
@@ -120,8 +123,6 @@
               });
           }
         });
-
-
     };
 
     //Checks if the user has voted
@@ -160,23 +161,22 @@
       $ionicSideMenuDelegate.toggleRight()
     }
 
-    $scope.sendAttendance = function () {
-      showToast(true, "Du har nu lämnat in närvaro");
-    }
-
     var showToast = function (successful, message) {
-      var toast = document.getElementsByClassName("snackbar");
-      var toastFlavour = "";
+      var toast = document.getElementById("snackbar");
       toast.innerHTML = message;
+      var flavour = "";
+      toast.classList.add('show');
       if (successful) {
-        toastFlavour = "success";
+        toast.classList.add('success');
+        flavour ="success";
       } else {
-        toastFlavour = "error";
+        toast.classList.add('error');
+        flavour ="error";
       }
-      toast.className = "show " + toastFlavour;
-      console.log(message);
+      console.log(toast.className);
       setTimeout(function () {
-        toast.className = toast.className.replace("show", "");
+        toast.classList.remove('show');
+        toast.classList.remove(flavour);
       }, 3000);
     }
 
