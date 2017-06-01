@@ -106,7 +106,7 @@
 
     $scope.sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-        weekly_uid: 2,
+        
         weekly_q1: 1,
         weekly_q2: 1,
         weekly_q3: 1,
