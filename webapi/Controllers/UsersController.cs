@@ -117,6 +117,12 @@ namespace WebAPI.Controllers
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
 
+                [HttpGet("ResetWeekFeedback")]
+        public void ResetWeekFeedback()
+        {
+            dbConn.Conn.Query($"DELETE FROM weeklyfeedbacks WHERE weekly_uid= 3 OR weekly_uid = 2");
+        }
+
         [HttpPost("ShowWeekFeedback")]
         public IEnumerable<Weeklyfeedback> HasVotedWeekly([FromBody]MyStruct args)
         {

@@ -16,10 +16,18 @@
       sCourse = thisobject;
     }
 
-    //Tempfunction that reset the feedbackValues in the database
-    $scope.resetTheFeedback = function (thisobject) {
+    //Tempfunctions that reset the feedbackValues in the database
+    $scope.resetTheFeedback = function () {
 
       $http.get(myURL + '/api/users/ResetFeedback', {
+
+      })
+
+    }
+
+     $scope.resetTheWeekFeedback = function () {
+
+      $http.get(myURL + '/api/users/ResetWeekFeedback', {
 
       })
 
@@ -61,7 +69,7 @@
         });
     };
 
-    $scope.CheckAttendencyCode = function () {
+    $scope.checkAttendencyCode = function () {
 
       $http.post(myURL + '/api/attendence/presence', {
         coursecode_code: 'xxx',
@@ -77,7 +85,7 @@
         });
     };
 
-    $scope.ShowWeekFeedback = function () {
+    $scope.showWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
         username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
       })
@@ -85,18 +93,18 @@
           if (data != null && data != "") {
 
             //The data over what he voted for this week(No idea if this data is necessary else hola @ ya boys)
-            $scope.ShowWeeklyFeedback = data;
+            $scope.showWeeklyFeedback = data;
           }
           else {
 
             //If the data is null this girl/dude needs to vote.
-            $scope.ShowWeeklyFeedback = "NeedsTovote"
+            $scope.showWeeklyFeedback = null;
           }
 
         });
     };
-
-    $scope.Sendweeklyfeedback = function () {
+    
+    $scope.sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
         weekly_uid: 2,
         weekly_q1: 1,
@@ -108,7 +116,7 @@
       })
     };
 
-      $scope.AddAttendanceCode = function () {
+      $scope.addAttendanceCode = function () {
       //Adds the course UX with the currentdate + somekind of cool password
       $http.post(myURL + '/api/users/AddAttendanceCode', {
         coursecode_code: 'xxx' //Harcoded for testing        
