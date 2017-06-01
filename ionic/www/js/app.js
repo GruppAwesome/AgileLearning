@@ -36,9 +36,9 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post(myURL + '/api/users/login', {
-          Username: username,
-          Password: password
-        })
+        Username: username,
+        Password: password
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
@@ -52,8 +52,8 @@
     $scope.showMyCourses = function () {
 
       $http.post(myURL + '/api/courses/mycourses', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootCourses = data;
@@ -61,12 +61,12 @@
         });
     };
 
-       $scope.CheckAttendencyCode = function () {
+    $scope.CheckAttendencyCode = function () {
 
       $http.post(myURL + '/api/attendence/presence', {
         coursecode_code: 'xxx',
-        username:$rootScope.rootData.user_name
-        })
+        username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.attendency = data;
@@ -77,41 +77,50 @@
         });
     };
 
-     $scope.ShowWeekFeedback = function () {
+    $scope.ShowWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
-        coursecode_code: 'xxx'
-        })
+        username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
-            alert("finns");
+
+            //The data over what he voted for this week(No idea if this data is necessary else hola @ ya boys)
             $scope.ShowWeeklyFeedback = data;
-          
           }
           else {
-            alert("Finns inte");
 
+            //If the data is null this girl/dude needs to vote.
+            $scope.ShowWeeklyFeedback = "NeedsTovote"
           }
+
         });
     };
 
-       $scope.Sendweeklyfeedback = function () {
+    $scope.Sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-          weekly_uid: 2,
-          weekly_q1: 1         
-        })
-        .success(function (data) {
-          $scope.hasVotedToday = data;
-
-        });
+        weekly_uid: 2,
+        weekly_q1: 1,
+        weekly_q2: 1,
+        weekly_q3: 1,
+        weekly_free_text1: "Hi",
+        weekly_free_text2: "Ho",
+        weekly_uid: 2 //Hardcoded again for testing --> $rootScope.rootData.user_id         
+      })
     };
 
+      $scope.AddAttendanceCode = function () {
+      //Adds the course UX with the currentdate + somekind of cool password
+      $http.post(myURL + '/api/users/AddAttendanceCode', {
+        coursecode_code: 'xxx' //Harcoded for testing        
+      })
+    };
 
 
     $scope.showMyGrades = function () {
 
       $http.post(myURL + '/api/users/grade', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.grades = data;
@@ -122,8 +131,8 @@
     $scope.showMyTodo = function () {
 
       $http.post(myURL + '/api/users/todo', {
-          Username: $rootScope.rootData.user_name
-        })
+        Username: $rootScope.rootData.user_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.todo = data;
@@ -134,15 +143,15 @@
     $scope.showMySchedule = function () {
 
       $http.post(myURL + '/api/courses/MySchedule', {
-          course_name: sCourse.course_name
-        })
+        course_name: sCourse.course_name
+      })
         .success(function (data) {
           if (data != null && data != "") {
             $scope.schedule = data;
 
             $http.post(myURL + '/api/courses/CourseAssignment', {
-                course_name: sCourse.course_name
-              })
+              course_name: sCourse.course_name
+            })
               .success(function (data) {
                 if (data != null && data != "") {
                   $scope.assignment = data;
@@ -157,8 +166,8 @@
     //Checks if the user has voted
     $scope.HasVoted = function () {
       $http.post(myURL + '/api/users/HasVoted', {
-          user_id: $rootScope.rootData.user_id
-        })
+        user_id: $rootScope.rootData.user_id
+      })
         .success(function (data) {
           if (data != null && data != "") {
 
@@ -177,9 +186,9 @@
     //The daily feedback
     $scope.SendFeedback = function (theVote) {
       $http.post(myURL + '/api/users/SendFeedback', {
-          feedback_vote: theVote,
-          user_id: $rootScope.rootData.user_id
-        })
+        feedback_vote: theVote,
+        user_id: $rootScope.rootData.user_id
+      })
         .success(function (data) {
           $scope.hasVotedToday = data;
 
