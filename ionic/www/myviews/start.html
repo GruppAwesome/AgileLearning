@@ -4,11 +4,17 @@
   </ion-header-bar>
   <ion-content ng-init="showWeekFeedback()" scroll="false" class="space">
 
+    <!--TEMP-->
     <div ng-if="showWeeklyFeedback === null">
-      <button ng-click="Sendweeklyfeedback()" class="button button-full button-positive">
+      <button ng-click="sendweeklyfeedback()" class="button button-full button-positive">
         Send some weeklyFeedback
       </button>
     </div>
+
+    <button ng-click="dailyFeedbackAverage()" class="button button-full button-dark">
+      DailyFeedback Average
+      {{dailyFeedbackAverage}}
+    </button>
 
     <button ng-click="addAttendanceCode()" class="button button-full button-assertive">
       Add a AttendanceCode for today
@@ -17,6 +23,7 @@
     <button ng-click="resetTheWeekFeedback()" class="button button-full button-royal">
       Reset the weeklyFeedback
     </button>
+    <!--END OF TEMP-->
 
     <div id="startlogo">
       <img class="full-image" ng-src="schooldata/{{data.logo}}">

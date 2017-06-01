@@ -25,7 +25,7 @@
 
     }
 
-     $scope.resetTheWeekFeedback = function () {
+    $scope.resetTheWeekFeedback = function () {
 
       $http.get(myURL + '/api/users/ResetWeekFeedback', {
 
@@ -103,7 +103,7 @@
 
         });
     };
-    
+
     $scope.sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
         weekly_uid: 2,
@@ -116,7 +116,7 @@
       })
     };
 
-      $scope.addAttendanceCode = function () {
+    $scope.addAttendanceCode = function () {
       //Adds the course UX with the currentdate + somekind of cool password
       $http.post(myURL + '/api/users/AddAttendanceCode', {
         coursecode_code: 'xxx' //Harcoded for testing        
@@ -202,6 +202,15 @@
 
         });
     };
+
+    $scope.dailyFeedbackAverage = function () {
+
+      $http.get(myURL + '/api/users/DailyFeedbackAverage')
+        .success(function (data) {
+          $scope.dailyFeedbackAverage = data;
+        });
+    };
+
 
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()

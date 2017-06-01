@@ -117,7 +117,7 @@ namespace WebAPI.Controllers
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
 
-                [HttpGet("ResetWeekFeedback")]
+        [HttpGet("ResetWeekFeedback")]
         public void ResetWeekFeedback()
         {
             dbConn.Conn.Query($"DELETE FROM weeklyfeedbacks WHERE weekly_uid= 3 OR weekly_uid = 2");
@@ -170,6 +170,15 @@ namespace WebAPI.Controllers
             new { theCid = args.coursecode_cid, theCode = args.coursecode_code });
 
         }
+
+        [HttpGet("DailyFeedbackAverage")]
+        public IEnumerable<FeedbackAverage> DailyFeedbackAverage()
+        {
+            return dbConn.Conn.Query<FeedbackAverage>
+            ($"SELECT feedback_date , Avg(feedback_vote) AS Average from feedbacks GROUP BY feedback_date , feedback_date");
+        }
+
+
 
         //SHA1HASHING
         public static byte[] GetHash(string inputString)
