@@ -4,8 +4,8 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
-  var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
-  //var myURL = "http://localhost:5000"; //local dev
+ // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+ var myURL = "http://localhost:5000"; //local dev
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
@@ -165,6 +165,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
   }
 
+
+
   $(window).resize(function () {
     if (!sidebarClosed) {
       $('#sidebar').animate({
@@ -176,6 +178,27 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       sidebarClosed = true;
     }
   });
+
+  // Leave evaluation
+$scope.leaveEvaluation = function () {
+ $http.post(myURL + '/api/users/leaveEvaluation', {
+      user_id: $rootScope.rootData.user_id
+    })
+  /*  .then(function (response) {
+        if (response.data != null && response.data != "") {
+          var message = "Din veckoutvärdering är skickad " ;
+          showToast(true, message);
+        }
+        else {
+          var message = "Något blev fel med veckoutväderingen " ;
+          showToast(false, message);
+        }*/
+};
+
+
+
+
+
 
   $scope.sidebarMenu = function () {
     var documentWidth = $(document).width();
@@ -225,6 +248,10 @@ app.config(function ($routeProvider) {
     })
     .when("/attendance", {
       templateUrl: "templates/attendance.html"
+
+    })
+    .when("/evaluation",{
+      templateUrl: "templates/evaluation.html"
     });
 
 });
