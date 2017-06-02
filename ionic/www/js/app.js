@@ -88,6 +88,31 @@
         });
     };
 
+
+    $scope.questionaire = {
+    'question1': '',
+    'question2': '',
+    'question3': '',
+    'freetext1': '',
+    'freetext2': ''
+    };
+
+    $scope.sendEvaluation = function (questionaire) {
+
+      $http.post(myURL + '/api/users/Sendweeklyfeedback', {
+        weekly_q1: questionaire.question1,
+        weekly_q2: questionaire.question2,
+        weekly_q3: questionaire.question3,
+        weekly_free_text1: questionaire.freetext1,
+        weekly_free_text2: questionaire.freetext2,
+        weekly_uid: $rootScope.rootData.user_id         
+      })
+
+      var msg = "Tack för din utvärdering!";
+      showToast(true, msg);
+
+    };
+
     $scope.showWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
         username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
@@ -273,6 +298,12 @@
     $stateProvider.state('courses', {
       url: '/courses',
       templateUrl: 'myviews/courses.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('evaluation', {
+      url: '/evaluation',
+      templateUrl: 'myviews/evaluation.html',
       controller: 'myCtrl'
     });
 
