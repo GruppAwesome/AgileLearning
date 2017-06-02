@@ -16,18 +16,10 @@
       sCourse = thisobject;
     }
 
-    //Tempfunctions that reset the feedbackValues in the database
-    $scope.resetTheFeedback = function () {
+    //Tempfunction that reset the feedbackValues in the database
+    $scope.resetTheFeedback = function (thisobject) {
 
       $http.get(myURL + '/api/users/ResetFeedback', {
-
-      })
-
-    }
-
-    $scope.resetTheWeekFeedback = function () {
-
-      $http.get(myURL + '/api/users/ResetWeekFeedback', {
 
       })
 
@@ -87,66 +79,6 @@
           }
         });
     };
-
-
-    $scope.questionaire = {
-    'question1': '',
-    'question2': '',
-    'question3': '',
-    'freetext1': '',
-    'freetext2': ''
-    };
-
-    $scope.sendEvaluation = function (questionaire) {
-      console.log(questionaire.question1);
-      console.log(questionaire.question2);
-      console.log(questionaire.question3);
-      console.log(questionaire.freetext1);
-      console.log(questionaire.freetext2);
-
-      var msg = "Tack för din utvärdering!";
-      showToast(true, msg);
-
-    };
-
-    $scope.showWeekFeedback = function () {
-      $http.post(myURL + '/api/Users/ShowWeekFeedback', {
-        username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
-      })
-        .success(function (data) {
-          if (data != null && data != "") {
-
-            //The data over what he voted for this week(No idea if this data is necessary else hola @ ya boys)
-            $scope.showWeeklyFeedback = data;
-          }
-          else {
-
-            //If the data is null this girl/dude needs to vote.
-            $scope.showWeeklyFeedback = null;
-          }
-
-        });
-    };
-
-    $scope.sendweeklyfeedback = function () {
-      $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-        
-        weekly_q1: 1,
-        weekly_q2: 1,
-        weekly_q3: 1,
-        weekly_free_text1: "Hi",
-        weekly_free_text2: "Ho",
-        weekly_uid: 2 //Hardcoded again for testing --> $rootScope.rootData.user_id         
-      })
-    };
-
-    $scope.addAttendanceCode = function () {
-      //Adds the course UX with the currentdate + somekind of cool password
-      $http.post(myURL + '/api/users/AddAttendanceCode', {
-        coursecode_code: 'xxx' //Harcoded for testing        
-      })
-    };
-
 
     $scope.showMyGrades = function () {
 
@@ -225,15 +157,6 @@
         });
     };
 
-    $scope.dailyFeedbackAverage = function () {
-
-      $http.get(myURL + '/api/users/DailyFeedbackAverage')
-        .success(function (data) {
-          $scope.dailyFeedbackAverage = data;
-        });
-    };
-
-
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()
     }
@@ -294,12 +217,6 @@
     $stateProvider.state('courses', {
       url: '/courses',
       templateUrl: 'myviews/courses.html',
-      controller: 'myCtrl'
-    });
-
-    $stateProvider.state('evaluation', {
-      url: '/evaluation',
-      templateUrl: 'myviews/evaluation.html',
       controller: 'myCtrl'
     });
 

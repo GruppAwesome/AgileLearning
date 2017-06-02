@@ -88,7 +88,7 @@
         });
     };
 
-
+<<<<<<< HEAD
     $scope.questionaire = {
     'question1': '',
     'question2': '',
@@ -109,6 +109,7 @@
 
     };
 
+=======
     $scope.showWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
         username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
@@ -148,6 +149,7 @@
     };
 
 
+>>>>>>> master
     $scope.showMyGrades = function () {
 
       $http.post(myURL + '/api/users/grade', {

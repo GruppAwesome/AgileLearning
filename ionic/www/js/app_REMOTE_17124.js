@@ -88,27 +88,6 @@
         });
     };
 
-
-    $scope.questionaire = {
-    'question1': '',
-    'question2': '',
-    'question3': '',
-    'freetext1': '',
-    'freetext2': ''
-    };
-
-    $scope.sendEvaluation = function (questionaire) {
-      console.log(questionaire.question1);
-      console.log(questionaire.question2);
-      console.log(questionaire.question3);
-      console.log(questionaire.freetext1);
-      console.log(questionaire.freetext2);
-
-      var msg = "Tack för din utvärdering!";
-      showToast(true, msg);
-
-    };
-
     $scope.showWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
         username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
@@ -294,12 +273,6 @@
     $stateProvider.state('courses', {
       url: '/courses',
       templateUrl: 'myviews/courses.html',
-      controller: 'myCtrl'
-    });
-
-    $stateProvider.state('evaluation', {
-      url: '/evaluation',
-      templateUrl: 'myviews/evaluation.html',
       controller: 'myCtrl'
     });
 
