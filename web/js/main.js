@@ -4,8 +4,9 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
-  var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
-  //var myURL = "http://localhost:5000"; //local dev
+ // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+ var myURL = "http://localhost:5000"; //local dev
+
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
   $http.get("../schooldata/data.json")
@@ -25,9 +26,6 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           $rootScope.rootData = response.data;
           $location.url('/dashboard');
         } else {
-          //var toast = document.getElementById("snackbar");
-          //toast.className = "show failure";
-          //toast.innerHTML = "Something went wrong... Did you write the correct info?";
           $scope.loginError = true;
           $("#loginError").fadeIn("slow");
         }
@@ -135,24 +133,39 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   // Leave attendance
   $scope.leaveAttendance = function () {
     var theCode = document.getElementById("codeInput").value;
-    var toast = document.getElementById("snackbar");
 
-    $http.post(myURL + '/api/users/SendAttendance', {
-      attendance_code: theCode
+    $http.post(myURL + '/api/attendence/presence', {
+      coursecode_code: theCode,
+      username: $rootScope.rootData.user_name
     })
       .then(function (response) {
-        if (response.data) {
-          $scope.courseName = response.data;
-          toast.className = "show success";
-          toast.innerHTML = "Din närvaro är nu registrerad för " + $scope.courseName;
+        $scope.courseName = response.data[0].course_name;
+        if (response.data != null && response.data != "") {
+          var message = "Du är närvarande på kursen " + $scope.courseName;
+          showToast(true, message);
         }
         else {
-          toast.className = "show failure";
-          toast.innerHTML = "Ingen närvaro för kod " + theCode;
+          var message = "Ingen närvaro för kod " + theCode;
+          showToast(false, message);
         }
       });
-    setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
   };
+
+  // show toast message
+  var showToast = function (success, message) {
+    var toast = document.getElementById("snackbar");
+
+    if (success) {
+      toast.className = "show success";
+    }
+    else {
+      toast.className = "show failure";
+    }
+
+    toast.innerHTML = message;
+    setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
+  }
+
 
 
   $(window).resize(function () {
@@ -166,6 +179,27 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       sidebarClosed = true;
     }
   });
+
+  // Leave evaluation
+$scope.leaveEvaluation = function () {
+ $http.post(myURL + '/api/users/leaveEvaluation', {
+      user_id: $rootScope.rootData.user_id
+    })
+  /*  .then(function (response) {
+        if (response.data != null && response.data != "") {
+          var message = "Din veckoutvärdering är skickad " ;
+          showToast(true, message);
+        }
+        else {
+          var message = "Något blev fel med veckoutväderingen " ;
+          showToast(false, message);
+        }*/
+};
+
+
+
+
+
 
   $scope.sidebarMenu = function () {
     var documentWidth = $(document).width();
@@ -200,7 +234,6 @@ app.config(function ($routeProvider) {
     })
     .when("/dashboard", {
       templateUrl: "templates/dashboard.html"
-
     })
     .when("/selectedcourse", {
       templateUrl: "templates/selectedcourse.html"
@@ -216,6 +249,10 @@ app.config(function ($routeProvider) {
     })
     .when("/attendance", {
       templateUrl: "templates/attendance.html"
+
+    })
+    .when("/evaluation",{
+      templateUrl: "templates/evaluation.html"
     });
 
 });
