@@ -44,25 +44,21 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post(myURL + '/api/users/login', {
-        // Username: username,
-        // Password: password
-        Username: "Ralle",
-        Password: "paprika"
+        Username: username,
+        Password: password
+     
       })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
 
             if (data.user_type == 'student') {
-              alert("student");
+
               $state.go('list');
             }
             else if (data.user_type == 'teacher') {
               $state.go('teacher');
-              // showCharts();
             }
-
-
           } else {
             showToast(false, "Inloggningen misslyckades.");
           }

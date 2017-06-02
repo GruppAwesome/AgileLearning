@@ -1,0 +1,11 @@
+<div data-ng-include="'templates/sidenav.html'"></div>
+<div class="container-fluid background">
+  <div data-ng-include="'templates/topnav.html'"></div>
+  <div class="subheader row">
+    <h6>Välkommen {{rootData.user_name}}!</h6>
+  </div>
+  <div class="card">
+    <canvas ng-init="getDailyFeedbackAverage()" id="myChart"></canvas>
+  </div>
+
+</div>
