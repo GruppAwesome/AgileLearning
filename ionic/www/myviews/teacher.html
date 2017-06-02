@@ -1,26 +1,22 @@
 <ion-view>
 
-      <ion-header-bar class="bar-dark" ng-cloak>
-        <h1 class="title">Välkommen till {{data.name}}s skolportal</h1>
- 
-        </div>
-      </ion-header-bar>
-      <div class="bar bar-subheader">
-        <h2 class="title">Välkommen {{rootData.first_name}}!</h2>
-      </div>
+  <ion-header-bar class="bar-dark" ng-cloak>
+    <h1 class="title">Välkommen till {{data.name}}s skolportal</h1>
 
-      <ion-content class="subheaderSpace">
+    </div>
+  </ion-header-bar>
+  <div class="bar bar-subheader">
+    <h2 class="title">Välkommen {{rootData.first_name}}!</h2>
+  </div>
 
-
-          <div class="list card">
-          
-
-         <canvas id="myChart"></canvas>
-
-            <p>HANNA GRAF</p>
-            <canvas id="myChart" width="400" height="400"></canvas>
-
-          </div>
+  <ion-content class="subheaderSpace">
 
 
-      </ion-content>
+    <div class="list card">
+
+
+      <canvas ng-init="getDailyFeedbackAverage()" id="myChart"></canvas>
+    </div>
+
+
+  </ion-content>
