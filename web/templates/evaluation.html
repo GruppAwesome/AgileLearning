@@ -8,82 +8,84 @@
     <div class="col-md-6">
         <div class="card">
             <h4>Veckoutvärdering</h4>
-            <div class="evalform">
-                <form class="multipleChoice">
-                    <label>Q3</label>
+            <form name="weekly" class="evalform">
+                <div class="multipleChoice">
+                    <label>Q1</label>
                     <div>
                         <label>1</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q1" value="1">
                     </div>
                     <div>
                         <label>2</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q1" value="2">
                     </div>
                     <div>
                         <label>3</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q1" value="3">
                     </div>
                     <div>
                         <label>4</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q1" value="4">
                     </div>
                     <div>
-                        <label>Vet Ej</label>
-                        <input type="radio" name="" id="">
+                        <label>Vet ej</label>
+                        <input type="radio" name="q1" value="0">
                     </div>
-                </form>
-                <form class="multipleChoice">
-                    <label>Q3</label>
+                </div>
+                <div class="multipleChoice">
+                    <label>Q2</label>
                     <div>
                         <label>1</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q2" value="1">
                     </div>
                     <div>
                         <label>2</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q2" value="2">
                     </div>
                     <div>
                         <label>3</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q2" value="3">
                     </div>
                     <div>
                         <label>4</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q2" value="4">
                     </div>
                     <div>
-                        <label>Vet Ej</label>
-                        <input type="radio" name="" id="">
+                        <label>Vet ej</label>
+                        <input type="radio" name="q2" value="0">
                     </div>
-                </form>
-                <form class="multipleChoice">
+                </div>
+                <div class="multipleChoice">
                     <label>Q3</label>
                     <div>
                         <label>1</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q3" value="1">
                     </div>
                     <div>
                         <label>2</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q3" value="2">
                     </div>
                     <div>
                         <label>3</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q3" value="3">
                     </div>
                     <div>
                         <label>4</label>
-                        <input type="radio" name="" id="">
+                        <input type="radio" name="q3" value="4">
                     </div>
                     <div>
-                        <label>Vet Ej</label>
-                        <input type="radio" name="" id="">
+                        <label>Vet ej</label>
+                        <input type="radio" name="q3" value="0">
                     </div>
-                </form>
+                </div>
                 <label>Freetext1</label>
-                <textarea name="" id=""></textarea>
+                <textarea name="f1"></textarea>
                 <label>Freetext2</label>
-                <textarea name="" id=""></textarea>
-                <button class="blackWithWhite" data-ng-click="leaveEvaluation()">Skicka</button>
-            </div>
+                <textarea name="f2"></textarea>
+                
+            <button class="blackWithWhite" data-ng-click="sendweeklyfeedback()">Skicka</button>
+            </form>
         </div>
     </div>
+</div>
 </div>
