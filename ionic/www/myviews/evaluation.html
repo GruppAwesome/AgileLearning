@@ -16,8 +16,8 @@
                     <h2 class="title">Utvärdering</h2>
                 </div>
 
-                <ion-content class="padding subheaderSpace">
-                    <div class="list card">
+                <ion-content ng-init="showWeekFeedback()" class="padding subheaderSpace">
+                    <div ng-if="showWeeklyFeedback === null" class="list card">
                         <div class="item item-body">
                             <form ng-controller="myCtrl" ng-submit="sendEvaluation(questionaire)">
                                 <label>Question 1</label><br>

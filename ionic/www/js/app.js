@@ -98,11 +98,15 @@
     };
 
     $scope.sendEvaluation = function (questionaire) {
-      console.log(questionaire.question1);
-      console.log(questionaire.question2);
-      console.log(questionaire.question3);
-      console.log(questionaire.freetext1);
-      console.log(questionaire.freetext2);
+
+      $http.post(myURL + '/api/users/Sendweeklyfeedback', {
+        weekly_q1: questionaire.question1,
+        weekly_q2: questionaire.question2,
+        weekly_q3: questionaire.question3,
+        weekly_free_text1: questionaire.freetext1,
+        weekly_free_text2: questionaire.freetext2,
+        weekly_uid: $rootScope.rootData.user_id         
+      })
 
       var msg = "Tack för din utvärdering!";
       showToast(true, msg);
