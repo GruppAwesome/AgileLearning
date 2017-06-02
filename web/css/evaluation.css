@@ -1,0 +1,40 @@
+.evalform{  
+    position: relative;
+    margin: 10px;
+}
+.evalform *{
+    display: block;
+}
+
+.evalform label{
+    margin-top: 10px;
+}
+
+.multipleChoice label{
+    display: block;
+}
+
+.multipleChoice *{
+    display: inline-block;
+}
+
+.multipleChoice div{
+    text-align: center;
+    padding-left: 6px;
+}
+
+.evalform textarea{
+    width: 95%;
+    max-width: 300px;
+    height: 100px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.evalform button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
