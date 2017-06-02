@@ -187,6 +187,16 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
   });
 
+  $scope.getDailyFeedbackAverage = function () {
+    $http.get(myURL + '/api/users/DailyFeedbackAverage')
+      .then(function (response) {
+        if (response.data) {
+          showCharts(response.data);
+        }
+
+      });
+  };
+
   $scope.sendweeklyfeedback = function () {
     var q1 = document.forms["weekly"]["q1"].value;
     var q2 = document.forms["weekly"]["q2"].value;
@@ -200,14 +210,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       weekly_free_text1: f1,
       weekly_free_text2: f2,
       weekly_uid: $rootScope.rootData.user_id
-    }).then(function(){
+    }).then(function () {
       $location.url('/dashboard');
       showToast(true, "Tack för hjälpen!");
     });
   };
-
-
-
 
 
   $scope.sidebarMenu = function () {
@@ -233,6 +240,54 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
     sidebarClosed = !sidebarClosed;
   };
+  var cleanFeedbackdate = function (objectArray) {
+    var fba = [];
+    for (var i = 0; i < objectArray.length; i++) {
+      var fbd = objectArray[i].feedback_date.substr(0, 11);
+      fba.push(fbd);
+    }
+    return fba;
+  }
+
+  var cleanAvg = function (objectArray) {
+    var a = [];
+    for (var i = 0; i < objectArray.length; i++) {
+      var avg = objectArray[i].average - 1;
+      a.push(avg);
+    }
+    return a;
+  }
+  var showCharts = function (data) {
+    var dates = cleanFeedbackdate(data);
+    var averages = cleanAvg(data)
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: 'average daily feedback',
+          data: averages,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
 
 });
 
