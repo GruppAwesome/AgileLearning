@@ -15,6 +15,8 @@ namespace WebAPI.Models {
 
         public Nullable<int> age { get; set; }
 
+        public string user_type { get; set;}
+
         [JsonIgnore]
         public string password { get; set; }
     }

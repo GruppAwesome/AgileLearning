@@ -50,7 +50,16 @@
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
-            $state.go('list');
+
+            if (data.user_type == 'student') {
+              alert("student");
+              $state.go('list');
+            }
+            else if (data.user_type == 'teacher') {
+              $state.go('teacher');
+            }
+
+
           } else {
             showToast(false, "Inloggningen misslyckades.");
           }
@@ -109,7 +118,7 @@
 
     $scope.sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-        
+
         weekly_q1: 1,
         weekly_q2: 1,
         weekly_q3: 1,
@@ -224,10 +233,10 @@
       toast.classList.add('show');
       if (successful) {
         toast.classList.add('success');
-        flavour ="success";
+        flavour = "success";
       } else {
         toast.classList.add('error');
-        flavour ="error";
+        flavour = "error";
       }
       console.log(toast.className);
       setTimeout(function () {
@@ -249,6 +258,12 @@
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('teacher', {
+      url: '/teacher',
+      templateUrl: 'myviews/teacher.html',
       controller: 'myCtrl'
     });
 
