@@ -4,8 +4,8 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
- // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
- var myURL = "http://localhost:5000"; //local dev
+  // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  var myURL = "http://localhost:5000"; //local dev
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
@@ -180,22 +180,24 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
   });
 
-  // Leave evaluation
-$scope.leaveEvaluation = function () {
- $http.post(myURL + '/api/users/leaveEvaluation', {
-      user_id: $rootScope.rootData.user_id
-    })
-  /*  .then(function (response) {
-        if (response.data != null && response.data != "") {
-          var message = "Din veckoutvärdering är skickad " ;
-          showToast(true, message);
-        }
-        else {
-          var message = "Något blev fel med veckoutväderingen " ;
-          showToast(false, message);
-        }*/
-};
-
+  $scope.sendweeklyfeedback = function () {
+    var q1 = document.forms["weekly"]["q1"].value;
+    var q2 = document.forms["weekly"]["q2"].value;
+    var q3 = document.forms["weekly"]["q3"].value;
+    var f1 = document.forms["weekly"]["f1"].value;
+    var f2 = document.forms["weekly"]["f2"].value;
+    $http.post(myURL + '/api/users/Sendweeklyfeedback', {
+      weekly_q1: q1,
+      weekly_q2: q2,
+      weekly_q3: q3,
+      weekly_free_text1: f1,
+      weekly_free_text2: f2,
+      weekly_uid: $rootScope.rootData.user_id
+    }).then(function(){
+      $location.url('/dashboard');
+      showToast(true, "Tack för hjälpen!");
+    });
+  };
 
 
 
@@ -251,7 +253,7 @@ app.config(function ($routeProvider) {
       templateUrl: "templates/attendance.html"
 
     })
-    .when("/evaluation",{
+    .when("/evaluation", {
       templateUrl: "templates/evaluation.html"
     });
 
