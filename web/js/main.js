@@ -4,8 +4,8 @@ var sidebarClosed = true;
 var app = angular.module("myApp", ["ngRoute"]);
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
- // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
- var myURL = "http://localhost:5000"; //local dev
+  // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  var myURL = "http://localhost:5000"; //local dev
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
@@ -24,7 +24,14 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       .then(function (response) {
         if (response.data) {
           $rootScope.rootData = response.data;
-          $location.url('/dashboard');
+
+          if (response.data.user_type == 'student') {
+            $location.url('/dashboard');
+          }
+          else if (response.data.user_type == 'teacher') {
+            $location.url('/teacherDashboard');
+          }
+
         } else {
           $scope.loginError = true;
           $("#loginError").fadeIn("slow");
@@ -181,20 +188,20 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   });
 
   // Leave evaluation
-$scope.leaveEvaluation = function () {
- $http.post(myURL + '/api/users/leaveEvaluation', {
+  $scope.leaveEvaluation = function () {
+    $http.post(myURL + '/api/users/leaveEvaluation', {
       user_id: $rootScope.rootData.user_id
     })
-  /*  .then(function (response) {
-        if (response.data != null && response.data != "") {
-          var message = "Din veckoutvärdering är skickad " ;
-          showToast(true, message);
-        }
-        else {
-          var message = "Något blev fel med veckoutväderingen " ;
-          showToast(false, message);
-        }*/
-};
+    /*  .then(function (response) {
+          if (response.data != null && response.data != "") {
+            var message = "Din veckoutvärdering är skickad " ;
+            showToast(true, message);
+          }
+          else {
+            var message = "Något blev fel med veckoutväderingen " ;
+            showToast(false, message);
+          }*/
+  };
 
 
 
@@ -235,6 +242,9 @@ app.config(function ($routeProvider) {
     .when("/dashboard", {
       templateUrl: "templates/dashboard.html"
     })
+    .when("/teacherDashboard", {
+      templateUrl: "templates/teacherDashboard.html"
+    })
     .when("/selectedcourse", {
       templateUrl: "templates/selectedcourse.html"
     })
@@ -251,7 +261,7 @@ app.config(function ($routeProvider) {
       templateUrl: "templates/attendance.html"
 
     })
-    .when("/evaluation",{
+    .when("/evaluation", {
       templateUrl: "templates/evaluation.html"
     });
 
