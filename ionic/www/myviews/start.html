@@ -2,13 +2,34 @@
   <ion-header-bar class="bar-dark" ng-cloak>
     <h1 class="title">Välkommen till {{data.name}}s skolportal</h1>
   </ion-header-bar>
-  <ion-content scroll="false" class="space">
+  <ion-content ng-init="showWeekFeedback()" scroll="false" class="space">
+
+    <!--TEMP-->
+    <div ng-if="showWeeklyFeedback === null">
+      <button ng-click="sendweeklyfeedback()" class="button button-full button-positive">
+        Send some weeklyFeedback
+      </button>
+    </div>
+
+    <button ng-click="dailyFeedbackAverage()" class="button button-full button-dark">
+      DailyFeedback Average
+      {{dailyFeedbackAverage}}
+    </button>
+
+    <button ng-click="addAttendanceCode()" class="button button-full button-assertive">
+      Add a AttendanceCode for today
+    </button>
+
+    <button ng-click="resetTheWeekFeedback()" class="button button-full button-royal">
+      Reset the weeklyFeedback
+    </button>
+    <!--END OF TEMP-->
+
     <div id="startlogo">
       <img class="full-image" ng-src="schooldata/{{data.logo}}">
     </div>
     <div class="item-body">
       <form>
-
         <label class="whiteback item item-input">
       <span class="input-label">Username</span>
       <input id="usernameInput" name="adults" type="text" required>
@@ -24,5 +45,5 @@
       </button>
     </div>
   </ion-content>
-  
+
 </ion-view>
