@@ -44,13 +44,25 @@
       var password = document.getElementById("passwordInput").value;
 
       $http.post(myURL + '/api/users/login', {
-        Username: username,
-        Password: password
+        // Username: username,
+        // Password: password
+        Username: "Ralle",
+        Password: "paprika"
       })
         .success(function (data) {
           if (data != null && data != "") {
             $rootScope.rootData = data;
-            $state.go('list');
+
+            if (data.user_type == 'student') {
+              alert("student");
+              $state.go('list');
+            }
+            else if (data.user_type == 'teacher') {
+              $state.go('teacher');
+              // showCharts();
+            }
+
+
           } else {
             showToast(false, "Inloggningen misslyckades.");
           }
@@ -134,7 +146,7 @@
 
     $scope.sendweeklyfeedback = function () {
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-        
+
         weekly_q1: 1,
         weekly_q2: 1,
         weekly_q3: 1,
@@ -229,11 +241,13 @@
         });
     };
 
-    $scope.dailyFeedbackAverage = function () {
-
+    $scope.getDailyFeedbackAverage = function () {
       $http.get(myURL + '/api/users/DailyFeedbackAverage')
         .success(function (data) {
           $scope.dailyFeedbackAverage = data;
+
+          console.log(data);
+          showCharts();
         });
     };
 
@@ -249,16 +263,63 @@
       toast.classList.add('show');
       if (successful) {
         toast.classList.add('success');
-        flavour ="success";
+        flavour = "success";
       } else {
         toast.classList.add('error');
-        flavour ="error";
+        flavour = "error";
       }
-      console.log(toast.className);
       setTimeout(function () {
         toast.classList.remove('show');
         toast.classList.remove(flavour);
       }, 3000);
+    }
+    var cleanFeedbackdate = function (objectArray) {
+      var fba = [];
+      for (var i = 0; i < objectArray.length; i++) {
+        var fbd = objectArray[i].feedback_date.substr(0, 11);
+        fba.push(fbd);
+      }
+      return fba;
+    }
+
+    var cleanAvg = function (objectArray) {
+      var a = [];
+      for (var i = 0; i < objectArray.length; i++) {
+        var avg = objectArray[i].average -1;
+        a.push(avg);
+      }
+      return a;
+    }
+    var showCharts = function () {
+      var dates = cleanFeedbackdate($scope.dailyFeedbackAverage);
+      var averages = cleanAvg($scope.dailyFeedbackAverage)
+      var ctx = document.getElementById("myChart").getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dates,
+          datasets: [{
+            label: 'average daily feedback',
+            data: averages,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
     }
 
   });
@@ -274,6 +335,12 @@
     $stateProvider.state('list', {
       url: '/list',
       templateUrl: 'myviews/list.html',
+      controller: 'myCtrl'
+    });
+
+    $stateProvider.state('teacher', {
+      url: '/teacher',
+      templateUrl: 'myviews/teacher.html',
       controller: 'myCtrl'
     });
 
@@ -329,5 +396,4 @@
       }
     });
   });
-
 }());
