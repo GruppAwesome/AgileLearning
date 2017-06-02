@@ -187,7 +187,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
   });
 
-  $scope.getDailyFeedbackAverage = function () {
+  $scope.makeCharts = function () {
+    getDailyFeedbackAverage();
+  }
+
+  var getDailyFeedbackAverage = function () {
     $http.get(myURL + '/api/users/DailyFeedbackAverage')
       .then(function (response) {
         if (response.data) {
@@ -260,8 +264,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   var showCharts = function (data) {
     var dates = cleanFeedbackdate(data);
     var averages = cleanAvg(data)
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctx = document.getElementById("dailyChart").getContext('2d');
+    var dailyChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: dates,

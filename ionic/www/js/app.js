@@ -289,8 +289,8 @@
     var showCharts = function () {
       var dates = cleanFeedbackdate($scope.dailyFeedbackAverage);
       var averages = cleanAvg($scope.dailyFeedbackAverage)
-      var ctx = document.getElementById("myChart").getContext('2d');
-      var myChart = new Chart(ctx, {
+      var ctx = document.getElementById("dailyChart").getContext('2d');
+      var dailyChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: dates,
