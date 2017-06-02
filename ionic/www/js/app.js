@@ -1,5 +1,5 @@
 (function () {
-
+  
   var sCourse;
   var app = angular.module('starter', ['ionic']);
 

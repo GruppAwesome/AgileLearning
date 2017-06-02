@@ -153,7 +153,7 @@ namespace WebAPI.Controllers
         {
              DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            if ((day >= DayOfWeek.Monday) && (day <= DayOfWeek.Sunday)) 
+            if (day >= DayOfWeek.Monday && (day <= DayOfWeek.Sunday)) 
             {
 
             dbConn.Conn.Query<Weeklyfeedback>($@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 ,weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week ) 
