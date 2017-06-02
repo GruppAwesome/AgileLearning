@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
 using Dapper;
+using System.Globalization;
 
 namespace WebAPI.Controllers
 {
@@ -17,10 +18,21 @@ namespace WebAPI.Controllers
         //Structor
         public struct MyStruct
         {
-            public string username;
-            public string password;
+            public String username;
+            public String password;
+            public String weekly_free_text1;
+            public String weekly_free_text2;
+            public String coursecode_date;
+            public String coursecode_code;
             public int feedback_vote;
             public int user_id;
+            public int weekly_q1;
+            public int weekly_q2;
+            public int weekly_q3;
+            public int weekly_uid;
+            public int coursecode_cid;
+
+
         }
 
         //DatabaseConnection
@@ -77,7 +89,9 @@ namespace WebAPI.Controllers
         public Feedback HasVoted([FromBody]MyStruct args)
         {
 
-            return dbConn.Conn.Query<Feedback>($"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id AND users.user_id = @userid and feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
+            return dbConn.Conn.Query<Feedback>(
+                $@"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id 
+                AND users.user_id = @userid and feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
 
         }
 
@@ -85,9 +99,15 @@ namespace WebAPI.Controllers
         public Feedback SendFeedback([FromBody]MyStruct args)
         {
 
-            dbConn.Conn.Query<Feedback>($"INSERT INTO feedbacks(feedback_uid, feedback_vote, feedback_date)SELECT @userid , '{args.feedback_vote}' , '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT feedback_uid FROM feedbacks WHERE feedback_uid = @userid AND feedback_date = '{GetCurrentDate()}')", new { userid = args.user_id });
+            dbConn.Conn.Query<Feedback>(
+                $@"INSERT INTO feedbacks(feedback_uid, feedback_vote, feedback_date)SELECT @userid , '{args.feedback_vote}' , 
+                '{GetCurrentDate()}' WHERE NOT EXISTS (SELECT feedback_uid FROM feedbacks WHERE feedback_uid = @userid AND feedback_date = '{GetCurrentDate()}')",
+                new { userid = args.user_id });
 
-            return dbConn.Conn.Query<Feedback>($"select distinct feedback_date, feedback_vote from users, feedbacks WHERE feedbacks.feedback_uid = users.user_id AND users.user_id = @userid and feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
+            return dbConn.Conn.Query<Feedback>(
+                $@"select distinct feedback_date, feedback_vote from users, feedbacks 
+                WHERE feedbacks.feedback_uid = users.user_id AND users.user_id = @userid and 
+                feedbacks.feedback_date = '{GetCurrentDate()}'", new { userid = args.user_id }).SingleOrDefault();
 
         }
 
@@ -96,6 +116,74 @@ namespace WebAPI.Controllers
         {
             dbConn.Conn.Query<Feedback>($"DELETE FROM feedbacks WHERE feedback_uid=3 OR feedback_uid = 2");
         }
+
+        [HttpGet("ResetWeekFeedback")]
+        public void ResetWeekFeedback()
+        {
+            dbConn.Conn.Query($"DELETE FROM weeklyfeedbacks WHERE weekly_uid= 3 OR weekly_uid = 2");
+        }
+
+        [HttpPost("ShowWeekFeedback")]
+        public IEnumerable<Weeklyfeedback> HasVotedWeekly([FromBody]MyStruct args)
+        {
+
+            IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(
+                $@"select distinct weekly_q1, weekly_q2, weekly_q3, class_name
+                from weeklyfeedbacks, classes, users , enrolledclasses
+                where enrolledclasses.enrolledclass_uid = users.user_id
+                and enrolledclasses.enrolledclass_clid = classes.class_id
+                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}
+                and users.user_name = @theUsername", new { theUsername = args.username });
+
+            DayOfWeek day = DateTime.Now.DayOfWeek;
+
+            if (result.FirstOrDefault() == null && (day >= DayOfWeek.Monday) && (day <= DayOfWeek.Sunday))
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+
+        }
+
+        [HttpPost("Sendweeklyfeedback")]
+        public void Sendweeklyfeedback([FromBody]MyStruct args)
+        {
+             DayOfWeek day = DateTime.Now.DayOfWeek;
+
+            if ((day >= DayOfWeek.Monday) && (day <= DayOfWeek.Sunday)) 
+            {
+
+            dbConn.Conn.Query<Weeklyfeedback>($@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 ,weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week ) 
+            SELECT @theQ1,@theQ2,@theQ3,@theFreeText1, @theFreeText2, @theUid , {GetWeekNumber(DateTime.Now)} 
+            WHERE NOT EXISTS (SELECT weekly_week FROM weeklyfeedbacks WHERE weekly_week = {GetWeekNumber(DateTime.Now)} AND weekly_uid = @theUid)",
+            new { theQ1 = args.weekly_q1, theQ2 = args.weekly_q2, theQ3 = args.weekly_q3, theFreeText1 = args.weekly_free_text1, theFreeText2 = args.weekly_free_text2, theUid = args.weekly_uid});
+            
+            }
+        }
+
+
+        [HttpPost("AddAttendanceCode")]
+        public void AddAttendanceCode([FromBody]MyStruct args)
+        {
+
+            dbConn.Conn.Query<AttendanceCode>($@"INSERT INTO coursecodes(coursecode_cid , coursecode_date, coursecode_code) 
+            SELECT 2 , '{GetCurrentDate()}' , @theCode 
+            WHERE NOT EXISTS (SELECT coursecode_date FROM coursecodes WHERE coursecode_date = '{GetCurrentDate()}' AND coursecode_cid = 2)",
+            new { theCid = args.coursecode_cid, theCode = args.coursecode_code });
+
+        }
+
+        [HttpGet("DailyFeedbackAverage")]
+        public IEnumerable<FeedbackAverage> DailyFeedbackAverage()
+        {
+            return dbConn.Conn.Query<FeedbackAverage>
+            ($"SELECT feedback_date , Avg(feedback_vote) AS Average from feedbacks GROUP BY feedback_date , feedback_date");
+        }
+
+
 
         //SHA1HASHING
         public static byte[] GetHash(string inputString)
@@ -118,6 +206,12 @@ namespace WebAPI.Controllers
         {
 
             return DateTime.Now.ToString("yyyy-MM-dd");
+        }
+        public static int GetWeekNumber(DateTime dtPassed)
+        {
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int weekNum = ciCurr.Calendar.GetWeekOfYear(dtPassed, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return weekNum;
         }
 
 
