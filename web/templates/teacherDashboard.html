@@ -4,12 +4,12 @@
   <div class="subheader row">
     <h6>Välkommen {{rootData.user_name}}!</h6>
   </div>
-  <div class="col-xs-12">
-    <div ng-init="makeCharts()" class="card">
-      <canvas ng-init="getDailyFeedbackAverage()" id="dailyChart"></canvas>
+  <div ng-init="makeCharts()" class="col-xs-12">
+    <div  class="card">
+      <canvas id="dailyChart"></canvas>
     </div>
-    <div class="card">
-      <canvas ng-init="getDailyFeedbackAverage()" id="weeklyQ1Chart"></canvas>
+    <div ng-init="HasVotedWeekly()" class="card">
+      <canvas id="weeklyQ1Chart"></canvas>
     </div>
   </div>
 </div>

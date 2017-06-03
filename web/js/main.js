@@ -14,10 +14,18 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       $scope.data = response.data;
     });
 
+  $http.get("../schooldata/questionaire.json")
+    .then(function (response) {
+      $scope.questionaire = response.data;
+      console.log($scope.questionaire);
+    });
+
   $scope.login = function () {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post(myURL + '/api/users/login', {
+      // Username: "Micke",
+      // Password: "tomat"
       Username: username,
       Password: password
     })
@@ -27,9 +35,12 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
           if (response.data.user_type == 'student') {
             $location.url('/dashboard');
+            
           }
           else if (response.data.user_type == 'teacher') {
             $location.url('/teacherDashboard');
+            
+
           }
 
         } else {
@@ -125,6 +136,25 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
   };
 
+  // $scope.HasVotedWeekly = function () {
+  //   $http.post(myURL + '/api/users/ShowWeekFeedback', {
+  //     user_id: $rootScope.rootData.user_id
+  //   })
+  //     .then(function (response) {
+  //       if (response.data != null && response.data != "") {
+  //         console.log("oh alala " + response.data);
+  //         // //If the user has voted
+  //         // $scope.hasVotedToday = response.data;
+
+  //       } else {
+  //         console.log("oh no " + response.data);
+  //         // //If the user hasn't voted
+  //         // $scope.hasVotedToday = "no";
+
+  //       }
+  //     });
+  // };
+
   //The daily feedback
   $scope.SendFeedback = function (theVote) {
     $http.post(myURL + '/api/users/SendFeedback', {
@@ -189,15 +219,15 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   $scope.makeCharts = function () {
     getDailyFeedbackAverage();
+    showWeeklyCharts('"Gillar du din utbildning?"');
   }
 
   var getDailyFeedbackAverage = function () {
     $http.get(myURL + '/api/users/DailyFeedbackAverage')
       .then(function (response) {
         if (response.data) {
-          showCharts(response.data);
+          showDailyCharts(response.data);
         }
-
       });
   };
 
@@ -261,7 +291,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
     return a;
   }
-  var showCharts = function (data) {
+  var showDailyCharts = function (data) {
     var dates = cleanFeedbackdate(data);
     var averages = cleanAvg(data)
     var ctx = document.getElementById("dailyChart").getContext('2d');
@@ -276,6 +306,40 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
             'rgba(255, 99, 132, 0.2)'
           ],
           borderColor: [
+            'rgba(255,99,132,1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+
+  var showWeeklyCharts = function (questionString, data) {
+    var ctx = document.getElementById("weeklyQ1Chart").getContext('2d');
+    var q1Chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [0, 1, 2],
+        datasets: [{
+          label: 'responses for ' + questionString,
+          data: [1, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(255,99,132,1)',
             'rgba(255,99,132,1)'
           ],
           borderWidth: 1
