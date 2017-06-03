@@ -2,10 +2,19 @@
 var sidebarClosed = true;
 
 var app = angular.module("myApp", ["ngRoute"]);
+
+
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   var myURL = "http://localhost:5000"; //local dev
+
+  /* Automatic log-outer */
+  (function () {
+    if (!$rootScope.rootData) {
+      $location.url('/');
+    }
+  })();
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
@@ -17,15 +26,12 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   $http.get("../schooldata/questionaire.json")
     .then(function (response) {
       $scope.questionaire = response.data;
-      console.log($scope.questionaire);
     });
 
   $scope.login = function () {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     $http.post(myURL + '/api/users/login', {
-      // Username: "Micke",
-      // Password: "tomat"
       Username: username,
       Password: password
     })
@@ -35,12 +41,9 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
           if (response.data.user_type == 'student') {
             $location.url('/dashboard');
-            
           }
           else if (response.data.user_type == 'teacher') {
             $location.url('/teacherDashboard');
-            
-
           }
 
         } else {
@@ -203,6 +206,10 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
   }
 
+  $scope.logout = function () {
+    $rootScope.rootData = null;
+  };
+
 
 
   $(window).resize(function () {
@@ -219,7 +226,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   $scope.makeCharts = function () {
     getDailyFeedbackAverage();
-    showWeeklyCharts('"Gillar du din utbildning?"');
+    showWeeklyCharts($scope.questionaire.multipleChoice);
   }
 
   var getDailyFeedbackAverage = function () {
@@ -303,10 +310,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           label: 'average daily feedback',
           data: averages,
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
+
+            'rgba(255, 128, 8, 0.2)'
           ],
           borderColor: [
-            'rgba(255,99,132,1)'
+            'rgba(255,128,8,1)'
           ],
           borderWidth: 1
         }]
@@ -323,24 +331,28 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     });
   }
 
-  var showWeeklyCharts = function (questionString, data) {
+  var showWeeklyCharts = function (questions, data) {
     var ctx = document.getElementById("weeklyQ1Chart").getContext('2d');
     var q1Chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [0, 1, 2],
+        labels: [1, 2, 3, 4, "vet ej"],
         datasets: [{
-          label: 'responses for ' + questionString,
-          data: [1, 2, 3],
+          label: 'Svar för "' + questions.q1 + '"',
+          data: [1, 2, 3, 0.5, 4],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)'
           ],
           borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)'
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)'
           ],
           borderWidth: 1
         }]
