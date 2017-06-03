@@ -23,10 +23,10 @@
               <form>
                 <label class="whiteback item item-input">
       <span class="input-label">Kod</span>
-      <input id="codeInput" type="text" required></input>
+      <input ng-model="manualCode" id="codeInput" type="text" required></input>
     </label>
-                <button ng-click="sendAttendance()" class="halfCard button button-dark item-right icon-left ion-paper-airplane">Skicka</button>
-                <button class="halfCard button button-dark item-right icon-left ion-qr-scanner">Lämna med QR</button>
+                <button ng-click="sendAttendance(manualCode)" class="halfCard button button-dark item-right icon-left ion-paper-airplane">Skicka</button>
+                <button on-touch="scan()" class="halfCard button button-dark item-right icon-left ion-qr-scanner">Lämna med QR</button>
               </form>
             </div>
           </div>
