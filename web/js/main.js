@@ -2,16 +2,30 @@
 var sidebarClosed = true;
 
 var app = angular.module("myApp", ["ngRoute"]);
+
+
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   var myURL = "http://localhost:5000"; //local dev
+
+  /* Automatic log-outer */
+  (function () {
+    if (!$rootScope.rootData) {
+      $location.url('/');
+    }
+  })();
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
   $http.get("../schooldata/data.json")
     .then(function (response) {
       $scope.data = response.data;
+    });
+
+  $http.get("../schooldata/questionaire.json")
+    .then(function (response) {
+      $scope.questionaire = response.data;
     });
 
   $scope.login = function () {
@@ -125,6 +139,24 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
   };
 
+  $scope.HasVotedWeekly = function () {
+    $http.post(myURL + '/api/users/ShowWeekFeedback', {
+      // user_id: $rootScope.rootData.user_id
+    })
+      .then(function (response) {
+        if (response.data != null && response.data != "") {
+          console.log("oh yes! " + response.data);
+          $scope.weeklyChartData = response.data;
+          showWeeklyCharts($scope.questionaire.multipleChoice, $scope.weeklyChartData);
+
+        } else {
+          console.log("oh no ");
+
+          //should hide the weekly charts
+        }
+      });
+  };
+
   //The daily feedback
   $scope.SendFeedback = function (theVote) {
     $http.post(myURL + '/api/users/SendFeedback', {
@@ -132,6 +164,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       user_id: $rootScope.rootData.user_id
     })
       .then(function (response) {
+
         $scope.hasVotedToday = response.data;
 
       });
@@ -173,6 +206,10 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 5000);
   }
 
+  $scope.logout = function () {
+    $rootScope.rootData = null;
+  };
+
 
 
   $(window).resize(function () {
@@ -191,9 +228,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     $http.get(myURL + '/api/users/DailyFeedbackAverage')
       .then(function (response) {
         if (response.data) {
-          showCharts(response.data);
+          showDailyCharts(response.data);
         }
-
       });
   };
 
@@ -220,9 +256,13 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       weekly_free_text1: f1,
       weekly_free_text2: f2,
       weekly_uid: $rootScope.rootData.user_id
-    }).then(function () {
-      $location.url('/dashboard');
-      showToast(true, "Tack för hjälpen!");
+    }).then(function (response) {
+      if (response.data) {
+        showToast(response.data, "Tack för hjälpen!");
+        $location.url('/dashboard');
+      } else {
+        showToast(response.data, "Något gick fel...");
+      }
     });
   };
 
@@ -267,11 +307,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
     return a;
   }
-  var showCharts = function (data) {
+  var showDailyCharts = function (data) {
     var dates = cleanFeedbackdate(data);
     var averages = cleanAvg(data)
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctx = document.getElementById("dailyChart").getContext('2d');
+    var dailyChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: dates,
@@ -279,10 +319,63 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
           label: 'average daily feedback',
           data: averages,
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
+
+            'rgba(255, 128, 8, 0.2)'
           ],
           borderColor: [
-            'rgba(255,99,132,1)'
+            'rgba(255,128,8,1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+
+  var cleanWeeklyData = function (data) {
+    var result = [0, 0, 0, 0, 0];
+
+    for (var i = 0; i < data.length; i++) {
+      for (var q = 0; q < 5; q++) {
+        if (data[i].weekly_q1 == q) {
+          result[q]++;
+        }
+      }
+    }
+    return result;
+  }
+
+  var showWeeklyCharts = function (questions, data) {
+    var array = cleanWeeklyData(data);
+    var ctx = document.getElementById("weeklyQ1Chart").getContext('2d');
+    var q1Chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["vet ej", 1, 2, 3, 4],
+        datasets: [{
+          label: 'Svar för "' + questions.q1 + '"',
+          data: array,
+          backgroundColor: [
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)',
+            'rgba(255, 128, 8, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)',
+            'rgba(255, 128, 8, 1)'
           ],
           borderWidth: 1
         }]

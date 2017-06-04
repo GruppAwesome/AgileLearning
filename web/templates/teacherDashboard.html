@@ -1,11 +1,17 @@
-<div data-ng-include="'templates/sidenav.html'"></div>
+<div data-ng-include="'templates/teacherSideNav.html'"></div>
 <div class="container-fluid background">
   <div data-ng-include="'templates/topnav.html'"></div>
   <div class="subheader row">
     <h6>Välkommen {{rootData.user_name}}!</h6>
   </div>
-  <div class="card">
-    <canvas ng-init="getDailyFeedbackAverage()" id="myChart"></canvas>
+  <div  class="col-xs-12">
+    <div  class="card">
+      <h4>Resultat ifrån dagliga utvärderingar</h4>
+      <canvas ng-init="getDailyFeedbackAverage()" id="dailyChart"></canvas>
+    </div>
+    <div ng-init="HasVotedWeekly()" class="card">
+      <h4>Resultat ifrån senaste veckans utvärderingar</h4>
+      <canvas id="weeklyQ1Chart"></canvas>
+    </div>
   </div>
-
 </div>
