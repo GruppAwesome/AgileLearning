@@ -69,7 +69,10 @@ namespace WebAPI.Controllers
                 where users.user_id = results.result_userid 
                 and courses.course_id = results.result_courseid 
                 and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid 
-                and exams.exam_id = results.result_examid and users.user_name = @theUsername", new { theUsername = args.username });
+                and exams.exam_id = results.result_examid
+                and (results.result_coursestatus = 'Avslutade' 
+                OR results.result_coursestatus = 'Aktiv')   
+                and users.user_name = @theUsername", new { theUsername = args.username });
         }
 
         [HttpPost("Todo")]
@@ -82,7 +85,7 @@ namespace WebAPI.Controllers
                 and courses.course_id = results.result_courseid 
                 and tasks.task_id = results.result_taskid and finals.final_id = results.result_finalid 
                 and exams.exam_id = results.result_examid and users.user_name = @theUsername 
-                and (results.result_coursestatus = 'Kommande' or results.result_coursestatus = 'Aktiv')", new { theUsername = args.username });
+                and results.result_coursestatus = 'Aktiv'", new { theUsername = args.username });
         }
 
         [HttpPost("HasVoted")]
@@ -134,7 +137,6 @@ namespace WebAPI.Controllers
                 and enrolledclasses.enrolledclass_clid = classes.class_id
                 and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}");
 
-            DayOfWeek day = DateTime.Now.DayOfWeek;
 
             if (result.FirstOrDefault() == null)
             {
@@ -173,7 +175,8 @@ namespace WebAPI.Controllers
         {
             DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            if ((day >= DayOfWeek.Sunday)) // The week begins with sunday in most countries ;)
+            if(day >= DayOfWeek.Sunday && day <= DayOfWeek.Monday)// The week begins with sunday in most countries ;)
+
             {
 
                 dbConn.Conn.Query<Weeklyfeedback>($@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 ,weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week ) 
@@ -213,6 +216,8 @@ namespace WebAPI.Controllers
                 $@"SELECT weekly_week , Sum(weekly_q1) AS Question1 , Sum(weekly_q2) AS Question2 , Sum(weekly_q3) AS Question3 
                 from weeklyfeedbacks Group by weekly_week");
         }
+
+
 
         //SHA1HASHING
         public static byte[] GetHash(string inputString)

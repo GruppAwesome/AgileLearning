@@ -8,10 +8,32 @@
   var myURL = "http://localhost:5000"; //local dev
 
   //Creates the controller
-  app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope, $cordovaBarcodeScanner, $ionicPlatform) {
-    $scope.logout = function () {
-      $rootScope.rootData = null;
+  app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope, $cordovaBarcodeScanner, $ionicPlatform, $timeout) {
+
+    //Init
+    $scope.sCourse = sCourse;
+    $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
+    $scope.loginError = false;
+
+    $scope.questionaire = {
+      'question1': '',
+      'question2': '',
+      'question3': '',
+      'freetext1': '',
+      'freetext2': ''
     };
+
+    //Recciving the JSONS
+    $http.get("../schooldata/questionaire.json")
+      .then(function (response) {
+        $scope.questionJson = response.data;
+      });
+
+    $http.get('schooldata/data.json').success(function (data) {
+      $scope.data = data;
+    });
+
+    //The barcoderscanner    
     $scope.scan = function () {
       var detachBarcodeScannerBackHandler = $ionicPlatform.registerBackButtonAction(function () {
         detachBarcodeScannerBackHandler();
@@ -26,17 +48,19 @@
       }, function (error) { console.log(error); });
     }
 
+    //Logout function
+    $scope.logout = function () {
+      $rootScope.rootData = null;
+    };
 
-    $scope.sCourse = sCourse;
-    $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
-    $scope.loginError = false;
+    //Grabs the object and put it into the a variabel
     $scope.getobject = function (thisobject) {
       sCourse = thisobject;
 
     }
 
     $scope.goToEval = function () {
-      $state.go('/evaluation');
+      $state.go('evaluation');
     }
     //Tempfunctions that reset the feedbackValues in the database
     $scope.resetTheFeedback = function () {
@@ -49,11 +73,7 @@
       })
     }
 
-    $http.get('schooldata/data.json').success(function (data) {
-      $scope.data = data;
-    });
-
-
+    //Some login action
     $scope.login = function () {
 
       var username = document.getElementById("usernameInput").value;
@@ -81,6 +101,7 @@
         });
     };
 
+    //SQL requests (We are aware that alot of these could be integrated into each other)
     $scope.showMyCourses = function () {
 
       $http.post(myURL + '/api/courses/mycourses', {
@@ -94,7 +115,6 @@
     };
 
     $scope.sendAttendance = function (theCode) {
-      //var theCode = document.getElementById("codeInput").value;
 
       $http.post(myURL + '/api/attendence/presence', {
         coursecode_code: theCode,
@@ -122,14 +142,6 @@
         });
     };
 
-    $scope.questionaire = {
-      'question1': '',
-      'question2': '',
-      'question3': '',
-      'freetext1': '',
-      'freetext2': ''
-    };
-
     $scope.sendEvaluation = function (questionaire) {
 
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
@@ -141,14 +153,17 @@
         weekly_uid: $rootScope.rootData.user_id
       })
 
+      //All I wanted was to refresh a state so the weeklyfeedback would go away
+      $timeout(function () {
+        $state.go('list', {}, { reload: true });
+        }, 200);
       var msg = "Tack för din utvärdering!";
       showToast(true, msg);
-
     };
 
     $scope.showWeekFeedback = function () {
       $http.post(myURL + '/api/Users/ShowWeekFeedback', {
-        username: 'Micke' //Hardcoded we know! --> $rootScope.rootData.user_name
+        username: $rootScope.rootData.user_name
       })
         .success(function (data) {
           if (data != null && data != "") {
@@ -164,26 +179,6 @@
 
         });
     };
-
-    $scope.sendweeklyfeedback = function () {
-      $http.post(myURL + '/api/users/Sendweeklyfeedback', {
-
-        weekly_q1: 1,
-        weekly_q2: 1,
-        weekly_q3: 1,
-        weekly_free_text1: "Hi",
-        weekly_free_text2: "Ho",
-        weekly_uid: 2 //Hardcoded again for testing --> $rootScope.rootData.user_id         
-      })
-    };
-
-    $scope.addAttendanceCode = function () {
-      //Adds the course UX with the currentdate + somekind of cool password
-      $http.post(myURL + '/api/users/AddAttendanceCode', {
-        coursecode_code: 'xxx' //Harcoded for testing        
-      })
-    };
-
 
     $scope.showMyGrades = function () {
 
@@ -230,7 +225,6 @@
         });
     };
 
-    //Checks if the user has voted
     $scope.HasVoted = function () {
       $http.post(myURL + '/api/users/HasVoted', {
         user_id: $rootScope.rootData.user_id
@@ -250,7 +244,6 @@
         });
     };
 
-    //The daily feedback
     $scope.SendFeedback = function (theVote) {
       $http.post(myURL + '/api/users/SendFeedback', {
         feedback_vote: theVote,
@@ -273,11 +266,12 @@
         });
     };
 
-
+    //Sidemenu
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight()
     }
 
+    //Toastfunction
     var showToast = function (successful, message) {
       var toast = document.getElementById("snackbar");
       toast.innerHTML = message;
@@ -295,6 +289,8 @@
         toast.classList.remove(flavour);
       }, 3000);
     }
+
+    //Cleaning the dateobject since it came back 2001-01-01 00:00:00  
     var cleanFeedbackdate = function (objectArray) {
       var fba = [];
       for (var i = 0; i < objectArray.length; i++) {
@@ -303,7 +299,6 @@
       }
       return fba;
     }
-
     var cleanAvg = function (objectArray) {
       var a = [];
       for (var i = 0; i < objectArray.length; i++) {
@@ -312,6 +307,8 @@
       }
       return a;
     }
+
+    //The cool chart
     var showCharts = function () {
       var dates = cleanFeedbackdate($scope.dailyFeedbackAverage);
       var averages = cleanAvg($scope.dailyFeedbackAverage)
@@ -346,7 +343,7 @@
 
   });
 
-  //My lovely router that redirection myviews
+  //Router
   app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('start', {
       url: '/start',
