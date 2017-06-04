@@ -12,7 +12,14 @@
       </div>
 
       <ion-content ng-init="HasVoted()" class="subheaderSpace">
-
+        <div ng-init="ShouldVoteWeekly()">
+          <div ng-if="shouldVote" ng-click="goToEval()">
+            <div class="list card">
+              <h4>Du har en veckoutvärdering att genomföra!</h4>
+              <p>Klicka här för att genomföra den!</p>
+            </div>
+          </div>
+        </div>
         <div ng-if="hasVotedToday == 'no'">
           <div class="list card">
 
@@ -113,13 +120,13 @@
       </header>
       <ion-content class="has-header">
         <ion-list>
-            <ion-item menu-close> <a href="#/list"> Hem </a></ion-item>
-            <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
-            <ion-item menu-close> <a href="#/assignments"> Uppgifter </a></ion-item>
-            <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
-            <ion-item menu-close> <a href="#/attendance"> Närvaro </a> </ion-item>
-            <ion-item menu-close> <a href="#/evaluation"> Utvärdering </a> </ion-item>
-            <ion-item menu-close> <a href="#/start" ng-click="logout()"> Logga ut </a> </ion-item>
+          <ion-item menu-close> <a href="#/list"> Hem </a></ion-item>
+          <ion-item menu-close> <a href="#/courses"> Kurser </a></ion-item>
+          <ion-item menu-close> <a href="#/assignments"> Uppgifter </a></ion-item>
+          <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
+          <ion-item menu-close> <a href="#/attendance"> Närvaro </a> </ion-item>
+          <ion-item menu-close> <a href="#/evaluation"> Utvärdering </a> </ion-item>
+          <ion-item menu-close> <a href="#/start" ng-click="logout()"> Logga ut </a> </ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>

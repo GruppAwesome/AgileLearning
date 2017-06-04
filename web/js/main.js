@@ -64,6 +64,10 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     })
   };
 
+  $scope.goToEval = function () {
+    $location.url('/evaluation');
+  }
+
   $scope.showMyCourses = function () {
     $http.post(myURL + '/api/courses/mycourses', {
       Username: $rootScope.rootData.user_name
@@ -145,15 +149,21 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     })
       .then(function (response) {
         if (response.data != null && response.data != "") {
-          console.log("oh yes! " + response.data);
           $scope.weeklyChartData = response.data;
           showWeeklyCharts($scope.questionaire.multipleChoice, $scope.weeklyChartData);
-
         } else {
           console.log("oh no ");
-
-          //should hide the weekly charts
         }
+      });
+  };
+
+
+  $scope.ShouldVoteWeekly = function () {
+    $http.post(myURL + '/api/users/ShouldVoteWeekly', {
+      user_id: $rootScope.rootData.user_id
+    })
+      .then(function (response) {
+        $scope.shouldVote = response.data;
       });
   };
 
@@ -380,7 +390,6 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
   var showWeeklyCharts = function (questions, data) {
     var result = cleanWeeklyData(questions, data);
-    console.log(result);
     var ctx = [
       document.getElementById("weeklyQ1Chart").getContext('2d'),
       document.getElementById("weeklyQ2Chart").getContext('2d'),

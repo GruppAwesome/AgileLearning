@@ -136,7 +136,7 @@ namespace WebAPI.Controllers
 
             DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            if (result.FirstOrDefault() == null && (day >= DayOfWeek.Monday) && (day <= DayOfWeek.Sunday))
+            if (result.FirstOrDefault() == null)
             {
                 return null;
             }
@@ -144,7 +144,28 @@ namespace WebAPI.Controllers
             {
                 return result;
             }
+        }
 
+        [HttpPost("ShouldVoteWeekly")]
+        public bool ShouldVoteWeekly([FromBody]MyStruct args)
+        {
+
+            IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(
+                $@"select distinct weekly_q1
+                from weeklyfeedbacks, users, enrolledclasses
+                where enrolledclasses.enrolledclass_uid = users.user_id
+                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}", new { userid = args.user_id });
+
+            DayOfWeek day = DateTime.Now.DayOfWeek;
+
+            if (result.FirstOrDefault() == null)// && (day >= DayOfWeek.Sunday) && (day <= DayOfWeek.Saturday))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         [HttpPost("Sendweeklyfeedback")]

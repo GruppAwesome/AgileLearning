@@ -35,7 +35,9 @@
 
     }
 
-
+    $scope.goToEval = function () {
+      $state.go('/evaluation');
+    }
     //Tempfunctions that reset the feedbackValues in the database
     $scope.resetTheFeedback = function () {
       $http.get(myURL + '/api/users/ResetFeedback', {
@@ -108,6 +110,15 @@
             var msg = "Ingen närvaro för kod " + theCode;
             showToast(false, msg);
           }
+        });
+    };
+
+    $scope.ShouldVoteWeekly = function () {
+      $http.post(myURL + '/api/users/ShouldVoteWeekly', {
+        user_id: $rootScope.rootData.user_id
+      })
+        .then(function (response) {
+          $scope.shouldVote = response.data;
         });
     };
 
