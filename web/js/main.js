@@ -10,11 +10,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   var myURL = "http://localhost:5000"; //local dev
 
   /* Automatic log-outer */
-  // (function () {
-  //   if (!$rootScope.rootData) {
-  //     $location.url('/');
-  //   }
-  // })();
+  (function () {
+    if (!$rootScope.rootData) {
+      $location.url('/');
+    }
+  })();
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
