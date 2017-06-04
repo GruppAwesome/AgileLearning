@@ -152,8 +152,6 @@ namespace WebAPI.Controllers
         {
             DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            Console.WriteLine(day);
-
             if ((day >= DayOfWeek.Sunday)) // The week begins with sunday in most countries ;)
             {
 
@@ -194,8 +192,6 @@ namespace WebAPI.Controllers
                 $@"SELECT weekly_week , Sum(weekly_q1) AS Question1 , Sum(weekly_q2) AS Question2 , Sum(weekly_q3) AS Question3 
                 from weeklyfeedbacks Group by weekly_week");
         }
-
-
 
         //SHA1HASHING
         public static byte[] GetHash(string inputString)

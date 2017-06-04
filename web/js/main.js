@@ -179,8 +179,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       username: $rootScope.rootData.user_name
     })
       .then(function (response) {
-        $scope.courseName = response.data[0].course_name;
         if (response.data != null && response.data != "") {
+          $scope.courseName = response.data[0].course_name;
           var message = "Du är närvarande på kursen " + $scope.courseName;
           showToast(true, message);
         }
@@ -316,7 +316,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       data: {
         labels: dates,
         datasets: [{
-          label: 'average daily feedback',
+          label: 'genomsnitt daglig feedback',
           data: averages,
           backgroundColor: [
 
@@ -340,56 +340,87 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     });
   }
 
-  var cleanWeeklyData = function (data) {
-    var result = [0, 0, 0, 0, 0];
-
-    for (var i = 0; i < data.length; i++) {
-      for (var q = 0; q < 5; q++) {
-        if (data[i].weekly_q1 == q) {
-          result[q]++;
+  var cleanWeeklyData = function (questions, data) {
+    var result = [
+      {
+        q: questions.q1
+      },
+      {
+        q: questions.q2
+      },
+      {
+        q: questions.q3
+      }
+    ];
+    for (var q = 0; q < 3; q++) {
+      var array = [0, 0, 0, 0, 0];
+      var comparator;
+      for (var i = 0; i < data.length; i++) {
+        for (var a = 0; a < array.length; a++) {
+          if (q == 0 && data[i].weekly_q1 == a) {
+            array[a]++;
+          }
+          else if (q == 1 && data[i].weekly_q2 == a) {
+            array[a]++;
+          }
+          else if (q == 2 && data[i].weekly_q3 == a) {
+            array[a]++;
+          }
         }
       }
+      result[q].a = array;
+
     }
     return result;
   }
 
+  $scope.randomQuote = function () {
+    return $scope.questionaire.f1;
+  }
+
   var showWeeklyCharts = function (questions, data) {
-    var array = cleanWeeklyData(data);
-    var ctx = document.getElementById("weeklyQ1Chart").getContext('2d');
-    var q1Chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["vet ej", 1, 2, 3, 4],
-        datasets: [{
-          label: 'Svar för "' + questions.q1 + '"',
-          data: array,
-          backgroundColor: [
-            'rgba(255, 128, 8, 0.2)',
-            'rgba(255, 128, 8, 0.2)',
-            'rgba(255, 128, 8, 0.2)',
-            'rgba(255, 128, 8, 0.2)',
-            'rgba(255, 128, 8, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 128, 8, 1)',
-            'rgba(255, 128, 8, 1)',
-            'rgba(255, 128, 8, 1)',
-            'rgba(255, 128, 8, 1)',
-            'rgba(255, 128, 8, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
+    var result = cleanWeeklyData(questions, data);
+    console.log(result);
+    var ctx = [
+      document.getElementById("weeklyQ1Chart").getContext('2d'),
+      document.getElementById("weeklyQ2Chart").getContext('2d'),
+      document.getElementById("weeklyQ3Chart").getContext('2d')];
+    for (var i = 0; i < ctx.length; i++) {
+      var chart = new Chart(ctx[i], {
+        type: 'bar',
+        data: {
+          labels: ["vet ej", 1, 2, 3, 4],
+          datasets: [{
+            label: 'Svar för "' + result[i].q + '"',
+            data: result[i].a,
+            backgroundColor: [
+              'rgba(255, 128, 8, 0.2)',
+              'rgba(255, 128, 8, 0.2)',
+              'rgba(255, 128, 8, 0.2)',
+              'rgba(255, 128, 8, 0.2)',
+              'rgba(255, 128, 8, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 128, 8, 1)',
+              'rgba(255, 128, 8, 1)',
+              'rgba(255, 128, 8, 1)',
+              'rgba(255, 128, 8, 1)',
+              'rgba(255, 128, 8, 1)'
+            ],
+            borderWidth: 1
           }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
         }
-      }
-    });
+      });
+    }
   }
 
 });

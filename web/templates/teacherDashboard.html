@@ -1,17 +1,37 @@
 <div data-ng-include="'templates/teacherSideNav.html'"></div>
-<div class="container-fluid background">
+<div ng-init="HasVotedWeekly()" class="container-fluid background">
   <div data-ng-include="'templates/topnav.html'"></div>
   <div class="subheader row">
     <h6>Välkommen {{rootData.user_name}}!</h6>
   </div>
-  <div  class="col-xs-12">
-    <div  class="card">
+  <div class="col-md-12">
+    <div class="card">
       <h4>Resultat ifrån dagliga utvärderingar</h4>
       <canvas ng-init="getDailyFeedbackAverage()" id="dailyChart"></canvas>
     </div>
-    <div ng-init="HasVotedWeekly()" class="card">
+  </div>
+  <div class="col-md-6">
+    <div class="card">
       <h4>Resultat ifrån senaste veckans utvärderingar</h4>
+      <p>Ett slumpmässigt valt citat ifrån utvärderingarna:</p>
+      <pre>
+      "Det bästa med Java-kursen var att vi fick lära oss PHP"
+      </pre>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
       <canvas id="weeklyQ1Chart"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <canvas id="weeklyQ2Chart"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <canvas id="weeklyQ3Chart"></canvas>
     </div>
   </div>
 </div>
