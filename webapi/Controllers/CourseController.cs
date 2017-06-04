@@ -45,14 +45,15 @@ namespace WebAPI.Controllers
                 and users.user_name = @theUsername", new { theUsername = args.username });
         }
 
+        
+
         [Route("[action]")]
         public IEnumerable<Schedule> MySchedule([FromBody]MyStruct args)
         {
             return dbConn.Conn.Query<Schedule>(
-                @"select distinct schedules.* from schedules, courses, enrolled 
-                where enrolled.cid = courses.course_id 
-                and enrolled.cid = schedules.schedule_id 
-                and courses.course_name = @theCourse", new { theCourse = args.course_name });
+                @"select distinct schedule_date, schedule_time, schedule_moment from schedules, courses
+                WHERE courses.course_name =   @theCourse AND courses.course_id = schedule_cid
+                order by schedule_date", new { theCourse = args.course_name });
         }
 
 
