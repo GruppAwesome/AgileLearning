@@ -16,31 +16,31 @@
                     <h2 class="title">Utvärdering</h2>
                 </div>
 
-                <ion-content ng-init="showWeekFeedback()" class="padding subheaderSpace">
-                    <div ng-if="showWeeklyFeedback === null" class="list card">
+                <ion-content class="padding subheaderSpace">
+                    <div class="list card">
                         <div class="item item-body">
                             <form ng-controller="myCtrl" ng-submit="sendEvaluation(questionaire)">
-                                <label>Question 1</label><br>
+                                <label>{{questionJson.multipleChoice.q1}}</label><br>
                                   <label><input type="radio" ng-model="questionaire.question1" value="1">1</label>
                                   <label><input type="radio" ng-model="questionaire.question1" value="2">2</label>
                                   <label><input type="radio" ng-model="questionaire.question1" value="3">3</label>
                                   <label><input type="radio" ng-model="questionaire.question1" value="4">4</label>
                                   <label><input type="radio" ng-model="questionaire.question1" value="0">Vet Ej</label><br>
-                                <label>Question 2</label><br>
+                                <label>{{questionJson.multipleChoice.q2}}</label><br>
                                   <label><input type="radio" ng-model="questionaire.question2" value="1">1</label>
                                   <label><input type="radio" ng-model="questionaire.question2" value="2">2</label>
                                   <label><input type="radio" ng-model="questionaire.question2" value="3">3</label>
                                   <label><input type="radio" ng-model="questionaire.question2" value="4">4</label>
                                   <label><input type="radio" ng-model="questionaire.question2" value="0">Vet Ej</label><br>
-                                <label>Question 3</label><br>
+                                <label>{{questionJson.multipleChoice.q3}}</label><br>
                                   <label><input type="radio" ng-model="questionaire.question3" value="1">1</label>
                                   <label><input type="radio" ng-model="questionaire.question3" value="2">2</label>
                                   <label><input type="radio" ng-model="questionaire.question3" value="3">3</label>
                                   <label><input type="radio" ng-model="questionaire.question3" value="4">4</label>
                                   <label><input type="radio" ng-model="questionaire.question3" value="0">Vet Ej</label><br>
-                                <label>Free text 1</label><br>
+                                <label>{{questionJson.freetext.q1}}</label><br>
                                   <input type="text" style="border: 1px solid" ng-model="questionaire.freetext1" value="1"><br>
-                                <label>Free text 2</label><br>
+                                <label>{{questionJson.freetext.q2}}</label><br>
                                   <input type="text" style="border: 1px solid" ng-model="questionaire.freetext2" value="1">
                                   <button class="halfCard button button-block button-dark item-right icon-left ion-paper-airplane" type="submit">Skicka</button>
                             </form>
@@ -60,7 +60,6 @@
                         <ion-item menu-close> <a href="#/assignments"> Uppgifter </a></ion-item>
                         <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
                         <ion-item menu-close> <a href="#/attendance"> Närvaro </a> </ion-item>
-                        <ion-item menu-close> <a href="#/evaluation"> Utvärdering </a> </ion-item>
                         <ion-item menu-close> <a href="#/start" ng-click="logout()"> Logga ut </a> </ion-item>
                     </ion-list>
                 </ion-content>

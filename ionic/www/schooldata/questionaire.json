@@ -1,0 +1,11 @@
+{
+    "multipleChoice":{
+        "q1": "Jag känner en tillräcklig utmaning",
+        "q2": "Tempot under veckan har varit bra",
+        "q3": "Fördelningen mellan föreläsningar, övningar, diskussioner och gruppuppgifter etc. har varit bra"
+    },
+    "freetext":{
+        "q1": "Jag anser att följande behöver förbättras",
+        "q2": "Jag ser fram emot följande nästa vecka"
+    }
+}
