@@ -179,8 +179,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       username: $rootScope.rootData.user_name
     })
       .then(function (response) {
-        $scope.courseName = response.data[0].course_name;
         if (response.data != null && response.data != "") {
+          $scope.courseName = response.data[0].course_name;
           var message = "Du är närvarande på kursen " + $scope.courseName;
           showToast(true, message);
         }
@@ -374,7 +374,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     return result;
   }
 
-  $scope.randomQuote = function(){
+  $scope.randomQuote = function () {
     return $scope.questionaire.f1;
   }
 
@@ -383,8 +383,8 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     console.log(result);
     var ctx = [
       document.getElementById("weeklyQ1Chart").getContext('2d'),
-    document.getElementById("weeklyQ2Chart").getContext('2d'),
-    document.getElementById("weeklyQ3Chart").getContext('2d')];
+      document.getElementById("weeklyQ2Chart").getContext('2d'),
+      document.getElementById("weeklyQ3Chart").getContext('2d')];
     for (var i = 0; i < ctx.length; i++) {
       var chart = new Chart(ctx[i], {
         type: 'bar',

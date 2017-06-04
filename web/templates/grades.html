@@ -16,14 +16,17 @@
                 <tr ng-if="x.final_info.length > 0">
                     <td>{{x.final_info}}: </td>
                     <td>{{x.result_final}}</td>
+                    <td ng-if="!x.result_final">-</td>
                 </tr>
                 <tr ng-if="x.exam_info.length > 0">
                     <td>{{x.exam_info}}: </td>
                     <td>{{x.result_exam}}</td>
+                    <td ng-if="!x.result_exam">-</td>
                 </tr>
                 <tr ng-if="x.task_info.length > 0">
                     <td>{{x.task_info}}: </td>
                     <td>{{x.result_task}}</td>
+                    <td ng-if="!x.result_task">-</td>
                 </tr>
             </table>
         </div>

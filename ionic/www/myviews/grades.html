@@ -21,22 +21,28 @@
           <div ng-repeat="x in grades" class="list card">
             <div class="item item-body">
 
-              <h2>{{x.course_name}}:</h2>
+              <h3 class="courseGradeName">{{x.course_name}}</h3>
+
               <span ng-if="x.result_coursestatus == 'Avslutade'">
                     {{x.result_coursegrade}}
-              </span><br><br>
-
-              <span ng-if="x.final_info.length > 0"> 
-                {{x.final_info}}: {{x.result_final}}
-                </span><br>
-
-              <span ng-if="x.exam_info.length > 0"> 
-                {{x.exam_info}}: {{x.result_exam}}
-                </span><br>
-
-              <span ng-if="x.exam_info.length > 0"> 
-                {{x.task_info}}: {{x.result_task}}
-                </span><br>
+              </span>
+              <table class="gradeTable">
+                <tr ng-if="x.final_info.length > 0">
+                  <td>{{x.final_info}}: </td>
+                  <td>{{x.result_final}}</td>
+                  <td ng-if="!x.result_final">-</td>
+                </tr>
+                <tr ng-if="x.exam_info.length > 0">
+                  <td>{{x.exam_info}}: </td>
+                  <td>{{x.result_exam}}</td>
+                  <td ng-if="!x.result_exam">-</td>
+                </tr>
+                <tr ng-if="x.task_info.length > 0">
+                  <td>{{x.task_info}}: </td>
+                  <td>{{x.result_task}}</td>
+                  <td ng-if="!x.result_task">-</td>
+                </tr>
+              </table>
 
             </div>
           </div>
@@ -55,7 +61,7 @@
             <ion-item menu-close> <a href="#/grades"> Betyg </a></ion-item>
             <ion-item menu-close> <a href="#/attendance"> Närvaro </a> </ion-item>
             <ion-item menu-close> <a href="#/evaluation"> Utvärdering </a> </ion-item>
-            <ion-item menu-close> <a href="#/start"> Logga ut </a> </ion-item>
+            <ion-item menu-close> <a href="#/start" ng-click="logout()"> Logga ut </a> </ion-item>
           </ion-list>
         </ion-content>
       </ion-side-menu>

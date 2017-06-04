@@ -2,21 +2,22 @@
 
   var sCourse;
   var app = angular.module('starter', ['ionic', 'ngCordova']);
-  
 
-  //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+
+  // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   var myURL = "http://localhost:5000"; //local dev
 
   //Creates the controller
   app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope, $cordovaBarcodeScanner, $ionicPlatform) {
-
+    $scope.logout = function () {
+      $rootScope.rootData = null;
+    };
     $scope.scan = function () {
       var detachBarcodeScannerBackHandler = $ionicPlatform.registerBackButtonAction(function () {
         detachBarcodeScannerBackHandler();
       }, 1000);
 
       $cordovaBarcodeScanner.scan().then(function (barcodeData) {
-        alert("Koden " + barcodeData.text + " är scannad");
         $scope.sendAttendance(barcodeData.text);
 
         if (!barcodeData.cancelled) {
@@ -25,15 +26,15 @@
       }, function (error) { console.log(error); });
     }
 
-    
+
     $scope.sCourse = sCourse;
     $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
     $scope.loginError = false;
     $scope.getobject = function (thisobject) {
-    sCourse = thisobject;
-    
-  }
-    
+      sCourse = thisobject;
+
+    }
+
 
     //Tempfunctions that reset the feedbackValues in the database
     $scope.resetTheFeedback = function () {
@@ -55,7 +56,7 @@
 
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
-      
+
       $http.post(myURL + '/api/users/login', {
         Username: username,
         Password: password

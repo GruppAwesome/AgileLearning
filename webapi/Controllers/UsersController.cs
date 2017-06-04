@@ -193,8 +193,6 @@ namespace WebAPI.Controllers
                 from weeklyfeedbacks Group by weekly_week");
         }
 
-
-
         //SHA1HASHING
         public static byte[] GetHash(string inputString)
         {

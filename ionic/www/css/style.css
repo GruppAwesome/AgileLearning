@@ -23,12 +23,12 @@
   margin: auto;
 }
 
-.dailyFeedbackText {
+/*.dailyFeedbackText {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   height: 40px;
-}
+}*/
 
 #startlogo {
   width: 50%;
@@ -70,7 +70,9 @@ a:visited {
 table,tr,th,td{
   border: solid 1px;
 }
-
+.gradeTable, .gradeTable * {
+  border: none;
+}
 th, td {
     padding: 15px;
 }
