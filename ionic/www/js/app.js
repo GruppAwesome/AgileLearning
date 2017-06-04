@@ -1,36 +1,49 @@
 (function () {
 
   var sCourse;
-  var app = angular.module('starter', ['ionic']);
+  var app = angular.module('starter', ['ionic', 'ngCordova']);
+  
 
   //var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
   var myURL = "http://localhost:5000"; //local dev
 
   //Creates the controller
-  app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope) {
+  app.controller('myCtrl', function ($scope, $ionicSideMenuDelegate, $http, $state, $rootScope, $cordovaBarcodeScanner, $ionicPlatform) {
 
+    $scope.scan = function () {
+      var detachBarcodeScannerBackHandler = $ionicPlatform.registerBackButtonAction(function () {
+        detachBarcodeScannerBackHandler();
+      }, 1000);
+
+      $cordovaBarcodeScanner.scan().then(function (barcodeData) {
+        alert("Koden " + barcodeData.text + " är scannad");
+        $scope.sendAttendance(barcodeData.text);
+
+        if (!barcodeData.cancelled) {
+          detachBarcodeScannerBackHandler();
+        }
+      }, function (error) { console.log(error); });
+    }
+
+    
     $scope.sCourse = sCourse;
     $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
     $scope.loginError = false;
     $scope.getobject = function (thisobject) {
-      sCourse = thisobject;
-    }
+    sCourse = thisobject;
+    
+  }
+    
 
     //Tempfunctions that reset the feedbackValues in the database
     $scope.resetTheFeedback = function () {
-
       $http.get(myURL + '/api/users/ResetFeedback', {
-
       })
-
     }
 
     $scope.resetTheWeekFeedback = function () {
-
       $http.get(myURL + '/api/users/ResetWeekFeedback', {
-
       })
-
     }
 
     $http.get('schooldata/data.json').success(function (data) {
@@ -42,11 +55,11 @@
 
       var username = document.getElementById("usernameInput").value;
       var password = document.getElementById("passwordInput").value;
-
+      
       $http.post(myURL + '/api/users/login', {
         Username: username,
         Password: password
-     
+
       })
         .success(function (data) {
           if (data != null && data != "") {
@@ -77,8 +90,9 @@
         });
     };
 
-    $scope.sendAttendance = function () {
-      var theCode = document.getElementById("codeInput").value;
+    $scope.sendAttendance = function (theCode) {
+      //var theCode = document.getElementById("codeInput").value;
+
       $http.post(myURL + '/api/attendence/presence', {
         coursecode_code: theCode,
         username: $rootScope.rootData.user_name
@@ -96,13 +110,12 @@
         });
     };
 
-
     $scope.questionaire = {
-    'question1': '',
-    'question2': '',
-    'question3': '',
-    'freetext1': '',
-    'freetext2': ''
+      'question1': '',
+      'question2': '',
+      'question3': '',
+      'freetext1': '',
+      'freetext2': ''
     };
 
     $scope.sendEvaluation = function (questionaire) {
@@ -113,7 +126,7 @@
         weekly_q3: questionaire.question3,
         weekly_free_text1: questionaire.freetext1,
         weekly_free_text2: questionaire.freetext2,
-        weekly_uid: $rootScope.rootData.user_id         
+        weekly_uid: $rootScope.rootData.user_id
       })
 
       var msg = "Tack för din utvärdering!";
@@ -244,6 +257,7 @@
 
           console.log(data);
           showCharts();
+          new QRCode(document.getElementById("qrcode"), "xxx");
         });
     };
 
@@ -281,7 +295,7 @@
     var cleanAvg = function (objectArray) {
       var a = [];
       for (var i = 0; i < objectArray.length; i++) {
-        var avg = objectArray[i].average -1;
+        var avg = objectArray[i].average - 1;
         a.push(avg);
       }
       return a;

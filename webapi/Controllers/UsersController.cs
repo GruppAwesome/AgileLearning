@@ -187,6 +187,14 @@ namespace WebAPI.Controllers
             ($"SELECT feedback_date , Avg(feedback_vote) AS Average from feedbacks GROUP BY feedback_date , feedback_date");
         }
 
+        [HttpGet("WeeklyFeedbackSum")]
+        public IEnumerable<WeeklyFeedbackSum> WeeklyFeedbackSum()
+        {
+            return dbConn.Conn.Query<WeeklyFeedbackSum>(
+                $@"SELECT weekly_week , Sum(weekly_q1) AS Question1 , Sum(weekly_q2) AS Question2 , Sum(weekly_q3) AS Question3 
+                from weeklyfeedbacks Group by weekly_week");
+        }
+
 
 
         //SHA1HASHING

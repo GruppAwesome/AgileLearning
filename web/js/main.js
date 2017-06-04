@@ -233,6 +233,16 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
   };
 
+  $scope.getWeeklyFeedbackSum = function () {
+    $http.get(myURL + '/api/users/WeeklyFeedbackSum')
+      .then(function (response) {
+        if (response.data) {
+          $scope.weeklyFeedbackSum = response.data;
+        }
+
+      });
+  };
+
   $scope.sendweeklyfeedback = function () {
     var q1 = document.forms["weekly"]["q1"].value;
     var q2 = document.forms["weekly"]["q2"].value;
