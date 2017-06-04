@@ -151,9 +151,10 @@
         weekly_free_text1: questionaire.freetext1,
         weekly_free_text2: questionaire.freetext2,
         weekly_uid: $rootScope.rootData.user_id
-      })
+      });
 
       //All I wanted was to refresh a state so the weeklyfeedback would go away
+      $scope.shouldVote = false;
       $timeout(function () {
         $state.go('list', {}, { reload: true });
         }, 200);

@@ -153,13 +153,12 @@ namespace WebAPI.Controllers
         {
 
             IEnumerable<Weeklyfeedback> result = dbConn.Conn.Query<Weeklyfeedback>(
-                $@"select distinct weekly_q1
-                from weeklyfeedbacks, users, enrolledclasses
-                where enrolledclasses.enrolledclass_uid = users.user_id
-                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}", new { userid = args.user_id });
+                $@"select distinct weekly_q1, weekly_q2, weekly_q3
+                from weeklyfeedbacks, users
+                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}
+                and users.user_name = @theUsername", new { theUsername = args.username  });
 
             DayOfWeek day = DateTime.Now.DayOfWeek;
-
             if (result.FirstOrDefault() == null)// && (day >= DayOfWeek.Sunday) && (day <= DayOfWeek.Saturday))
             {
                 return true;

@@ -13,7 +13,7 @@
 
       <ion-content ng-init="HasVoted()" class="subheaderSpace">
         <div ng-init="ShouldVoteWeekly()">
-          <div ng-if="shouldVote" ng-click="goToEval()">
+          <div ng-show="shouldVote" ng-click="goToEval()">
             <div class="list card">
               <div class="item item-divider text-center">
                 <h4>Du har en veckoutvärdering att genomföra!</h4>
@@ -78,6 +78,16 @@
             </div>
           </div>
         </div>
+
+
+        <!--<div ng-click="goToEval()" ng-show="showWeeklyFeedback" class="list card">
+          <div class="item item-divider text-center">
+            Veckoutvärderingen
+          </div>
+          <div class="centerText item item-body">
+           Hejsan kära elev var god och gör veckoutvärderingen genom att klicka här.
+          </div>
+        </div>-->
 
         <div class="list card">
           <div class="item item-divider text-center">
