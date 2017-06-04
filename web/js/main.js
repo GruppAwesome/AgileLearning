@@ -10,11 +10,11 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
   var myURL = "http://localhost:5000"; //local dev
 
   /* Automatic log-outer */
-  (function () {
-    if (!$rootScope.rootData) {
-      $location.url('/');
-    }
-  })();
+  // (function () {
+  //   if (!$rootScope.rootData) {
+  //     $location.url('/');
+  //   }
+  // })();
 
   $scope.loginError = false;
   $scope.feedbackAlternatives = ["DÅLIGT", "MELLAN", "BRA"];
@@ -139,24 +139,23 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       });
   };
 
-  // $scope.HasVotedWeekly = function () {
-  //   $http.post(myURL + '/api/users/ShowWeekFeedback', {
-  //     user_id: $rootScope.rootData.user_id
-  //   })
-  //     .then(function (response) {
-  //       if (response.data != null && response.data != "") {
-  //         console.log("oh alala " + response.data);
-  //         // //If the user has voted
-  //         // $scope.hasVotedToday = response.data;
+  $scope.HasVotedWeekly = function () {
+    $http.post(myURL + '/api/users/ShowWeekFeedback', {
+      // user_id: $rootScope.rootData.user_id
+    })
+      .then(function (response) {
+        if (response.data != null && response.data != "") {
+          console.log("oh yes! " + response.data);
+          $scope.weeklyChartData = response.data;
+          showWeeklyCharts($scope.questionaire.multipleChoice, $scope.weeklyChartData);
 
-  //       } else {
-  //         console.log("oh no " + response.data);
-  //         // //If the user hasn't voted
-  //         // $scope.hasVotedToday = "no";
+        } else {
+          console.log("oh no ");
 
-  //       }
-  //     });
-  // };
+          //should hide the weekly charts
+        }
+      });
+  };
 
   //The daily feedback
   $scope.SendFeedback = function (theVote) {
@@ -165,6 +164,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       user_id: $rootScope.rootData.user_id
     })
       .then(function (response) {
+
         $scope.hasVotedToday = response.data;
 
       });
@@ -224,12 +224,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     }
   });
 
-  $scope.makeCharts = function () {
-    getDailyFeedbackAverage();
-    showWeeklyCharts($scope.questionaire.multipleChoice);
-  }
-
-  var getDailyFeedbackAverage = function () {
+  $scope.getDailyFeedbackAverage = function () {
     $http.get(myURL + '/api/users/DailyFeedbackAverage')
       .then(function (response) {
         if (response.data) {
@@ -251,9 +246,13 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
       weekly_free_text1: f1,
       weekly_free_text2: f2,
       weekly_uid: $rootScope.rootData.user_id
-    }).then(function () {
-      $location.url('/dashboard');
-      showToast(true, "Tack för hjälpen!");
+    }).then(function (response) {
+      if (response.data) {
+        showToast(response.data, "Tack för hjälpen!");
+        $location.url('/dashboard');
+      } else {
+        showToast(response.data, "Något gick fel...");
+      }
     });
   };
 
@@ -331,15 +330,29 @@ app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
     });
   }
 
+  var cleanWeeklyData = function (data) {
+    var result = [0, 0, 0, 0, 0];
+
+    for (var i = 0; i < data.length; i++) {
+      for (var q = 0; q < 5; q++) {
+        if (data[i].weekly_q1 == q) {
+          result[q]++;
+        }
+      }
+    }
+    return result;
+  }
+
   var showWeeklyCharts = function (questions, data) {
+    var array = cleanWeeklyData(data);
     var ctx = document.getElementById("weeklyQ1Chart").getContext('2d');
     var q1Chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [1, 2, 3, 4, "vet ej"],
+        labels: ["vet ej", 1, 2, 3, 4],
         datasets: [{
           label: 'Svar för "' + questions.q1 + '"',
-          data: [1, 2, 3, 0.5, 4],
+          data: array,
           backgroundColor: [
             'rgba(255, 128, 8, 0.2)',
             'rgba(255, 128, 8, 0.2)',

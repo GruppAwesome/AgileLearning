@@ -132,8 +132,7 @@ namespace WebAPI.Controllers
                 from weeklyfeedbacks, classes, users , enrolledclasses
                 where enrolledclasses.enrolledclass_uid = users.user_id
                 and enrolledclasses.enrolledclass_clid = classes.class_id
-                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}
-                and users.user_name = @theUsername", new { theUsername = args.username });
+                and weeklyfeedbacks.weekly_week = {GetWeekNumber(DateTime.Now)}");
 
             DayOfWeek day = DateTime.Now.DayOfWeek;
 
@@ -149,19 +148,24 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Sendweeklyfeedback")]
-        public void Sendweeklyfeedback([FromBody]MyStruct args)
+        public bool Sendweeklyfeedback([FromBody]MyStruct args)
         {
-             DayOfWeek day = DateTime.Now.DayOfWeek;
+            DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            if ((day >= DayOfWeek.Monday)) 
+            Console.WriteLine(day);
+
+            if ((day >= DayOfWeek.Sunday)) // The week begins with sunday in most countries ;)
             {
 
-            dbConn.Conn.Query<Weeklyfeedback>($@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 ,weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week ) 
+                dbConn.Conn.Query<Weeklyfeedback>($@"INSERT INTO weeklyfeedbacks(weekly_q1 , weekly_q2, weekly_q3 ,weekly_free_text1, weekly_free_text2, weekly_uid, weekly_week ) 
             SELECT @theQ1,@theQ2,@theQ3,@theFreeText1, @theFreeText2, @theUid , {GetWeekNumber(DateTime.Now)} 
             WHERE NOT EXISTS (SELECT weekly_week FROM weeklyfeedbacks WHERE weekly_week = {GetWeekNumber(DateTime.Now)} AND weekly_uid = @theUid)",
-            new { theQ1 = args.weekly_q1, theQ2 = args.weekly_q2, theQ3 = args.weekly_q3, theFreeText1 = args.weekly_free_text1, theFreeText2 = args.weekly_free_text2, theUid = args.weekly_uid});
-            
+                new { theQ1 = args.weekly_q1, theQ2 = args.weekly_q2, theQ3 = args.weekly_q3, theFreeText1 = args.weekly_free_text1, theFreeText2 = args.weekly_free_text2, theUid = args.weekly_uid });
+
+                return true;
             }
+
+            return false;
         }
 
 

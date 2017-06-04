@@ -4,11 +4,13 @@
   <div class="subheader row">
     <h6>Välkommen {{rootData.user_name}}!</h6>
   </div>
-  <div ng-init="makeCharts()" class="col-xs-12">
+  <div  class="col-xs-12">
     <div  class="card">
-      <canvas id="dailyChart"></canvas>
+      <h4>Resultat ifrån dagliga utvärderingar</h4>
+      <canvas ng-init="getDailyFeedbackAverage()" id="dailyChart"></canvas>
     </div>
     <div ng-init="HasVotedWeekly()" class="card">
+      <h4>Resultat ifrån senaste veckans utvärderingar</h4>
       <canvas id="weeklyQ1Chart"></canvas>
     </div>
   </div>
