@@ -152,8 +152,6 @@ namespace WebAPI.Controllers
         {
             DayOfWeek day = DateTime.Now.DayOfWeek;
 
-            Console.WriteLine(day);
-
             if ((day >= DayOfWeek.Sunday)) // The week begins with sunday in most countries ;)
             {
 
