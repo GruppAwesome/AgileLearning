@@ -56,6 +56,21 @@
     //Grabs the object and put it into the a variabel
     $scope.getobject = function (thisobject) {
       sCourse = thisobject;
+
+    }
+
+    $scope.goToEval = function () {
+      $state.go('evaluation');
+    }
+    //Tempfunctions that reset the feedbackValues in the database
+    $scope.resetTheFeedback = function () {
+      $http.get(myURL + '/api/users/ResetFeedback', {
+      })
+    }
+
+    $scope.resetTheWeekFeedback = function () {
+      $http.get(myURL + '/api/users/ResetWeekFeedback', {
+      })
     }
 
     //Some login action
@@ -118,6 +133,15 @@
         });
     };
 
+    $scope.ShouldVoteWeekly = function () {
+      $http.post(myURL + '/api/users/ShouldVoteWeekly', {
+        user_id: $rootScope.rootData.user_id
+      })
+        .then(function (response) {
+          $scope.shouldVote = response.data;
+        });
+    };
+
     $scope.sendEvaluation = function (questionaire) {
 
       $http.post(myURL + '/api/users/Sendweeklyfeedback', {
@@ -127,9 +151,10 @@
         weekly_free_text1: questionaire.freetext1,
         weekly_free_text2: questionaire.freetext2,
         weekly_uid: $rootScope.rootData.user_id
-      })
+      });
 
       //All I wanted was to refresh a state so the weeklyfeedback would go away
+      $scope.shouldVote = false;
       $timeout(function () {
         $state.go('list', {}, { reload: true });
         }, 200);
@@ -154,10 +179,6 @@
           }
 
         });
-    };
-
-    $scope.go2WeeklyFeedback = function () {
-      $state.go('evaluation');
     };
 
     $scope.showMyGrades = function () {

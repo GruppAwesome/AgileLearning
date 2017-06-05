@@ -4,6 +4,15 @@
   <div class="subheader row">
     <h6>Välkommen {{rootData.user_name}}!</h6>
   </div>
+
+  <div ng-init="ShouldVoteWeekly()" class="col-md-6">
+    <div ng-show="shouldVote" ng-click="goToEval()">
+      <div class="card">
+        <h4>Du har en veckoutvärdering att genomföra!</h4>
+        <p>Klicka här för att genomföra den!</p>
+      </div>
+    </div>
+  </div>
   <div ng-init="HasVoted()" class="col-md-6">
     <div ng-if="hasVotedToday == 'no'">
       <div class="card">
@@ -21,9 +30,9 @@
             <i class="test123 fa fa-smile-o fa-4x" aria-hidden="true"></i>
           </a>
         </div>
-          <p>
-            Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
-          </p>
+        <p>
+          Vi skulle uppskatta om du röstade om hur din dag har varit genom att trycka på en av de tre smileyserna ovan
+        </p>
 
       </div>
     </div>
@@ -50,7 +59,9 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="col-md-6">
     <div class="card">
       <h4>Öppethus 14/8</h4>
       <p>Öppethus på testvägen 12</p>
