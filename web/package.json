@@ -3,6 +3,7 @@
     "dev": "lite-server"
   },
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "liteserver": "^0.3.0"
   }
 }
