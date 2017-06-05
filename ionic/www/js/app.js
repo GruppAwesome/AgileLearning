@@ -24,7 +24,7 @@
     };
 
     //Recciving the JSONS
-    $http.get("../schooldata/questionaire.json")
+    $http.get('schooldata/questionaire.json')
       .then(function (response) {
         $scope.questionJson = response.data;
       });
