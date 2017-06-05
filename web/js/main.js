@@ -6,8 +6,8 @@ var app = angular.module("myApp", ["ngRoute"]);
 
 app.controller('myCtrl', function ($scope, $http, $rootScope, $location) {
 
-  // var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
-  var myURL = "http://localhost:5000"; //local dev
+  var myURL = "http://weboholics-001-site4.htempurl.com"; // remote release
+  // var myURL = "http://localhost:5000"; //local dev
 
   /* Automatic log-outer */
   (function () {
